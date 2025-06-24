@@ -1,9 +1,9 @@
 <div class="login-container">
-  <h2>Acceso NutriSchool</h2>
+  <h2 class="title">Acceso NutriSchool</h2>
   <form [formGroup]="form" (ngSubmit)="onLogin()">
     <div>
-      <label for="email">Email</label>
-      <input id="email" formControlName="email" />
+      <label class="label" for="email">Email</label>
+      <input class="input" id="email" formControlName="email" />
       @if (form.controls['email'].touched && form.controls['email'].invalid) {
       <div class="error">
         @if (form.controls['email'].errors?.['required']) {
@@ -16,15 +16,20 @@
     </div>
 
     <div>
-      <label for="password">Contraseña</label>
-      <input id="password" type="password" formControlName="password" />
+      <label class="label" for="password">Contraseña</label>
+      <input
+        class="input"
+        id="password"
+        type="password"
+        formControlName="password"
+      />
       @if (form.controls['password'].touched &&
       form.controls['password'].invalid) {
       <div class="error">
         @if (form.controls['password'].errors?.['required']) {
         <div>La contraseña es obligatoria.</div>
         } @if (form.controls['password'].errors?.['minlength']) {
-        <div>Mínimo 8 caracteres.</div>
+        <div>Mínimo 5 caracteres.</div>
         }
       </div>
       }
@@ -34,7 +39,7 @@
     <div class="error">{{ errorMessage }}</div>
     }
 
-    <button type="submit">Login</button>
+    <button class="button" type="submit">Login</button>
     <p class="register-link">
       ¿No tienes cuenta? <a (click)="goToRegister()">Regístrate</a>
     </p>

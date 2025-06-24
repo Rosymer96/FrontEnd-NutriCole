@@ -1,5 +1,5 @@
+import { AuthService } from './../../services/auth/auth.service';
 import { Component, inject } from '@angular/core';
-import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import {
   FormControl,
@@ -15,7 +15,7 @@ import {
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  private userService = inject(UsersService);
+  private authService = inject(AuthService);
   private router = inject(Router);
 
   errorMessage = '';
@@ -27,6 +27,7 @@ export class LoginComponent {
     password: new FormControl<string | null>(null, [
       Validators.required,
       Validators.minLength(5),
+      Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&.]{5,}$/),
     ]),
   });
 
@@ -35,25 +36,27 @@ export class LoginComponent {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
     }
+    // Normalizar datos antes de enviar
+    const email = this.form.value.email?.trim().toLowerCase() || '';
+    const password = this.form.value.password || '';
+
     //Si los datos son correctos va al profile.
-    this.userService
-      .login(this.form.value.email!, this.form.value.password!)
-      .subscribe({
-        next: (user) => {
-          if (user) {
-            console.log('Login exitoso', user);
-            //Redireccionar al profile dependiendo del rol.
-          } else {
-            alert('Credenciales inválidas');
-          }
-        },
-        error: (err) => {
-          console.error('Error en login:', err);
-          // alert(err.error?.message || 'Error desconocido');
-          this.errorMessage =
-            err.error?.message || 'Email o contraseña inválidos';
-        },
-      });
+    this.authService.login(email, password).subscribe({
+      next: (user) => {
+        if (user) {
+          console.log('Login exitoso', user);
+          //Redireccionar al profile dependiendo del rol.
+        } else {
+          alert('Credenciales inválidas');
+        }
+      },
+      error: (err) => {
+        console.error('Error en login:', err);
+        // alert(err.error?.message || 'Error desconocido');
+        this.errorMessage =
+          err.error?.message || 'Email o contraseña inválidos';
+      },
+    });
   }
 
   goToRegister() {

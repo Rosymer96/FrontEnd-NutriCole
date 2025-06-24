@@ -5,3 +5,8 @@ export interface LoginResponse {
   token: string;
   user: IUser;
 }
+
+export interface RegisterResponse {
+  message: string;
+  newTutorId: number;
+}
