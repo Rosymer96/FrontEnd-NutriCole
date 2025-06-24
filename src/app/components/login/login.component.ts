@@ -45,9 +45,14 @@ export class LoginComponent {
       next: (user) => {
         if (user) {
           console.log('Login exitoso', user);
-          //Redireccionar al profile dependiendo del rol.
-        } else {
-          alert('Credenciales inválidas');
+          const rol = user.rol;
+          if (rol === 'administrador') {
+          //  this.router.navigate(['/admin/dashboard']); AQUI COLOCAR LA RUTA DEL DASHBOARD
+          } else if (rol === 'tutor') {
+          //  this.router.navigate(['/tutor/dashboard']); AQUI COLOCAR LA RUTA DEL DASHBOARD
+          } else {
+            this.router.navigate(['/']);
+          }
         }
       },
       error: (err) => {
