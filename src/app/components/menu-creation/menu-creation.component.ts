@@ -27,6 +27,7 @@ export class MenuCreationComponent {
   // Descripciones automáticas para cada plato
   private descripcionesPorPlato: { [key: string]: string } = {
     'Pollo asado': 'Pollo, ajo, romero, limón',
+    'Crema de calabaza2': 'Calabaza2, nata2, cebolla2, nuez moscada2',
     'Lasaña': 'Carne, pasta, tomate, queso',
     'Pescado a la plancha': 'Pescado, limón, aceite, perejil',
     'Paella': 'Arroz, mariscos, pollo, azafrán',
@@ -73,7 +74,7 @@ export class MenuCreationComponent {
     // Normalizar datos antes de enviar
     const datosDish: Dish = {
       name: this.formulario.value.nombre!, // Ya no necesita capitalizeWords porque viene del select
-      dish_type: this.formulario.value.tipoDish!,
+      dishType: this.formulario.value.tipoDish!,
       description: this.formulario.value.descripcion?.trim() || '',
       active: this.formulario.value.activo ? 1 : 0, // Convertir boolean a integer
     };

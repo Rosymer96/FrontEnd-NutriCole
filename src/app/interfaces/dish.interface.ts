@@ -2,7 +2,7 @@
 export interface Dish {
   idDish?: number;        // Auto-increment, opcional al crear
   name: string;           // Nombre del plato
-  dish_type: string;      // Tipo de plato (primero, segundo, postre)
+  dishType: string;      // Tipo de plato (primero, segundo, postre)
   description: string;    // Descripción del plato
   active: number;         // Estado activo (1) o inactivo (0)
 }
@@ -10,7 +10,7 @@ export interface Dish {
 // Interfaz para crear un nuevo dish (sin idDish)
 export interface CrearDishDto {
   name: string;
-  dish_type: string;
+  dishType: string;
   description: string;
   active: number;
 }
@@ -18,7 +18,7 @@ export interface CrearDishDto {
 // Interfaz para actualizar un dish
 export interface ActualizarDishDto {
   name?: string;
-  dish_type?: string;
+  dishType?: string;
   description?: string;
   active?: number;
 }
