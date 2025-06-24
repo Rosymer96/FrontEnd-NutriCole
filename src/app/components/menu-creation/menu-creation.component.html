@@ -1,0 +1,82 @@
+<div class="menu-creation-container">
+  <h2 class="title">Crear Nuevo Plato</h2>
+  <form [formGroup]="formulario" (ngSubmit)="alCrearDish()">
+    
+    <div class="form-group">
+      <label class="label" for="nombre">Nombre del Plato</label>
+      <select class="select" id="nombre" formControlName="nombre">
+        <option value="">Seleccionar plato</option>
+        <option value="Pollo asado">Pollo asado</option>
+        <option value="Lasaña">Lasaña</option>
+        <option value="Pescado a la plancha">Pescado a la plancha</option>
+        <option value="Paella">Paella</option>
+        <option value="Arroz chaufa">Arroz chaufa</option>
+        <option value="Ensalada César">Ensalada César</option>
+        <option value="Sopa de tomate">Sopa de tomate</option>
+        <option value="Gazpacho">Gazpacho</option>
+        <option value="Crema de calabaza">Crema de calabaza</option>
+      </select>
+      @if (formulario.controls['nombre'].touched && formulario.controls['nombre'].invalid) {
+        <div class="error">
+          @if (formulario.get('nombre')?.errors?.['required']) {
+            <div>Nombre del plato obligatorio.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label class="label" for="tipoDish">Tipo de Plato</label>
+      <select class="select" id="tipoDish" formControlName="tipoDish">
+        <option value="">Seleccionar tipo</option>
+        <option value="primero">Primero</option>
+        <option value="segundo">Segundo</option>
+        <option value="postre">Postre</option>
+      </select>
+      @if (formulario.controls['tipoDish'].touched && formulario.controls['tipoDish'].invalid) {
+        <div class="error">
+          @if (formulario.get('tipoDish')?.errors?.['required']) {
+            <div>Tipo de plato obligatorio.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label class="label" for="descripcion">Descripción</label>
+      <textarea class="textarea" id="descripcion" formControlName="descripcion" placeholder="La descripción se completará automáticamente al seleccionar un plato..." readonly></textarea>
+      @if (formulario.controls['descripcion'].touched && formulario.controls['descripcion'].invalid) {
+        <div class="error">
+          @if (formulario.get('descripcion')?.errors?.['required']) {
+            <div>Descripción obligatoria.</div>
+          }
+          @if (formulario.get('descripcion')?.errors?.['maxlength']) {
+            <div>Máximo 500 caracteres.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label class="label" for="activo">Estado</label>
+      <select class="select" id="activo" formControlName="activo">
+        <option [value]="true">Activo</option>
+        <option [value]="false">Inactivo</option>
+      </select>
+    </div>
+
+    @if (mensajeError) {
+      <div class="error">{{ mensajeError }}</div>
+    } @else if (mensajeRespuesta) {
+      <div class="messageCreate">{{ mensajeRespuesta }}</div>
+    }
+
+    <button class="button" type="submit" [disabled]="formulario.invalid">
+      Crear Plato
+    </button>
+    
+    <p class="back-link">
+      <a (click)="irAtras()">← Volver al listado</a>
+    </p>
+  </form>
+</div>
