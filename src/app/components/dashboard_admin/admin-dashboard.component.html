@@ -1,0 +1,13 @@
+<div class="admin-dashboard">
+    <header>
+      <h1>NutriSchool Admin</h1>
+      <button class="btn logout" (click)="logout()">Log Off</button>
+    </header>
+  
+    <div class="actions">
+      <button class="btn green" (click)="goToClasses()">Add Class</button>
+      <button class="btn green" (click)="goToCreateDish()">Create Dish</button>
+    </div>
+  
+    <router-outlet></router-outlet>
+  </div>
