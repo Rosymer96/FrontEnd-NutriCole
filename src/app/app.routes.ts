@@ -8,3 +8,17 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];
+
+//Ejemplo de paths usando la verificacion de las guards:
+//  {
+//     path: 'admin',
+//     canActivate: [authGuard, roleGuard],
+//     data: { role: 'admin' }, // <- Aquí defines el rol requerido
+//     loadComponent: () => import('./pages/admin/admin.component').then(m => m.AdminComponent)
+//   },
+//   {
+//     path: 'user',
+//     canActivate: [authGuard, roleGuard],
+//     data: { role: 'user' },
+//     loadComponent: () => import('./pages/user/user.component').then(m => m.UserComponent)
+//   },
