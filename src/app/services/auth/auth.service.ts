@@ -30,5 +30,32 @@ export class AuthService {
         })
       );
   }
+  public logout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
+  }
+  public getToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
+  public isLoggedIn(): boolean {
+    const token = this.getToken();
+    return token ? true : false;
+  }
+  public getCurrentUser(): IUser | null {
+    const userJson = localStorage.getItem('currentUser');
+    if (!userJson) return null;
 
+    try {
+      return JSON.parse(userJson) as IUser;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  public getCurrentRole(): string {
+    const user = this.getCurrentUser();
+    return user?.rol || '';
+  }
 }
