@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AssingMenuComponent } from './components/assing-menu/assing-menu.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'calendar', component: AssingMenuComponent },
 ];
 
 //Ejemplo de paths usando la verificacion de las guards:

@@ -1,0 +1,51 @@
+<div class="calendar-container">
+  <h2 class="title">Menu Mensual</h2>
+  <form [formGroup]="form" (submit)="onShowMenu()">
+    <div>
+      <label for="monthSelect">Mes</label>
+      <select id="monthSelect" formControlName="monthSelected">
+        <option value="" disabled selected>Selecciona un mes</option>
+        @for (month of months(); track $index) {
+        <option [value]="month.valor">{{ month.nombre }}</option>
+        }
+      </select>
+      @if (form.controls['monthSelected'].touched &&
+      form.controls['monthSelected'].invalid) {
+      <div class="error-message">El mes es obligatorio.</div>
+      }
+    </div>
+    <div>
+      <label for="yearSelect">Año</label>
+      <select id="yearSelect" formControlName="yearSelected">
+        <option value="" disabled selected>Selecciona un año</option>
+        @for (year of years(); track $index) {
+        <option [value]="year">{{ year }}</option>
+        }
+      </select>
+      @if (form.controls['yearSelected'].touched &&
+      form.controls['yearSelected'].invalid) {
+      <div class="error-message">El año es obligatorio.</div>
+      }
+    </div>
+    <button class="button" type="submit">Ver calendario</button>
+  </form>
+</div>
+
+<div class="calendar-container">
+  <p>menus().length: {{ menus().length }}</p>
+  <div class="menu-list">
+    @if (menus() && menus().length > 0) { @for(menu of menus(); track menu.date)
+    {
+    <div class="menu-item">
+      <h3>Menú para el día: {{ menu.date | date : "dd/MM/yyyy" }}</h3>
+      <ul>
+        @for(dish of menu.dishes; track $index) {
+        <li>{{ dish }}</li>
+        }
+      </ul>
+    </div>
+    } } @else {
+    <p>No hay menús disponibles para la selección actual.</p>
+    }
+  </div>
+</div>
