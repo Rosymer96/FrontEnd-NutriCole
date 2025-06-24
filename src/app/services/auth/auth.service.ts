@@ -31,17 +31,4 @@ export class AuthService {
       );
   }
 
-  public logout() {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('currentUser');
-    this.router.navigate(['/login']);
-  }
-  public getToken(): string | null {
-    return localStorage.getItem('authToken');
-  }
-  public isLoggedIn(): boolean {
-    const token = this.getToken();
-    return token ? true : false;
-  }
 }
