@@ -4,23 +4,32 @@
     <button class="btn logout" (click)="logout()">Log Off</button>
   </header>
 
-  <div class="actions">
-    <button class="btn green" (click)="goToCreateDish()">Create Dish</button>
-  </div>
   <div class="class-list">
     <h2>Clases:</h2>
     @if (classes().length > 0) { @for (classItem of classes(); track $index) {
     <div class="class-item">
       <span>{{ classItem.name }}</span>
-      <button class="btn green">Asignar Menu</button>
+      <button class="btn green" (click)="goToClass(classItem.idClass)">
+        Asignar Menu
+      </button>
     </div>
     } } @else {
-    <p>No classes available.</p>
+    <p>No hay clases disponibles.</p>
     }
   </div>
-  <form>
-    <label></label>
-    <input type="input" />
-    <button class="btn green" (click)="goToClass()">Add Class</button>
-  </form>
+  <div class="actions">
+    <form [formGroup]="form">
+      <label class="label" for="name"></label>
+      <input
+        class="input"
+        type="input"
+        id="name"
+        placeholder="Nombre de la clase"
+        maxlength="12"
+        formControlName="name"
+      />
+      <button class="btn green" (click)="addClass()">Añadir clase</button>
+    </form>
+    <button class="btn green" (click)="goToCreateDish()">Crear platos</button>
+  </div>
 </div>

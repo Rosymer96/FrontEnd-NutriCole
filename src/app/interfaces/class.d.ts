@@ -4,6 +4,10 @@ export interface ClassResponse {
 }
 
 export interface IClass {
-  id: number;
+  idClass: number;
   name: string;
+}
+export interface AddClassResponse {
+  message: string;
+  classId: number;
 }
