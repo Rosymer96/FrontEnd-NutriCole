@@ -1,8 +1,7 @@
 export interface MenuByMonthResponse {
   message: string;
-  classId: string | string;
+  classId: string | number;
   dateRange: { start: string; end: string };
-  classId: string;
   menus: MenuResponse[];
 }
 

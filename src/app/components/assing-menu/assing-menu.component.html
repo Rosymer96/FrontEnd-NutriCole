@@ -1,51 +1,81 @@
-<div class="calendar-container">
-  <h2 class="title">Menu Mensual</h2>
-  <form [formGroup]="form" (submit)="onShowMenu()">
-    <div>
-      <label for="monthSelect">Mes</label>
-      <select id="monthSelect" formControlName="monthSelected">
-        <option value="" disabled selected>Selecciona un mes</option>
-        @for (month of months(); track $index) {
-        <option [value]="month.valor">{{ month.nombre }}</option>
+<div class="main-content-wrapper">
+  <div class="calendar-container">
+    <h2 class="title">Menú Mensual</h2>
+    <form [formGroup]="form" (submit)="onShowMenu()" class="selection-form">
+      <div class="form-group">
+        <label for="monthSelect">Mes</label>
+        <select id="monthSelect" formControlName="monthSelected">
+          <option value="" disabled selected>Selecciona un mes</option>
+          @for (month of months(); track $index) {
+          <option [value]="month.value">{{ month.name }}</option>
+          }
+        </select>
+        @if (form.controls['monthSelected'].touched &&
+        form.controls['monthSelected'].invalid) {
+        <div class="error-message">El mes es obligatorio.</div>
         }
-      </select>
-      @if (form.controls['monthSelected'].touched &&
-      form.controls['monthSelected'].invalid) {
-      <div class="error-message">El mes es obligatorio.</div>
-      }
-    </div>
-    <div>
-      <label for="yearSelect">Año</label>
-      <select id="yearSelect" formControlName="yearSelected">
-        <option value="" disabled selected>Selecciona un año</option>
-        @for (year of years(); track $index) {
-        <option [value]="year">{{ year }}</option>
+      </div>
+      <div class="form-group">
+        <label for="yearSelect">Año</label>
+        <select id="yearSelect" formControlName="yearSelected">
+          <option value="" disabled selected>Selecciona un año</option>
+          @for (year of years(); track $index) {
+          <option [value]="year">{{ year }}</option>
+          }
+        </select>
+        @if (form.controls['yearSelected'].touched &&
+        form.controls['yearSelected'].invalid) {
+        <div class="error-message">El año es obligatorio.</div>
         }
-      </select>
-      @if (form.controls['yearSelected'].touched &&
-      form.controls['yearSelected'].invalid) {
-      <div class="error-message">El año es obligatorio.</div>
-      }
-    </div>
-    <button class="button" type="submit">Ver calendario</button>
-  </form>
-</div>
-
-<div class="calendar-container">
-  <p>menus().length: {{ menus().length }}</p>
-  <div class="menu-list">
-    @if (menus() && menus().length > 0) { @for(menu of menus(); track menu.date)
-    {
-    <div class="menu-item">
-      <h3>Menú para el día: {{ menu.date | date : "dd/MM/yyyy" }}</h3>
-      <ul>
-        @for(dish of menu.dishes; track $index) {
-        <li>{{ dish }}</li>
-        }
-      </ul>
-    </div>
-    } } @else {
-    <p>No hay menús disponibles para la selección actual.</p>
-    }
+      </div>
+      <button class="action-button primary-button" type="submit">
+        Ver calendario
+      </button>
+    </form>
   </div>
+
+  @if (rowCalendar) {
+  <div class="calendar-display-container calendar-container">
+    <h2 class="month-year-heading">
+      Menú del mes de {{ monthName }} del {{ year() }}
+    </h2>
+    <table class="calendar-table">
+      <thead>
+        <tr>
+          <th>Lun</th>
+          <th>Mar</th>
+          <th>Mié</th>
+          <th>Jue</th>
+          <th>Vie</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (week of calendar(); track $index) {
+        <tr class="calendar-week">
+          @for (day of week; track $index) {
+          <td class="calendar-day-cell">
+            @if (day) {
+            <div class="day-content">
+              <strong class="day-date">{{ day.displayDate }}</strong>
+              <ul class="dish-list">
+                @if (day.menu) { @for (dish of day.menu.dishes; track $index) {
+                <li class="dish-item">{{ dish }}</li>
+                }
+                <button class="action-button edit-button">Editar</button>
+                } @else {
+                <button class="action-button assign-button">Asignar</button>
+                }
+              </ul>
+            </div>
+            } @else {
+            <div class="empty-day-cell"></div>
+            }
+          </td>
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  }
 </div>

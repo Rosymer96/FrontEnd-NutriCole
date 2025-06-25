@@ -19,7 +19,7 @@ export class MenuService {
       `${this.API_URL}/listByClass/${classId}?monthDate=${monthDate}`,
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       }
     );
