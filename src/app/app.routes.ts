@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AdminDashboardComponent } from './components/dashboard_admin/admin-dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  {path: 'dashboard/admin', component: AdminDashboardComponent}
 ];
 
 //Ejemplo de paths usando la verificacion de las guards:

@@ -14,6 +14,7 @@ export class AuthService {
   private router = inject(Router);
 
   private API_URL: string = `${environment.API_BASE_URL}/user`;
+  private userProfile: IUser | null = null;
 
   public login(email: string, password: string): Observable<IUser | null> {
     return this.httpClient
@@ -30,6 +31,27 @@ export class AuthService {
         })
       );
   }
+
+  public getProfile(): Observable<IUser> {
+    if (this.userProfile) {
+      return of(this.userProfile);
+    }
+
+    const token = this.getToken();
+    const rol = this.getCurrentRole();
+
+    return this.httpClient
+      .get<{ data: IUser }>(`${this.API_URL}/profile/${rol}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .pipe(
+        map((res) => {
+          this.userProfile = res.data;
+          return res.data;
+        })
+      );
+  }
+
   public logout() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userId');
@@ -58,4 +80,7 @@ export class AuthService {
     const user = this.getCurrentUser();
     return user?.rol || '';
   }
+}
+function of(userProfile: IUser): Observable<IUser> {
+  throw new Error('Function not implemented.');
 }
