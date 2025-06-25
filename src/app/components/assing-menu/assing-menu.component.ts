@@ -34,7 +34,7 @@ export class AssingMenuComponent {
 
   years = signal(['2024', '2025', '2026']);
   //Se tiene que cambiar por la classId guardada en el localStorage almomento de dar click al boton.
-  classId: string = '2';
+  classId = signal<string>(localStorage.getItem('classId') ?? '');
 
   menus = signal<MenuResponse[]>([]);
   dateRange = signal<{ start: string; end: string } | null>(null);
