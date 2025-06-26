@@ -1,18 +1,17 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { MenuService } from '../../services/menu/menu.service';
 import { MenuResponse } from '../../interfaces/menu';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule, formatDate } from '@angular/common';
-import { FormMenuComponent } from '../form-menu/form-menu.component';
 import { Month } from '../../interfaces/month';
+import { MenuService } from '../../services/menu/menu.service';
+import { formatDate } from '@angular/common';
+import { FormMenuComponent } from '../form-menu/form-menu.component';
 
 @Component({
-  selector: 'app-assing-menu',
-  imports: [ReactiveFormsModule, CommonModule, FormMenuComponent],
-  templateUrl: './assing-menu.component.html',
-  styleUrl: './assing-menu.component.css',
+  selector: 'app-calendar-tutor',
+  imports: [FormMenuComponent],
+  templateUrl: './calendar-tutor.component.html',
+  styleUrl: './calendar-tutor.component.css',
 })
-export class AssingMenuComponent {
+export class CalendarTutorComponent {
   private menuService = inject(MenuService);
 
   //Se tiene que cambiar por la classId guardada en el localStorage almomento de dar click al boton.
@@ -133,5 +132,8 @@ export class AssingMenuComponent {
   onHandleMonths(months: Month[]) {
     this.receivedMonths = months;
     console.log(this.receivedMonths);
+  }
+  showMenuOfDay(){
+    
   }
 }

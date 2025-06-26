@@ -3,12 +3,14 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AssingMenuComponent } from './components/assing-menu/assing-menu.component';
+import { CalendarTutorComponent } from './components/calendar-tutor/calendar-tutor.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'user/login', pathMatch: 'full' },
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },
   { path: 'assing-menu', component: AssingMenuComponent },
+  { path: 'calendar', component: CalendarTutorComponent },
 ];
 
 //Ejemplo de paths usando la verificacion de las guards:
