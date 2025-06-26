@@ -1,0 +1,33 @@
+<form [formGroup]="form" (submit)="onSubmit()" class="selection-form">
+  <div class="form-group">
+    <label for="monthSelect">Mes</label>
+    <select id="monthSelect" formControlName="monthSelected">
+      <option value="" disabled selected>Selecciona un mes</option>
+      @for (month of months(); track $index) {
+      <option [value]="month.value">{{ month.name }}</option>
+      }
+    </select>
+    @if (form.controls['monthSelected'].touched &&
+    form.controls['monthSelected'].invalid) {
+    <div class="error-message">El mes es obligatorio.</div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="yearSelect">Año</label>
+    <select id="yearSelect" formControlName="yearSelected">
+      <option value="" disabled selected>Selecciona un año</option>
+      @for (year of years(); track $index) {
+      <option [value]="year">{{ year }}</option>
+      }
+    </select>
+    @if (form.controls['yearSelected'].touched &&
+    form.controls['yearSelected'].invalid) {
+    <div class="error-message">El año es obligatorio.</div>
+    }
+  </div>
+
+  <button class="action-button primary-button" type="submit">
+    Ver calendario
+  </button>
+</form>

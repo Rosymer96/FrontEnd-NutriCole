@@ -8,40 +8,28 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule, formatDate } from '@angular/common';
+import { FormMenuComponent } from '../form-menu/form-menu.component';
+import { Month } from '../../interfaces/month';
 
 @Component({
   selector: 'app-assing-menu',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, FormMenuComponent],
   templateUrl: './assing-menu.component.html',
   styleUrl: './assing-menu.component.css',
 })
 export class AssingMenuComponent {
   private menuService = inject(MenuService);
 
-  months = signal([
-    { name: 'Septiembre', value: '09' },
-    { name: 'Octubre', value: '10' },
-    { name: 'Noviembre', value: '11' },
-    { name: 'Diciembre', value: '12' },
-    { name: 'Enero', value: '01' },
-    { name: 'Febrero', value: '02' },
-    { name: 'Marzo', value: '03' },
-    { name: 'Abril', value: '04' },
-    { name: 'Mayo', value: '05' },
-    { name: 'Junio', value: '06' },
-    { name: 'Julio', value: '07' },
-  ]);
-
-  years = signal(['2024', '2025', '2026']);
   //Se tiene que cambiar por la classId guardada en el localStorage almomento de dar click al boton.
   classId = signal<string>(localStorage.getItem('classId') ?? '');
 
   menus = signal<MenuResponse[]>([]);
   dateRange = signal<{ start: string; end: string } | null>(null);
   month = signal<string>('');
-  year = signal('');
+  receivedMonths: Month[] = [];
+  errorMessage = '';
 
-  //Computed para armar el calendario:
+  //Computed para armar el calendario, creado con ayuda de IA.
   calendar = computed(() => {
     const range = this.dateRange();
     if (!range) return [];
@@ -60,12 +48,7 @@ export class AssingMenuComponent {
     let dayOfWeekForFirstDay = firstDayOfMonth.getDay(); // 0 = Sunday, 1 = Monday ...
 
     // Ajustar el día de la semana para que Lunes sea 0, Martes 1, ..., Viernes 4
-    // Si es Domingo (0), lo tratamos como 6 para que se salte correctamente.
-    // Si es Sábado (6), lo tratamos como 5 para que se salte correctamente.
-    // Si es Lunes (1), queremos 0 espacios.
-    // Si es Martes (2), queremos 1 espacio.
-    // ...
-    // Si es Sábado (6) o Domingo (0), no añadimos espacios para días laborables.
+  
     let startPadding = 0;
     if (dayOfWeekForFirstDay !== 0 && dayOfWeekForFirstDay !== 6) {
       // Solo si no es fin de semana
@@ -120,42 +103,43 @@ export class AssingMenuComponent {
   get rowCalendar(): boolean {
     return this.calendar()?.length > 0;
   }
-
-  get monthName(): string {
-    const value = this.month();
-    const match = this.months().find((m) => m.value === value);
+  hasPlates = computed(() => {
+    return this.calendar().some((week) =>
+      week.some((day) => day?.menu?.dishes?.length > 0)
+    );
+  });
+  get monthName(): any {
+    const currentMonth = this.month();
+    const match = this.receivedMonths.find((m) => m.value === currentMonth);
     return match?.name ?? '';
   }
-  form: FormGroup = new FormGroup({
-    monthSelected: new FormControl('', [Validators.required]),
-    yearSelected: new FormControl('', [Validators.required]),
-  });
 
-  onShowMenu() {
-    const { monthSelected, yearSelected } = this.form.value;
-    console.log('probando');
-    if (this.form.invalid) {
-      // debugger;
-      this.form.markAllAsTouched();
-      return;
-    }
-    const monthDate = `${monthSelected}-${yearSelected}`;
+  onFormSubmit({ month, year }: { month: string; year: string }) {
+    const monthDate = `${month}-${year}`;
     console.log(monthDate);
     console.log('classId enviado:', this.classId);
     this.menuService
-      .getMenusByClassAndMonth(parseInt(this.classId), monthDate)
+      .getMenusByClassAndMonth(parseInt(this.classId()), monthDate)
       .subscribe({
         next: (resp) => {
           console.log('Respuesta recibida:', resp);
           const menuArray = Object.values(resp.menus);
           this.dateRange.set(resp.dateRange);
           this.menus.set(menuArray);
-          this.month.set(monthSelected);
+          this.month.set(month);
           console.log('Valor de this.menus():', this.menus());
           console.log('Valor de this.moth():', this.month());
           console.log('Valor de range():', this.dateRange());
+          this.errorMessage = '';
         },
-        error: () => this.menus.set([]),
+        error: (err) => {
+          this.menus.set([]);
+          this.errorMessage = err.error?.error || 'Calendario no encontrado.';
+        },
       });
+  }
+  onHandleMonths(months: Month[]) {
+    this.receivedMonths = months;
+    console.log(this.receivedMonths);
   }
 }
