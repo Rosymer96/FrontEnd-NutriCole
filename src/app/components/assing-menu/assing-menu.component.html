@@ -33,7 +33,12 @@
                 }
                 <button class="action-button edit-button">Editar</button>
                 } @else {
-                <button class="action-button assign-button">Asignar</button>
+                <button
+                  class="action-button assign-button"
+                  (click)="onDateSelect(day.date)"
+                >
+                  Asignar
+                </button>
                 }
               </ul>
             </div>
@@ -51,3 +56,14 @@
   <div class="error">{{ errorMessage }}</div>
   }
 </div>
+@if(selectedDate()){
+<app-create-menu
+class="app-create-menu"
+  [date]="selectedDate()"
+  [classId]="classId()"
+  (menuCreated)="
+    onFormSubmit({ month: month(), year: selectedDate().split('-')[0] })
+  "
+  (close)="selectedDate.set('')"
+></app-create-menu>
+}

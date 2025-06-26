@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { MenuByMonthResponse } from '../../interfaces/menu';
+import { MenuByMonthResponse, MenuResponse } from '../../interfaces/menu';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -18,5 +18,20 @@ export class MenuService {
     return this.httpClient.get<MenuByMonthResponse>(
       `${this.API_URL}/listByClass/${classId}?monthDate=${monthDate}`
     );
+  }
+  public createMenu(
+    date: string,
+    classId: string,
+    firstId: string,
+    secondId: string,
+    dessertId: string
+  ): Observable<MenuResponse> {
+    return this.httpClient.post<MenuResponse>(`${this.API_URL}/create`, {
+      date,
+      classId,
+      firstId,
+      secondId,
+      dessertId,
+    });
   }
 }

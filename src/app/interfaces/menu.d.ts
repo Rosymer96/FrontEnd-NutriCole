@@ -9,3 +9,7 @@ export interface MenuResponse {
   date: string;
   dishes: string[];
 }
+
+export interface Menu {
+  
+}

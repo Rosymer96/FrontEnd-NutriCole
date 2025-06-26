@@ -1,19 +1,20 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { MenuService } from '../../services/menu/menu.service';
 import { MenuResponse } from '../../interfaces/menu';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, formatDate } from '@angular/common';
 import { FormMenuComponent } from '../form-menu/form-menu.component';
 import { Month } from '../../interfaces/month';
+import { CreateMenuComponent } from '../create-menu/create-menu.component';
 
 @Component({
   selector: 'app-assing-menu',
-  imports: [ReactiveFormsModule, CommonModule, FormMenuComponent],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    FormMenuComponent,
+    CreateMenuComponent,
+  ],
   templateUrl: './assing-menu.component.html',
   styleUrl: './assing-menu.component.css',
 })
@@ -22,6 +23,7 @@ export class AssingMenuComponent {
 
   //Se tiene que cambiar por la classId guardada en el localStorage almomento de dar click al boton.
   classId = signal<string>(localStorage.getItem('classId') ?? '');
+  selectedDate = signal<string>('');
 
   menus = signal<MenuResponse[]>([]);
   dateRange = signal<{ start: string; end: string } | null>(null);
@@ -48,7 +50,7 @@ export class AssingMenuComponent {
     let dayOfWeekForFirstDay = firstDayOfMonth.getDay(); // 0 = Sunday, 1 = Monday ...
 
     // Ajustar el día de la semana para que Lunes sea 0, Martes 1, ..., Viernes 4
-  
+
     let startPadding = 0;
     if (dayOfWeekForFirstDay !== 0 && dayOfWeekForFirstDay !== 6) {
       // Solo si no es fin de semana
@@ -140,6 +142,9 @@ export class AssingMenuComponent {
   }
   onHandleMonths(months: Month[]) {
     this.receivedMonths = months;
-    console.log(this.receivedMonths);
+  }
+  onDateSelect(date: Date) {
+    const formatted = formatDate(date, 'yyyy-MM-dd', 'en-US');
+    this.selectedDate.set(formatted);
   }
 }
