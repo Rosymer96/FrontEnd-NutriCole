@@ -16,12 +16,7 @@ export class MenuService {
     monthDate: string
   ): Observable<MenuByMonthResponse> {
     return this.httpClient.get<MenuByMonthResponse>(
-      `${this.API_URL}/listByClass/${classId}?monthDate=${monthDate}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-        },
-      }
+      `${this.API_URL}/listByClass/${classId}?monthDate=${monthDate}`
     );
   }
 }
