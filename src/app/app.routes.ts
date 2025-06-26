@@ -4,9 +4,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: 'user/login', pathMatch: 'full' },
+  { path: 'user/login', component: LoginComponent },
+  { path: 'user/register', component: RegisterComponent },
 ];
 
 //Ejemplo de paths usando la verificacion de las guards:

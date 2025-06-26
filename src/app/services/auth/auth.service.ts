@@ -41,9 +41,7 @@ export class AuthService {
     const rol = this.getCurrentRole();
 
     return this.httpClient
-      .get<{ data: IUser }>(`${this.API_URL}/profile/${rol}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .get<{ data: IUser }>(`${this.API_URL}/profile/${rol}`)
       .pipe(
         map((res) => {
           this.userProfile = res.data;
@@ -53,9 +51,8 @@ export class AuthService {
   }
 
   public logout() {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('currentUser');
+    localStorage.clear();
+
     this.userProfile = null;
     this.router.navigate(['/login']);
   }
