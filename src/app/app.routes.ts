@@ -5,9 +5,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { MenuCreationComponent } from './components/menu-creation/menu-creation.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: 'user/login', pathMatch: 'full' },
+  { path: 'user/login', component: LoginComponent },
+  { path: 'user/register', component: RegisterComponent },
   { path: 'menu-creation', component: MenuCreationComponent },
 ];
 

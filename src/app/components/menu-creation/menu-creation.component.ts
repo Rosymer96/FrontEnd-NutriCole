@@ -18,8 +18,8 @@ import { Dish } from '../../interfaces/dish.interface'; // Ajustar la ruta segú
   styleUrl: './menu-creation.component.css',
 })
 export class MenuCreationComponent {
-  private dishService = inject(DishService); // 
-  private enrutador = inject(Router);
+  private dishService = inject(DishService); //
+  private router = inject(Router);
 
   mensajeError: string = '';
   mensajeRespuesta: string = '';
@@ -28,23 +28,19 @@ export class MenuCreationComponent {
   private descripcionesPorPlato: { [key: string]: string } = {
     'Pollo asado': 'Pollo, ajo, romero, limón',
     'Crema de calabaza2': 'Calabaza2, nata2, cebolla2, nuez moscada2',
-    'Lasaña': 'Carne, pasta, tomate, queso',
+    Lasaña: 'Carne, pasta, tomate, queso',
     'Pescado a la plancha': 'Pescado, limón, aceite, perejil',
-    'Paella': 'Arroz, mariscos, pollo, azafrán',
+    Paella: 'Arroz, mariscos, pollo, azafrán',
     'Arroz chaufa': 'Arroz, pollo, salsa de soya y cebolla larga',
     'Ensalada César': 'Lechuga, pollo, queso parmesano, croutones',
     'Sopa de tomate': 'Tomate, cebolla, ajo, albahaca',
-    'Gazpacho': 'Tomate, pepino, pimiento, ajo',
-    'Crema de calabaza': 'Calabaza, nata, cebolla, nuez moscada'
+    Gazpacho: 'Tomate, pepino, pimiento, ajo',
+    'Crema de calabaza': 'Calabaza, nata, cebolla, nuez moscada',
   };
 
   public formulario = new FormGroup({
-    nombre: new FormControl<string | null>(null, [
-      Validators.required,
-    ]),
-    tipoDish: new FormControl<string | null>(null, [
-      Validators.required,
-    ]),
+    nombre: new FormControl<string | null>(null, [Validators.required]),
+    tipoDish: new FormControl<string | null>(null, [Validators.required]),
     descripcion: new FormControl<string | null>(null, [
       Validators.required,
       Validators.maxLength(500),
@@ -54,10 +50,10 @@ export class MenuCreationComponent {
 
   constructor() {
     // Observar cambios en el nombre del plato para actualizar automáticamente la descripción
-    this.formulario.get('nombre')?.valueChanges.subscribe(nombrePlato => {
+    this.formulario.get('nombre')?.valueChanges.subscribe((nombrePlato) => {
       if (nombrePlato && this.descripcionesPorPlato[nombrePlato]) {
         this.formulario.patchValue({
-          descripcion: this.descripcionesPorPlato[nombrePlato]
+          descripcion: this.descripcionesPorPlato[nombrePlato],
         });
       }
     });
@@ -65,7 +61,7 @@ export class MenuCreationComponent {
 
   alCrearDish() {
     console.log('Creando dish');
-    
+
     if (this.formulario.invalid) {
       this.formulario.markAllAsTouched();
       return;
@@ -81,7 +77,6 @@ export class MenuCreationComponent {
 
     console.log('Datos del dish:', datosDish);
 
-    
     this.dishService.crearDish(datosDish).subscribe({
       next: (respuesta) => {
         if (respuesta) {
@@ -90,10 +85,10 @@ export class MenuCreationComponent {
           this.formulario.reset();
           this.formulario.patchValue({ activo: true }); // Resetear valor por defecto
           this.mensajeError = '';
-          
+
           // Opcional: redirigir después de un tiempo
           setTimeout(() => {
-            this.enrutador.navigate(['/dishes']); // Ajustar la ruta según aplicación
+            this.router.navigate(['/dishes']); // Ajustar la ruta según aplicación
           }, 2000);
         } else {
           this.mensajeError = 'No se pudo crear el plato.';
@@ -101,14 +96,14 @@ export class MenuCreationComponent {
       },
       error: (err) => {
         console.error('Error al crear dish:', err);
-        this.mensajeError = err.error?.message || 'No se pudo completar la creación del plato.';
+        this.mensajeError =
+          err.error?.message || 'No se pudo completar la creación del plato.';
         this.mensajeRespuesta = '';
       },
     });
-
   }
 
   irAtras() {
-    this.enrutador.navigate(['/dishes']); // Ajustar la ruta según aplicación
+    this.router.navigate(['/dishes']); // Ajustar la ruta según aplicación
   }
 }
