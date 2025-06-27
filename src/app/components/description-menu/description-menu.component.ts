@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 
 import { IDish } from '../../interfaces/dish';
 import { CommonModule } from '@angular/common';
+import { SelectedDayMenu } from '../../interfaces/menu';
 
 @Component({
   selector: 'app-description-menu',
@@ -14,4 +15,5 @@ export class DescriptionMenuComponent {
   date = input<string>('');
   menuId = input<string>('');
   menu = input<{ date: string; dishes: IDish[] } | null>(null);
+  menuofDay = input<SelectedDayMenu | null>(null);
 }

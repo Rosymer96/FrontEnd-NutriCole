@@ -4,7 +4,7 @@ import { Month } from '../../interfaces/month';
 import { MenuService } from '../../services/menu/menu.service';
 import { formatDate } from '@angular/common';
 import { FormMenuComponent } from '../form-menu/form-menu.component';
-import { DescriptionMenuComponent } from "../description-menu/description-menu.component";
+import { DescriptionMenuComponent } from '../description-menu/description-menu.component';
 
 @Component({
   selector: 'app-calendar-tutor',
@@ -24,6 +24,7 @@ export class CalendarTutorComponent {
   month = signal<string>('');
   receivedMonths: Month[] = [];
   errorMessage = '';
+  menuVisible = false;
 
   //Computed para armar el calendario, creado con ayuda de IA.
   calendar = computed(() => {
@@ -122,6 +123,7 @@ export class CalendarTutorComponent {
           const menuArray = Object.values(resp.menus);
           this.dateRange.set(resp.dateRange);
           this.menus.set(menuArray);
+          console.log('MENUS', this.menus());
           this.month.set(month);
           this.errorMessage = '';
         },
@@ -136,15 +138,15 @@ export class CalendarTutorComponent {
     console.log(this.receivedMonths);
   }
   onShowDescription(dayData: {
-    date: Date;
+    date: string;
     displayDate: string;
     menu: MenuResponse | undefined;
   }) {
-    const formattedDate = formatDate(dayData.date, 'yyyy-MM-dd', 'en-US');
     this.menuOfDay.set({
-      date: formattedDate,
-      menu: dayData.menu || null, // Asegura que 'menu' sea MenuResponse o null
+      date: dayData.date,
+      menu: dayData.menu || null, // `dayData.menu` puede ser `undefined`, lo convertimos a `null` si es así
     });
+    this.menuVisible = true;
 
     console.log('Menú y fecha seleccionados en menuOfDay:', this.menuOfDay());
   }

@@ -29,7 +29,7 @@
               <strong class="day-date">{{ day.displayDate }}</strong>
               <ul class="dish-list">
                 @if (day.menu) { @for (dish of day.menu.dishes; track $index) {
-                <li class="dish-item">{{ dish }}</li>
+                <li class="dish-item">{{ dish.name }}</li>
                 }
                 <button
                   class="action-button edit-button"
@@ -54,4 +54,10 @@
   <div class="error">{{ errorMessage }}</div>
   }
 </div>
-<app-description-menu></app-description-menu>
+@if(menuVisible){
+
+<app-description-menu
+  [menuofDay]="menuOfDay()"
+  class="description-menu-wrapper"
+></app-description-menu>
+}
