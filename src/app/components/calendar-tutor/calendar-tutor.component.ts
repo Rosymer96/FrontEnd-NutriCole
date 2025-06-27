@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { MenuResponse } from '../../interfaces/menu';
+import { MenuResponse, SelectedDayMenu } from '../../interfaces/menu';
 import { Month } from '../../interfaces/month';
 import { MenuService } from '../../services/menu/menu.service';
 import { formatDate } from '@angular/common';
@@ -18,6 +18,7 @@ export class CalendarTutorComponent {
   classId = signal<string>(localStorage.getItem('classId') ?? '');
 
   menus = signal<MenuResponse[]>([]);
+  menuOfDay = signal<SelectedDayMenu | null>(null);
   dateRange = signal<{ start: string; end: string } | null>(null);
   month = signal<string>('');
   receivedMonths: Month[] = [];
@@ -133,7 +134,17 @@ export class CalendarTutorComponent {
     this.receivedMonths = months;
     console.log(this.receivedMonths);
   }
-  showMenuOfDay(){
-    
+  onShowDescription(dayData: {
+    date: Date;
+    displayDate: string;
+    menu: MenuResponse | undefined;
+  }) {
+    const formattedDate = formatDate(dayData.date, 'yyyy-MM-dd', 'en-US');
+    this.menuOfDay.set({
+      date: formattedDate,
+      menu: dayData.menu || null, // Asegura que 'menu' sea MenuResponse o null
+    });
+
+    console.log('Menú y fecha seleccionados en menuOfDay:', this.menuOfDay());
   }
 }

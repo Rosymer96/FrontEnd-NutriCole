@@ -9,3 +9,7 @@ export interface MenuResponse {
   date: string;
   dishes: string[];
 }
+interface SelectedDayMenu {
+  date: string;
+  menu: MenuResponse | null;
+}
