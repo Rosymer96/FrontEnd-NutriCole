@@ -102,9 +102,7 @@ export class CreateMenuComponent implements OnInit {
           this.menuCreatedSignal.set(true);
           this.menuCreated.emit();
           this.onMenuCreate = true;
-          console.log(
-            'MENU DATA FOR DESCRIPTION:', this.menuDataForDescription()?.date
-          );
+          this.menuId.set(res.menuId);
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'No se pudo crear el menú';
@@ -115,25 +113,17 @@ export class CreateMenuComponent implements OnInit {
 
   editMenu() {
     const { first, second, dessert } = this.form.value;
-    // Buscar objetos de plato completos por id
-    const firstDish = this.allDishes().find((d) => d.idDish === Number(first));
-    const secondDish = this.allDishes().find(
-      (d) => d.idDish === Number(second)
-    );
-    const dessertDish = this.allDishes().find(
-      (d) => d.idDish === Number(dessert)
-    );
 
     this.menuService
       .editMenu(this.menuId(), first!, second!, dessert!)
       .subscribe({
-        next: () => {
+        next: (res) => {
           this.messageResponse = 'Menú creado con éxito.';
           this.errorMessage = '';
           this.menuDataForDescription.set({
             // ¡Actualiza la señal con los datos completos del menú creado!
-            date: this.date(),
-            dishes: [firstDish!, secondDish!, dessertDish!],
+            date: res.date,
+            dishes: res.menu,
           });
           this.menuCreatedSignal.set(true);
           this.menuCreated.emit();
@@ -151,6 +141,11 @@ export class CreateMenuComponent implements OnInit {
     this.menuService.deleteMenu(this.menuId()).subscribe({
       next: () => {
         this.messageResponse = 'Menú eliminado con éxito.';
+        this.menuDataForDescription.set(null);
+        this.showDescription.set(false);
+        this.menuCreated.emit();
+        this.onMenuCreate = false;
+        this.form.reset();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'No se pudo crear el menú';

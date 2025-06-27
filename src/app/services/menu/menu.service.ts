@@ -54,8 +54,8 @@ export class MenuService {
     firstId: string,
     secondId: string,
     dessertId: string
-  ): Observable<{ message: string }> {
-    return this.httpClient.put<{ message: string }>(
+  ): Observable<MenuEdited> {
+    return this.httpClient.put<MenuEdited>(
       `${this.API_URL}/${menuId}`,
       { firstId, secondId, dessertId }
     );

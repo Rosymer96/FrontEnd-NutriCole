@@ -29,9 +29,9 @@ export interface MenuByDay {
 }
 
 export interface MenuEdited {
+  message: string,
   menuId: number;
-  classId: number;
   date: string;
-  dishes: Dish[];
+  menu: Dish[];
 }
 

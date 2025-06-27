@@ -51,7 +51,7 @@
     </div>
     }
   </form>
-  @if(menuCreatedSignal()){
+  @if(menuCreatedSignal() && menuDataForDescription()){
   <app-description-menu
     [menu]="menuDataForDescription()"
   ></app-description-menu>
