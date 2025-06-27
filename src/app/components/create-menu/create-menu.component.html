@@ -1,0 +1,46 @@
+<div class="form-container">
+  <form [formGroup]="form" (submit)="createMenu()" class="selection-form">
+    <div class="form-group">
+      <label for="first">Primero</label>
+      <select id="first" formControlName="first">
+        <option value="" disabled selected>Selecciona un primero</option>
+        @for (dish of firstDishes(); track $index) {
+        <option [value]="dish.idDish">{{ dish.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="second">Segundo</label>
+      <select id="second" formControlName="second">
+        <option value="" disabled selected>Selecciona un segundo</option>
+        @for (dish of secondDishes(); track $index) {
+        <option [value]="dish.idDish">{{ dish.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="dessert">Postre</label>
+      <select id="dessert" formControlName="dessert">
+        <option value="" disabled selected>Selecciona un postre</option>
+        @for (dish of dessertDishes(); track $index) {
+        <option [value]="dish.idDish">{{ dish.name }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Mensaje de error único -->
+    @if ( form.invalid && (form.controls['first'].touched ||
+    form.controls['second'].touched || form.controls['dessert'].touched) ) {
+    <div class="error-message">Todos los campos son obligatorios.</div>
+    }
+
+    <button class="action-button primary-button" type="submit">
+      Crear menú
+    </button>
+  </form>
+  @if(menuCreatedSignal()){
+  <app-description-menu [classId]="classId()" [date]="date()"></app-description-menu>
+  }
+</div>

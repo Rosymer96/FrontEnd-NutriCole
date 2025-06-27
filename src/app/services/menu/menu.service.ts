@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { MenuByMonthResponse, MenuResponse } from '../../interfaces/menu';
+import {
+  MenuByDay,
+  MenuByMonthResponse,
+  MenuResponse,
+} from '../../interfaces/menu';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -33,5 +37,13 @@ export class MenuService {
       secondId,
       dessertId,
     });
+  }
+  public getMenuByClassAndDay(
+    classId: string,
+    date: string
+  ): Observable<MenuByDay> {
+    return this.httpClient.get<MenuByDay>(
+      `${this.API_URL}/byClassAndDate?classId=${classId}&date=${date}`
+    );
   }
 }

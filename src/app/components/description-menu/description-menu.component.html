@@ -1,0 +1,22 @@
+<div class="description-menu-container">
+  <div>
+    <h4>Menú del día: {{ menu().date | date:'EEEE, dd/MM/yyyy' }}</h4>
+  </div>
+
+  @if (menu().dishes.length >= 1) {
+  <div>
+    <h2>{{ menu().dishes[0].name }}</h2>
+    <p>{{ menu().dishes[0].description }}</p>
+  </div>
+  } @if (menu().dishes.length >= 2) {
+  <div>
+    <h2>{{ menu().dishes[1].name }}</h2>
+    <p>{{ menu().dishes[1].description }}</p>
+  </div>
+  } @if (menu().dishes.length >= 3) {
+  <div>
+    <h2>{{ menu().dishes[2].name }}</h2>
+    <p>{{ menu().dishes[2].description }}</p>
+  </div>
+  }
+</div>

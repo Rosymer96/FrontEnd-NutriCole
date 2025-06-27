@@ -58,12 +58,10 @@
 </div>
 @if(selectedDate()){
 <app-create-menu
-class="app-create-menu"
+  class="app-create-menu"
   [date]="selectedDate()"
   [classId]="classId()"
-  (menuCreated)="
-    onFormSubmit({ month: month(), year: selectedDate().split('-')[0] })
-  "
-  (close)="selectedDate.set('')"
+  (menuCreated)="onMenuSuccessfullyCreated()"
 ></app-create-menu>
 }
+

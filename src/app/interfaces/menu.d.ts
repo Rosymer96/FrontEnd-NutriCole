@@ -10,6 +10,9 @@ export interface MenuResponse {
   dishes: string[];
 }
 
-export interface Menu {
-  
+export interface MenuByDay {
+  menuId: number;
+  classId: number;
+  date: string;
+  dishes: Dish[];
 }

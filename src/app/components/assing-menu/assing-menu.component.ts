@@ -6,6 +6,7 @@ import { CommonModule, formatDate } from '@angular/common';
 import { FormMenuComponent } from '../form-menu/form-menu.component';
 import { Month } from '../../interfaces/month';
 import { CreateMenuComponent } from '../create-menu/create-menu.component';
+import { DescriptionMenuComponent } from '../description-menu/description-menu.component';
 
 @Component({
   selector: 'app-assing-menu',
@@ -14,6 +15,7 @@ import { CreateMenuComponent } from '../create-menu/create-menu.component';
     CommonModule,
     FormMenuComponent,
     CreateMenuComponent,
+    DescriptionMenuComponent,
   ],
   templateUrl: './assing-menu.component.html',
   styleUrl: './assing-menu.component.css',
@@ -24,6 +26,8 @@ export class AssingMenuComponent {
   //Se tiene que cambiar por la classId guardada en el localStorage almomento de dar click al boton.
   classId = signal<string>(localStorage.getItem('classId') ?? '');
   selectedDate = signal<string>('');
+  menuWasCreated = signal(false);
+  showDescription = signal(false);
 
   menus = signal<MenuResponse[]>([]);
   dateRange = signal<{ start: string; end: string } | null>(null);
@@ -129,14 +133,17 @@ export class AssingMenuComponent {
           this.dateRange.set(resp.dateRange);
           this.menus.set(menuArray);
           this.month.set(month);
+          this.menuWasCreated.set(true);
           console.log('Valor de this.menus():', this.menus());
           console.log('Valor de this.moth():', this.month());
           console.log('Valor de range():', this.dateRange());
           this.errorMessage = '';
+          this.showDescription.set(false);
         },
         error: (err) => {
           this.menus.set([]);
           this.errorMessage = err.error?.error || 'Calendario no encontrado.';
+          this.showDescription.set(false);
         },
       });
   }
@@ -146,5 +153,16 @@ export class AssingMenuComponent {
   onDateSelect(date: Date) {
     const formatted = formatDate(date, 'yyyy-MM-dd', 'en-US');
     this.selectedDate.set(formatted);
+    this.showDescription.set(false);
+  }
+  onMenuSuccessfullyCreated() {
+    // Cuando un menú se crea con éxito en CreateMenuComponent,
+    // actualiza el calendario y muestra la descripción del menú recién creado.
+    this.onFormSubmit({
+      month: this.month(),
+      year: this.selectedDate().split('-')[0],
+    });
+    this.showDescription.set(true);
+    this.selectedDate.set(this.selectedDate());
   }
 }
