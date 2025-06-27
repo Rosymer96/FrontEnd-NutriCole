@@ -1,0 +1,49 @@
+.description-menu-container {
+  font-family: "Handlee", cursive; /* Using a handwritten-style font, you might need to import it from Google Fonts */
+  border: 3px solid black;
+  border-radius: 20px;
+  padding: 20px;
+  width: 400px; /* Adjust as needed */
+  background-color: #fff; /* White background as in the image */
+  line-height: 3rem;
+}
+
+.menu-date {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.menu-date h4 {
+  font-size: 1.2em;
+  font-weight: normal;
+  margin: 0;
+  text-align: end;
+}
+
+.first-name,
+.second-name,
+.desert-name {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px 10px;
+  margin-bottom: 5px;
+  background-color: #fff; /* Ensure white background inside each box */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dish-name {
+  font-size: 1em;
+  font-weight: bold; /* The image text looks bold */
+  margin: 0;
+  text-transform: uppercase; /* The image has uppercase titles */
+}
+
+p {
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin: 0;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(216, 216, 216);
+  height: 50px;
+}

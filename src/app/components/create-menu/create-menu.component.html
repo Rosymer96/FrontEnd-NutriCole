@@ -1,3 +1,6 @@
+<div class="top-bar">
+  <button class="close-button" (click)="close.emit()">Cerrar</button>
+</div>
 <div class="form-container">
   <form [formGroup]="form" (submit)="createMenu()" class="selection-form">
     <div class="form-group">
@@ -34,13 +37,42 @@
     @if ( form.invalid && (form.controls['first'].touched ||
     form.controls['second'].touched || form.controls['dessert'].touched) ) {
     <div class="error-message">Todos los campos son obligatorios.</div>
-    }
+    } @if(!onMenuCreate){
+    <button class="action-button primary-button" type="submit">Crear</button>
 
-    <button class="action-button primary-button" type="submit">
-      Crear menú
-    </button>
+    } @if(onMenuCreate){
+    <div class="button-container">
+      <button class="action-button primary-button" (click)="editMenu()">
+        Editar
+      </button>
+      <button class="action-button primary-button" (click)="deleteMenu()">
+        Eliminar
+      </button>
+    </div>
+    }
   </form>
   @if(menuCreatedSignal()){
-  <app-description-menu [classId]="classId()" [date]="date()"></app-description-menu>
+  <app-description-menu
+    [classId]="classId()"
+    [date]="date()"
+  ></app-description-menu>
+  }@else {
+  <div class="description-menu-container">
+    <div class="menu-date">
+      <h4>Fecha</h4>
+    </div>
+    <div class="first-name">
+      <h2 class="dish-name">Primero:</h2>
+      <p>Description</p>
+    </div>
+    <div class="second-name">
+      <h2 class="dish-name">Segundo:</h2>
+      <p>Description</p>
+    </div>
+    <div class="desert-name">
+      <h2 class="dish-name">Postre:</h2>
+      <p>Description</p>
+    </div>
+  </div>
   }
 </div>

@@ -2,6 +2,7 @@ import { DishService } from './../../services/dish/dish.service';
 import {
   Component,
   computed,
+  effect,
   inject,
   input,
   OnInit,
@@ -17,6 +18,7 @@ import {
 import { IDish } from '../../interfaces/dish';
 import { MenuService } from '../../services/menu/menu.service';
 import { DescriptionMenuComponent } from '../description-menu/description-menu.component';
+import { MenuByDay } from '../../interfaces/menu';
 
 @Component({
   selector: 'app-create-menu',
@@ -28,12 +30,16 @@ export class CreateMenuComponent implements OnInit {
   private dishService = inject(DishService);
   private menuService = inject(MenuService);
   menuCreatedSignal = signal(false);
+  showDescription = signal(false);
+  menuDataForDescription = signal<{ date: string; dishes: IDish[] } | null>(
+    null
+  );
 
   menuCreated = output<void>();
   close = output<void>();
+  onMenuCreate: boolean = false;
 
   allDishes = signal<IDish[]>([]);
-  menuCreatedData = signal<{ date: string; dishes: IDish[] } | null>(null);
 
   // Inputs
   date = input<string>('');
@@ -61,6 +67,13 @@ export class CreateMenuComponent implements OnInit {
     dessert: new FormControl('', [Validators.required]),
   });
 
+  loadMenu = effect(() => {
+    const date = this.date();
+    const classId = this.classId();
+    if (date && classId && this.allDishes().length > 0) {
+      this.loadMenuIfExists(date, classId);
+    }
+  });
   ngOnInit(): void {
     this.dishService.getAllDishes().subscribe({
       next: (resp) => {
@@ -68,6 +81,31 @@ export class CreateMenuComponent implements OnInit {
       },
       error: () => {
         this.allDishes.set([]);
+      },
+    });
+  }
+  loadMenuIfExists(date: string, classId: string) {
+    this.menuService.getMenuByClassAndDay(classId, date).subscribe({
+      next: (menu) => {
+        const firstId = menu.dishes[0]?.idDish?.toString() ?? '';
+        const secondId = menu.dishes[1]?.idDish?.toString() ?? '';
+        const dessertId = menu.dishes[2]?.idDish?.toString() ?? '';
+
+        this.form.patchValue({
+          first: firstId,
+          second: secondId,
+          dessert: dessertId,
+        });
+        this.showDescription.set(true); // Mostrar la descripción si el menú existe
+        this.menuDataForDescription.set(menu); // Pasar el menú completo a la descripción
+        this.onMenuCreate = true; // Para habilitar los botones de "Editar" / "Eliminar"**
+        this.errorMessage = ''; // Limpiar cualquier error previo
+      },
+      error: () => {
+        this.form.reset();
+        this.showDescription.set(false); // Ocultar la descripción si no hay menú o hay un error
+        this.menuDataForDescription.set(null); // Limpiar los datos del menú de la descripción**
+        // No mostrar un error aquí si simplemente no hay menú para la fecha
       },
     });
   }
@@ -94,22 +132,30 @@ export class CreateMenuComponent implements OnInit {
         next: () => {
           this.messageResponse = 'Menú creado con éxito.';
           this.errorMessage = '';
-          this.menuCreatedData.set({
+          this.menuDataForDescription.set({
+            // ¡Actualiza la señal con los datos completos del menú creado!
             date: this.date(),
             dishes: [firstDish!, secondDish!, dessertDish!],
           });
           this.menuCreatedSignal.set(true);
           this.menuCreated.emit();
+          this.onMenuCreate = true;
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'No se pudo crear el menú';
+          this.showDescription.set(false);
         },
       });
   }
 
+  editMenu() {}
+
+  deleteMenu() {}
+
   cancel() {
     this.form.reset();
-    this.form.reset();
     this.close.emit();
+    this.showDescription.set(false); // Asegúrate de ocultar la descripción al cancelar
+    this.menuDataForDescription.set(null); // Limpia los datos de la descripción
   }
 }

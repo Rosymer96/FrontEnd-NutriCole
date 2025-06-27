@@ -1,14 +1,20 @@
 <div class="main-content-wrapper">
-  <div class="calendar-container">
-    <app-form-menu
-      (showMenu)="onFormSubmit($event)"
-      (monthsEmitted)="onHandleMonths($event)"
-    ></app-form-menu>
+  <div class="form-and-title-container">
+    <div class="calendar-container">
+      <app-form-menu
+        (showMenu)="onFormSubmit($event)"
+        (monthsEmitted)="onHandleMonths($event)"
+      ></app-form-menu>
+    </div>
+    @if (hasPlates()) {
+    <div class="month-container">
+      <p class="month-year-heading">Menú de:</p>
+      <h2 class="month-year-text">{{ monthName }}</h2>
+    </div>
+    }
   </div>
-
   @if (hasPlates()) {
   <div class="calendar-display-container calendar-container">
-    <h2 class="month-year-heading">Menú del mes de {{ monthName }}</h2>
     <table class="calendar-table">
       <thead>
         <tr>
@@ -31,7 +37,7 @@
                 @if (day.menu) { @for (dish of day.menu.dishes; track $index) {
                 <li class="dish-item">{{ dish }}</li>
                 }
-                <button class="action-button edit-button">Editar</button>
+                <button class="action-button edit-button" (click)="openCreateMenu(day.date)">Editar</button>
                 } @else {
                 <button
                   class="action-button assign-button"
@@ -62,6 +68,6 @@
   [date]="selectedDate()"
   [classId]="classId()"
   (menuCreated)="onMenuSuccessfullyCreated()"
+  (close)="selectedDate.set('')"
 ></app-create-menu>
 }
-
