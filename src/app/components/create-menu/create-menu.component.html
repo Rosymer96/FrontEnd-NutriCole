@@ -2,7 +2,7 @@
   <button class="close-button" (click)="close.emit()">Cerrar</button>
 </div>
 <div class="form-container">
-  <form [formGroup]="form" (submit)="createMenu()" class="selection-form">
+  <form [formGroup]="form" (submit)="onMenuCreate ? editMenu() : createMenu()" class="selection-form">
     <div class="form-group">
       <label for="first">Primero</label>
       <select id="first" formControlName="first">
@@ -42,10 +42,10 @@
 
     } @if(onMenuCreate){
     <div class="button-container">
-      <button class="action-button primary-button" (click)="editMenu()">
+      <button class="action-button primary-button" type="button" (click)="editMenu()">
         Editar
       </button>
-      <button class="action-button primary-button" (click)="deleteMenu()">
+      <button class="action-button primary-button" type="button" (click)="deleteMenu()">
         Eliminar
       </button>
     </div>
@@ -55,24 +55,7 @@
   <app-description-menu
     [classId]="classId()"
     [date]="date()"
+    [menuId]="menuId()"
   ></app-description-menu>
-  }@else {
-  <div class="description-menu-container">
-    <div class="menu-date">
-      <h4>Fecha</h4>
-    </div>
-    <div class="first-name">
-      <h2 class="dish-name">Primero:</h2>
-      <p>Description</p>
-    </div>
-    <div class="second-name">
-      <h2 class="dish-name">Segundo:</h2>
-      <p>Description</p>
-    </div>
-    <div class="desert-name">
-      <h2 class="dish-name">Postre:</h2>
-      <p>Description</p>
-    </div>
-  </div>
   }
 </div>

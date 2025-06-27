@@ -4,7 +4,9 @@ import { environment } from '../../environments/environment';
 import {
   MenuByDay,
   MenuByMonthResponse,
+  MenuEdited,
   MenuResponse,
+  MenuResponseCreated,
 } from '../../interfaces/menu';
 import { Observable } from 'rxjs';
 
@@ -29,8 +31,8 @@ export class MenuService {
     firstId: string,
     secondId: string,
     dessertId: string
-  ): Observable<MenuResponse> {
-    return this.httpClient.post<MenuResponse>(`${this.API_URL}/create`, {
+  ): Observable<MenuResponseCreated> {
+    return this.httpClient.post<MenuResponseCreated>(`${this.API_URL}/create`, {
       date,
       classId,
       firstId,
@@ -44,6 +46,24 @@ export class MenuService {
   ): Observable<MenuByDay> {
     return this.httpClient.get<MenuByDay>(
       `${this.API_URL}/byClassAndDate?classId=${classId}&date=${date}`
+    );
+  }
+
+  public editMenu(
+    menuId: string,
+    firstId: string,
+    secondId: string,
+    dessertId: string
+  ): Observable<{ message: string }> {
+    return this.httpClient.put<{ message: string }>(
+      `${this.API_URL}/${menuId}`,
+      { firstId, secondId, dessertId }
+    );
+  }
+
+  public deleteMenu(menuId: string): Observable<{ message: string }> {
+    return this.httpClient.delete<{ message: string }>(
+      `${this.API_URL}/${menuId}`
     );
   }
 }
