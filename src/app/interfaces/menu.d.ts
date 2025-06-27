@@ -1,3 +1,5 @@
+import { IDish } from "./dish";
+
 export interface MenuByMonthResponse {
   message: string;
   classId: string | number;
@@ -10,8 +12,12 @@ export interface MenuResponse {
   dishes: string[];
 }
 export interface MenuResponseCreated {
+  [x: string]: IDish;
+  res: IDish;
   message: string;
-  newMenu: string;
+  menuId: string;
+  date: string,
+  menu: IDish[]
 }
 
 

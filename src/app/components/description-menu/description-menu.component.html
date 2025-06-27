@@ -1,14 +1,21 @@
 <div class="description-menu-container">
-  <div>
-    <h4>Menú del día: {{ menu().date | date:'EEEE, dd/MM/yyyy' }}</h4>
+  <div class="menu-date">
+    <h4>Menú del día: {{ menu()?.date| date : "EEEE, dd/MM/yyyy" }}</h4>
   </div>
 
-  @if (menu().dishes.length >= 1) {
-  <div>
-    <h2>{{ menu().dishes[0].name }}</h2>
-    <p>{{ menu().dishes[0].description }}</p>
+  @for(dish of menu()?.dishes; track $index){
+  <div class="dish">
+    <h2 class="dish-name">{{ dish.name }}</h2>
+    <p>{{ dish.description }}</p>
   </div>
-  } @if (menu().dishes.length >= 2) {
+  }
+  <!-- 
+  @if (menu()?.dishes?.length) {
+  <div>
+    <h2>{{ menu()?.dishes[0]?.name}}</h2>
+    <p>{{ menu()?.dishes[0] }}</p>
+  </div>
+  } @if (menu()?.dishes?.length) {
   <div>
     <h2>{{ menu().dishes[1].name }}</h2>
     <p>{{ menu().dishes[1].description }}</p>
@@ -18,5 +25,5 @@
     <h2>{{ menu().dishes[2].name }}</h2>
     <p>{{ menu().dishes[2].description }}</p>
   </div>
-  }
+  } -->
 </div>

@@ -53,9 +53,7 @@
   </form>
   @if(menuCreatedSignal()){
   <app-description-menu
-    [classId]="classId()"
-    [date]="date()"
-    [menuId]="menuId()"
+    [menu]="menuDataForDescription()"
   ></app-description-menu>
   }
 </div>

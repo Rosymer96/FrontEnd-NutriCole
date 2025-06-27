@@ -87,13 +87,6 @@ export class CreateMenuComponent implements OnInit {
 
     const { first, second, dessert } = this.form.value;
     // Buscar objetos de plato completos por id
-    const firstDish = this.allDishes().find((d) => d.idDish === Number(first));
-    const secondDish = this.allDishes().find(
-      (d) => d.idDish === Number(second)
-    );
-    const dessertDish = this.allDishes().find(
-      (d) => d.idDish === Number(dessert)
-    );
 
     this.menuService
       .createMenu(this.date(), this.classId(), first!, second!, dessert!)
@@ -103,15 +96,15 @@ export class CreateMenuComponent implements OnInit {
           this.errorMessage = '';
           this.menuDataForDescription.set({
             // ¡Actualiza la señal con los datos completos del menú creado!
-            date: this.date(),
-            dishes: [firstDish!, secondDish!, dessertDish!],
+            date: res.date,
+            dishes: res.menu,
           });
-          this.menuId.set(res.newMenu);
           this.menuCreatedSignal.set(true);
           this.menuCreated.emit();
           this.onMenuCreate = true;
-          console.log('res:' + res);
-          console.log('menuId:' + this.menuId());
+          console.log(
+            'MENU DATA FOR DESCRIPTION:', this.menuDataForDescription()?.date
+          );
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'No se pudo crear el menú';

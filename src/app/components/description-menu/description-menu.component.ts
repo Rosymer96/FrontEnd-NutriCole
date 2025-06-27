@@ -18,38 +18,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './description-menu.component.html',
   styleUrl: './description-menu.component.css',
 })
-export class DescriptionMenuComponent implements OnInit, OnChanges {
-  private menuService = inject(MenuService);
-
+export class DescriptionMenuComponent {
   classId = input<string>('');
   date = input<string>('');
   menuId = input<string>('');
-  menu = signal<{ date: string; dishes: IDish[] }>({ date: '', dishes: [] });
+  menu = input<{ date: string; dishes: IDish[] } | null>(
+    null
+  );
 
-  ngOnInit(): void {
-    this.loadMenu();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['classId'] || changes['date'] || changes['menuId']) {
-      this.loadMenu();
-    }
-  }
-  private loadMenu(): void {
-    if (this.classId && this.date) {
-      this.menuService
-        .getMenuByClassAndDay(this.classId(), this.date())
-        .subscribe({
-          next: (res) => {
-            this.menu.set({ date: res.date, dishes: res.dishes });
-            console.log('MENUCARGADO:' + this.menu());
-          },
-          error: () => {
-            this.menu.set({ date: '', dishes: [] });
-          },
-        });
-    } else {
-      this.menu.set({ date: '', dishes: [] });
-    }
-  }
 }
