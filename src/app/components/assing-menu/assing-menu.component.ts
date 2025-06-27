@@ -137,8 +137,25 @@ export class AssingMenuComponent {
           this.errorMessage = '';
         },
         error: (err) => {
-          this.menus.set([]);
-          this.errorMessage = err.error?.error || 'Calendario no encontrado.';
+          // Extraer mes y año seleccionados
+          const [selectedMonth, selectedYear] = monthDate
+            .split('-')
+            .map(Number);
+
+          // Calcular primer y último día hábil del mes
+          const startDate = new Date(selectedYear, selectedMonth - 1, 1);
+          const endDate = new Date(selectedYear, selectedMonth, 0); // último día del mes
+
+          // Ajustar dateRange manualmente aunque no haya menús
+          this.dateRange.set({
+            start: formatDate(startDate, 'yyyy-MM-dd', 'en-US'),
+            end: formatDate(endDate, 'yyyy-MM-dd', 'en-US'),
+          });
+
+          this.menus.set([]); // vacío
+          this.month.set(month);
+          this.menuWasCreated.set(false);
+          this.errorMessage = ''; // Ocultar el mensaje de error
         },
       });
   }
@@ -159,7 +176,7 @@ export class AssingMenuComponent {
     this.selectedDate.set(this.selectedDate());
   }
   openCreateMenu(date: Date) {
-  const formattedDate = formatDate(date, 'yyyy-MM-dd', 'en-US');
-  this.selectedDate.set(formattedDate);
-}
+    const formattedDate = formatDate(date, 'yyyy-MM-dd', 'en-US');
+    this.selectedDate.set(formattedDate);
+  }
 }

@@ -6,14 +6,14 @@
         (monthsEmitted)="onHandleMonths($event)"
       ></app-form-menu>
     </div>
-    @if (hasPlates()) {
+    @if (rowCalendar) {
     <div class="month-container">
       <p class="month-year-heading">Menú de:</p>
       <h2 class="month-year-text">{{ monthName }}</h2>
     </div>
     }
   </div>
-  @if (hasPlates()) {
+  @if (rowCalendar) {
   <div class="calendar-display-container calendar-container">
     <table class="calendar-table">
       <thead>
