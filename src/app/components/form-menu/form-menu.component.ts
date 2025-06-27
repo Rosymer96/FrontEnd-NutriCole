@@ -32,6 +32,7 @@ export class FormMenuComponent {
   ]);
 
   years = signal(['2024', '2025', '2026']);
+  wasSubmitted = false;
 
   form = new FormGroup({
     monthSelected: new FormControl('', [Validators.required]),
@@ -40,6 +41,7 @@ export class FormMenuComponent {
 
   //Metodo para enviar los datos recogidos del form:
   onSubmit() {
+    this.wasSubmitted = true;
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
