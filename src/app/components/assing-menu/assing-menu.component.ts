@@ -175,8 +175,7 @@ export class AssingMenuComponent {
     });
     this.selectedDate.set(this.selectedDate());
   }
-  openCreateMenu(date: Date) {
-    const formattedDate = formatDate(date, 'yyyy-MM-dd', 'en-US');
-    this.selectedDate.set(formattedDate);
+  openCreateMenu() {
+
   }
 }
