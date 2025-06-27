@@ -4,10 +4,11 @@ import { Month } from '../../interfaces/month';
 import { MenuService } from '../../services/menu/menu.service';
 import { formatDate } from '@angular/common';
 import { FormMenuComponent } from '../form-menu/form-menu.component';
+import { DescriptionMenuComponent } from "../description-menu/description-menu.component";
 
 @Component({
   selector: 'app-calendar-tutor',
-  imports: [FormMenuComponent],
+  imports: [FormMenuComponent, DescriptionMenuComponent],
   templateUrl: './calendar-tutor.component.html',
   styleUrl: './calendar-tutor.component.css',
 })
