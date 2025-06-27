@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 import { IDish } from '../../interfaces/dish';
 import { CommonModule } from '@angular/common';
@@ -16,4 +16,9 @@ export class DescriptionMenuComponent {
   menuId = input<string>('');
   menu = input<{ date: string; dishes: IDish[] } | null>(null);
   menuofDay = input<SelectedDayMenu | null>(null);
+  closeMenu = output<void>();
+
+  close() {
+    this.closeMenu.emit();
+  }
 }
