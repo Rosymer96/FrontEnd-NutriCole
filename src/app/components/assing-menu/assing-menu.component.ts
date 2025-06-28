@@ -31,6 +31,7 @@ export class AssingMenuComponent {
   month = signal<string>('');
   receivedMonths: Month[] = [];
   errorMessage = '';
+  onOpenEdit = false;
 
   //Computed para armar el calendario, creado con ayuda de IA.
   calendar = computed(() => {
@@ -131,9 +132,6 @@ export class AssingMenuComponent {
           this.menus.set(menuArray);
           this.month.set(month);
           this.menuWasCreated.set(true);
-          console.log('Valor de this.menus():', this.menus());
-          console.log('Valor de this.moth():', this.month());
-          console.log('Valor de range():', this.dateRange());
           this.errorMessage = '';
         },
         error: (err) => {
@@ -175,7 +173,8 @@ export class AssingMenuComponent {
     });
     this.selectedDate.set(this.selectedDate());
   }
-  openCreateMenu() {
-
+  openEditMenu(menu: MenuResponse) {
+    this.onOpenEdit = true;
+    
   }
 }

@@ -35,9 +35,14 @@
               <strong class="day-date">{{ day.displayDate }}</strong>
               <ul class="dish-list">
                 @if (day.menu) { @for (dish of day.menu.dishes; track $index) {
-                <li class="dish-item">{{ dish }}</li>
+                <li class="dish-item">{{ dish.name }}</li>
                 }
-                <button class="action-button edit-button" (click)="onDateSelect(day.date)">Editar</button>
+                <button
+                  class="action-button edit-button"
+                  (click)="openEditMenu(day.menu)"
+                >
+                  Editar
+                </button>
                 } @else {
                 <button
                   class="action-button assign-button"
@@ -70,4 +75,6 @@
   (menuCreated)="onMenuSuccessfullyCreated()"
   (close)="selectedDate.set('')"
 ></app-create-menu>
+}@else if (onOpenEdit) {
+<app-create-menu></app-create-menu>
 }
