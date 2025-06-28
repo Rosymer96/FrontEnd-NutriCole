@@ -105,3 +105,29 @@
     width: 100% !important;
   }
 }
+
+.calendar-table .edit-button,
+.calendar-table .action-button {
+  width: 56px !important;
+  min-width: 0 !important;
+  max-width: 70px !important;
+  padding: 0.32rem 0 !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  border-radius: 999px !important;
+  border: 0.5px solid #fff !important;
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%) !important;
+  color: #fff !important;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 6px 0 rgba(10,20,40,0.14) !important;
+  margin: 8px auto 0 auto !important;
+  display: block !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  text-transform: none !important;
+}
+
+.calendar-table .edit-button span,
+.calendar-table .action-button span {
+  font-size: 0.9rem !important;
+}

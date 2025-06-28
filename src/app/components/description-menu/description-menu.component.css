@@ -1,11 +1,139 @@
 .description-menu-container {
-  font-family: "Handlee", cursive; /* Using a handwritten-style font, you might need to import it from Google Fonts */
-  border: 3px solid black;
-  border-radius: 20px;
-  padding: 20px;
-  width: 400px; /* Adjust as needed */
-  background-color: #fff; /* White background as in the image */
-  line-height: 3rem;
+  background: #393939;
+  border-radius: 32px;
+  border: 2px solid #fff;
+  box-shadow: 0 8px 40px 0 rgba(0,0,0,0.25);
+  color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  position: relative;
+  z-index: 99999;
+}
+
+.description-menu-container button {
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 700;
+  border: 0.5px solid #fff;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  padding: 0.7rem 2rem;
+  cursor: pointer;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+  transition: background 0.2s;
+}
+
+.description-menu-container button:hover {
+  background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
+}
+
+.dish {
+  background: #444;
+  border-radius: 22px;
+  border: 1.5px solid #fff;
+  padding: 1.2rem 1.5rem 1.3rem 1.5rem;
+  margin-bottom: 1.6rem;
+  box-shadow: 0 1px 8px 0 rgba(0,0,0,0.08);
+}
+
+.dish-name {
+  font-size: 1.18em;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.dish-note {
+  background: #bbbbbb40;
+  border-radius: 16px;
+  color: #e7e7e7;
+  font-style: italic;
+  font-size: 1.15rem;
+  margin-top: 0.8rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
+}
+
+.description-menu-container textarea {
+  width: 100%;
+  min-height: 70px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.09rem;
+  border-radius: 14px;
+  border: 1.5px solid #b6e0f7;
+  padding: 1.1rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  resize: vertical;
+  background: #222;
+  color: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.18s;
+}
+.description-menu-container textarea:focus {
+  outline: none;
+  border-color: #26c6f9;
+  background: #2b2b2b;
+}
+
+.description-menu-container .note-submit,
+.description-menu-container button[type="submit"] {
+  background: none !important;
+  border: none !important;
+  color: #26c6f9 !important;
+  text-decoration: underline !important;
+  font-size: 1.11rem !important;
+  font-family: 'Montserrat', Arial, sans-serif !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin-top: 0.3rem !important;
+  margin-left: 0.3rem !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: inline-block !important;
+}
+
+.description-menu-container .note-submit:hover,
+.description-menu-container button[type="submit"]:hover {
+  color: #09a1e2 !important;
+}
+
+.description-menu-container input[type="text"] {
+  width: 100%;
+  border-radius: 999px;
+  padding: 0.8rem 1.4rem;
+  border: 1.5px solid #ccc;
+  background: #ededed;
+  color: #333;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.05rem;
+  margin-bottom: 1.3rem;
+}
+
+.description-menu-container label,
+.description-menu-container h2,
+.description-menu-container h3 {
+  color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.32rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+
+.description-menu-container h2 {
+  font-size: 1.7rem;
+  margin-bottom: 1.6rem;
+}
+
+.description-menu-container h3 {
+  font-size: 1.23rem;
+  margin-bottom: 1.2rem;
 }
 
 .menu-date {
@@ -18,30 +146,4 @@
   font-weight: normal;
   margin: 0;
   text-align: end;
-}
-
-.dish{
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 10px 10px;
-  margin-bottom: 5px;
-  background-color: #fff; /* Ensure white background inside each box */
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.dish-name {
-  font-size: 1em;
-  font-weight: bold; /* The image text looks bold */
-  margin: 0;
-  text-transform: uppercase; /* The image has uppercase titles */
-}
-
-p {
-  font-size: 0.9em;
-  line-height: 1.4;
-  margin: 0;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: rgb(216, 216, 216);
-  height: 50px;
 }

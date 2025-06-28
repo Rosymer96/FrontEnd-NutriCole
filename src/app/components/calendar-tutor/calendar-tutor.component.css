@@ -221,7 +221,7 @@ label[for="month"], .month-title, .mes-title, .title {
   margin-top: 0.5rem;
 }
 
-button, .button-calendar {
+.button-calendar, .button-calendar-main {
   width: 350px !important;
   padding: 1.2rem 0 !important;
   background: linear-gradient(90deg, #01243b 0%, #1687c8 100%) !important;
@@ -310,4 +310,31 @@ select:focus, .select-month:focus {
 .button-calendar-main:hover {
   background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%) !important;
   box-shadow: 0 8px 24px 0 rgba(22,135,200,0.08) !important;
+}
+
+.calendar-table .edit-button,
+.calendar-table .assign-button {
+  background: none !important;
+  border: none !important;
+  color: #26c6f9 !important;
+  text-decoration: underline !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100%;
+  padding: 0 !important;
+  margin: 8px auto 0 auto !important;
+  display: inline-block !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  text-transform: none !important;
+  cursor: pointer !important;
+}
+
+.calendar-table .edit-button:hover,
+.calendar-table .assign-button:hover {
+  color: #09a1e2 !important;
 }
