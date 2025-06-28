@@ -3,7 +3,7 @@ import {
   FormControl,
   FormGroup,
   Validators,
-  ReactiveFormsModule, 
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Month } from '../../interfaces/month';
@@ -16,6 +16,7 @@ import { Month } from '../../interfaces/month';
 export class FormMenuComponent {
   showMenu = output<{ month: string; year: string }>();
   monthsEmitted = output<Month[]>();
+  
 
   months = signal<Month[]>([
     { name: 'Septiembre', value: '09' },
@@ -31,26 +32,23 @@ export class FormMenuComponent {
     { name: 'Julio', value: '07' },
   ]);
 
-  years = signal(['2024', '2025', '2026']);
-  wasSubmitted = false;
+  years = signal(['2025']);
 
   form = new FormGroup({
     monthSelected: new FormControl('', [Validators.required]),
-    yearSelected: new FormControl('', [Validators.required]),
   });
 
   //Metodo para enviar los datos recogidos del form:
   onSubmit() {
-    this.wasSubmitted = true;
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    const { monthSelected, yearSelected } = this.form.value;
+    const { monthSelected } = this.form.value;
     this.showMenu.emit({
       month: monthSelected!,
-      year: yearSelected!,
+      year: this.years()[0],
     });
     this.onEmitMonths();
   }
