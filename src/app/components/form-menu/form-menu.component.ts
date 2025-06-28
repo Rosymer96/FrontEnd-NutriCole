@@ -16,7 +16,6 @@ import { Month } from '../../interfaces/month';
 export class FormMenuComponent {
   showMenu = output<{ month: string; year: string }>();
   monthsEmitted = output<Month[]>();
-  
 
   months = signal<Month[]>([
     { name: 'Septiembre', value: '09' },
@@ -37,6 +36,9 @@ export class FormMenuComponent {
   form = new FormGroup({
     monthSelected: new FormControl('', [Validators.required]),
   });
+
+
+
 
   //Metodo para enviar los datos recogidos del form:
   onSubmit() {
