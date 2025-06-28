@@ -1,4 +1,4 @@
-import { IDish } from "./dish";
+import { IDish } from './dish';
 
 export interface MenuByMonthResponse {
   message: string;
@@ -9,6 +9,7 @@ export interface MenuByMonthResponse {
 
 export interface MenuResponse {
   date: string;
+  id: number;
   dishes: IDish[];
 }
 interface SelectedDayMenu {

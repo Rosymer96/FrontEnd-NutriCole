@@ -1,9 +1,9 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output, signal } from '@angular/core';
 
 import { IDish } from '../../interfaces/dish';
 import { CommonModule } from '@angular/common';
 import { SelectedDayMenu } from '../../interfaces/menu';
-import { NoteComponent } from "../note/note.component";
+import { NoteComponent } from '../note/note.component';
 
 @Component({
   selector: 'app-description-menu',
@@ -14,11 +14,11 @@ import { NoteComponent } from "../note/note.component";
 export class DescriptionMenuComponent {
   classId = input<string>('');
   date = input<string>('');
-  menuId = input<string>('');
   menu = input<{ date: string; dishes: IDish[] } | null>(null);
   menuofDay = input<SelectedDayMenu | null>(null);
   closeMenu = output<void>();
 
+menuId = computed(() => this.menuofDay()?.menu?.id ?? -1);
   close() {
     this.closeMenu.emit();
   }

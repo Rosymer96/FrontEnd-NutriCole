@@ -16,6 +16,7 @@ import { Month } from '../../interfaces/month';
 export class FormMenuComponent {
   showMenu = output<{ month: string; year: string }>();
   monthsEmitted = output<Month[]>();
+  
 
   months = signal<Month[]>([
     { name: 'Septiembre', value: '09' },
@@ -31,11 +32,10 @@ export class FormMenuComponent {
     { name: 'Julio', value: '07' },
   ]);
 
-  years = signal(['2024', '2025', '2026']);
+  years = signal(['2025']);
 
   form = new FormGroup({
     monthSelected: new FormControl('', [Validators.required]),
-    yearSelected: new FormControl('', [Validators.required]),
   });
 
   //Metodo para enviar los datos recogidos del form:
@@ -45,10 +45,10 @@ export class FormMenuComponent {
       return;
     }
 
-    const { monthSelected, yearSelected } = this.form.value;
+    const { monthSelected } = this.form.value;
     this.showMenu.emit({
       month: monthSelected!,
-      year: yearSelected!,
+      year: this.years()[0],
     });
     this.onEmitMonths();
   }
