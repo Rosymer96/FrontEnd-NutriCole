@@ -3,10 +3,11 @@ import { Component, input, output } from '@angular/core';
 import { IDish } from '../../interfaces/dish';
 import { CommonModule } from '@angular/common';
 import { SelectedDayMenu } from '../../interfaces/menu';
+import { NoteComponent } from "../note/note.component";
 
 @Component({
   selector: 'app-description-menu',
-  imports: [CommonModule],
+  imports: [CommonModule, NoteComponent],
   templateUrl: './description-menu.component.html',
   styleUrl: './description-menu.component.css',
 })
