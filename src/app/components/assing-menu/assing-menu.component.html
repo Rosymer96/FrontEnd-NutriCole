@@ -67,14 +67,13 @@
   <div class="error">{{ errorMessage }}</div>
   }
 </div>
-@if(selectedDate()){
-<app-create-menu
-  class="app-create-menu"
-  [date]="selectedDate()"
-  [classId]="classId()"
-  (menuCreated)="onMenuSuccessfullyCreated()"
-  (close)="selectedDate.set('')"
-></app-create-menu>
-}@else if (onOpenEdit) {
-<app-create-menu></app-create-menu>
+@if (selectedDate()) {
+  <app-create-menu
+    class="app-create-menu"
+    [date]="selectedDate()"
+    [classId]="classId()"
+    [existingMenu]="menuToEdit()"
+    (menuCreated)="onMenuSuccessfullyCreated()"
+    (close)="selectedDate.set(''); menuToEdit.set(null)"
+  ></app-create-menu>
 }

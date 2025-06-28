@@ -1,6 +1,6 @@
 <div class="description-menu-container">
   <div class="menu-date">
-    <h4>Menú del día: {{ menu()?.date| date : "EEEE, dd/MM/yyyy" }}</h4>
+    <h4>{{ menu()?.date| date : "EEEE, dd/MM/yyyy" }}</h4>
   </div>
 
   @for(dish of menu()?.dishes; track $index){
@@ -9,21 +9,4 @@
     <p>{{ dish.description }}</p>
   </div>
   }
-  <!-- 
-  @if (menu()?.dishes?.length) {
-  <div>
-    <h2>{{ menu()?.dishes[0]?.name}}</h2>
-    <p>{{ menu()?.dishes[0] }}</p>
-  </div>
-  } @if (menu()?.dishes?.length) {
-  <div>
-    <h2>{{ menu().dishes[1].name }}</h2>
-    <p>{{ menu().dishes[1].description }}</p>
-  </div>
-  } @if (menu().dishes.length >= 3) {
-  <div>
-    <h2>{{ menu().dishes[2].name }}</h2>
-    <p>{{ menu().dishes[2].description }}</p>
-  </div>
-  } -->
 </div>

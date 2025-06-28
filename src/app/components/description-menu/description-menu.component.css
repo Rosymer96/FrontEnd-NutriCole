@@ -6,6 +6,7 @@
   width: 400px; /* Adjust as needed */
   background-color: #fff; /* White background as in the image */
   line-height: 3rem;
+  height: 450px;
 }
 
 .menu-date {
@@ -43,5 +44,5 @@ p {
   padding: 10px;
   border-radius: 10px;
   background-color: rgb(216, 216, 216);
-  height: 50px;
+  height: 30px;
 }

@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { MenuService } from '../../services/menu/menu.service';
 import { MenuResponse } from '../../interfaces/menu';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,6 +25,7 @@ export class AssingMenuComponent {
   classId = signal<string>(localStorage.getItem('classId') ?? '');
   selectedDate = signal<string>('');
   menuWasCreated = signal(false);
+  menuToEdit = signal<MenuResponse | null>(null);
 
   menus = signal<MenuResponse[]>([]);
   dateRange = signal<{ start: string; end: string } | null>(null);
@@ -161,20 +162,29 @@ export class AssingMenuComponent {
     this.receivedMonths = months;
   }
   onDateSelect(date: Date) {
+    if (!date) {
+      this.selectedDate.set('');
+      return;
+    }
     const formatted = formatDate(date, 'yyyy-MM-dd', 'en-US');
     this.selectedDate.set(formatted);
   }
   onMenuSuccessfullyCreated() {
     // Cuando un menú se crea con éxito en CreateMenuComponent,
     // actualiza el calendario y muestra la descripción del menú recién creado.
+    const year = this.selectedDate()
+      ? this.selectedDate().split('-')[0]
+      : new Date().getFullYear().toString();
     this.onFormSubmit({
       month: this.month(),
-      year: this.selectedDate().split('-')[0],
+      year,
     });
+
     this.selectedDate.set(this.selectedDate());
   }
   openEditMenu(menu: MenuResponse) {
-    this.onOpenEdit = true;
-    
+    this.menuToEdit.set(menu);
+    console.log('menutoedit:', this.menuToEdit())
+    this.selectedDate.set(menu.date);
   }
 }

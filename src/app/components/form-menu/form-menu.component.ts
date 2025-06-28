@@ -1,15 +1,16 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, output, signal,  } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   Validators,
   ReactiveFormsModule,
+  FormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Month } from '../../interfaces/month';
 @Component({
   selector: 'app-form-menu',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './form-menu.component.html',
   styleUrl: './form-menu.component.css',
 })
@@ -33,23 +34,13 @@ export class FormMenuComponent {
 
   years = signal(['2025']);
 
-  form = new FormGroup({
-    monthSelected: new FormControl('', [Validators.required]),
-  });
 
-
-
+  monthSelected = signal<string>('');
 
   //Metodo para enviar los datos recogidos del form:
   onSubmit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    const { monthSelected } = this.form.value;
     this.showMenu.emit({
-      month: monthSelected!,
+      month:this.monthSelected(),
       year: this.years()[0],
     });
     this.onEmitMonths();

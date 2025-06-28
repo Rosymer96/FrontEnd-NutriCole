@@ -5,7 +5,6 @@ import {
   MenuByDay,
   MenuByMonthResponse,
   MenuEdited,
-  MenuResponse,
   MenuResponseCreated,
 } from '../../interfaces/menu';
 import { Observable } from 'rxjs';
@@ -28,9 +27,9 @@ export class MenuService {
   public createMenu(
     date: string,
     classId: string,
-    firstId: string,
-    secondId: string,
-    dessertId: string
+    firstId: number,
+    secondId: number,
+    dessertId: number
   ): Observable<MenuResponseCreated> {
     return this.httpClient.post<MenuResponseCreated>(`${this.API_URL}/create`, {
       date,
@@ -51,9 +50,9 @@ export class MenuService {
 
   public editMenu(
     menuId: string,
-    firstId: string,
-    secondId: string,
-    dessertId: string
+    firstId: number,
+    secondId: number,
+    dessertId: number
   ): Observable<MenuEdited> {
     return this.httpClient.put<MenuEdited>(
       `${this.API_URL}/${menuId}`,
