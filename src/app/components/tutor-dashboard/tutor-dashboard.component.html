@@ -1,0 +1,13 @@
+<div>
+  <div>
+    <h1>Hola,{{ user()?.name }}</h1>
+    <h2>Ver menu de:</h2>
+    @if (students().length > 0) { @for(student of students();track $index) {
+    <div>
+      <p>{{ student.name }}</p>
+      <p>{{ student.class_name }}</p>
+    </div>
+<button>Ver Menu</button>
+    } }
+  </div>
+</div>
