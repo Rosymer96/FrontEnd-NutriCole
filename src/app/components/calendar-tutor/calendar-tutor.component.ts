@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { MenuResponse, SelectedDayMenu } from '../../interfaces/menu';
 import { Month } from '../../interfaces/month';
 import { MenuService } from '../../services/menu/menu.service';
@@ -12,11 +12,13 @@ import { DescriptionMenuComponent } from '../description-menu/description-menu.c
   templateUrl: './calendar-tutor.component.html',
   styleUrl: './calendar-tutor.component.css',
 })
-export class CalendarTutorComponent {
+export class CalendarTutorComponent implements OnInit {
   private menuService = inject(MenuService);
-
+  classId = signal<string>('');
+  ngOnInit(): void {
+    this.classId.set(localStorage.getItem('classId') || '');
+  }
   //Se tiene que cambiar por la classId guardada en el localStorage almomento de dar click al boton.
-  classId = signal<string>(localStorage.getItem('classId') ?? '');
 
   menus = signal<MenuResponse[]>([]);
   menuOfDay = signal<SelectedDayMenu | null>(null);

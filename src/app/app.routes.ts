@@ -11,7 +11,7 @@ export const routes: Routes = [
   { path: 'user/register', component: RegisterComponent },
   { path: 'assing-menu', component: AssingMenuComponent },
   { path: 'dashboard-tutor', component: TutorDashboardComponent },
-  { path: 'calendar', component: CalendarTutorComponent },
+  { path: 'tutor-calendar', component: CalendarTutorComponent },
 ];
 //Ejemplo de paths usando la verificacion de las guards:
 //  {

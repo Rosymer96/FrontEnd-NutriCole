@@ -1,7 +1,7 @@
 import { AuthService } from './../../services/auth/auth.service';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { IStudent } from '../../interfaces/student';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { StudentService } from '../../services/students/students.service';
 import { IUser } from '../../interfaces/user';
 
@@ -19,7 +19,7 @@ export class TutorDashboardComponent implements OnInit {
   students = signal<IStudent[]>([]);
   user = signal<IUser | null>(null);
   isTutor = false;
-  classId = signal <number | null>(null)
+  classId = signal<number | null>(null);
 
   ngOnInit(): void {
     this.authService.getProfile().subscribe({
@@ -35,17 +35,17 @@ export class TutorDashboardComponent implements OnInit {
     this.studentService.getStudentsByTutorId().subscribe({
       next: (response) => {
         this.students.set(response.students);
-        console.log("respuesta",  response.students);
+        console.log('respuesta', response.students);
       },
       error: (error) => {
         console.error('Error obteniendo estudiantes:', error);
       },
     });
   }
-goToCalendar(classId:number){
-  this.classId.set(classId)
-  console.log('clasId enviado:',this.classId())
- // this.router.navigate[('/')]
-}
-
+  goToCalendar(classId: number) {
+    this.classId.set(classId);
+    localStorage.setItem('classId', this.classId()!.toString());
+    console.log('clasId enviado:', this.classId());
+    this.router.navigate(['/tutor-calendar']);
+  }
 }
