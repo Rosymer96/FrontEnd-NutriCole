@@ -1,18 +1,11 @@
-<form [formGroup]="form" (submit)="onSubmit()" class="selection-form">
+<div class="selection-form">
   <div class="form-group">
-    <label for="monthSelect">Mes</label>
-    <select id="monthSelect" formControlName="monthSelected">
-      <option value="" disabled selected>Selecciona un mes</option>
+    <label for="monthSelect">Selecciona el mes:</label>
+    <select id="monthSelect" [(ngModel)]="monthSelected" (change)="onSubmit()">
+      <option [ngValue]="null" disabled>Selecciona un mes</option>
       @for (month of months(); track $index) {
-      <option [value]="month.value">{{ month.name }}</option>
+      <option [ngValue]="month.value">{{ month.name }}</option>
       }
     </select>
-    @if (form.controls['monthSelected'].touched &&
-    form.controls['monthSelected'].invalid) {
-    <div class="error-message">El mes es obligatorio.</div>
-    }
-    <button class="action-button primary-button" type="submit">
-      Ver calendario
-    </button>
   </div>
-</form>
+</div>

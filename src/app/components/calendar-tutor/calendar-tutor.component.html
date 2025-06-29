@@ -5,10 +5,6 @@
       (showMenu)="onFormSubmit($event)"
       (monthsEmitted)="onHandleMonths($event)"
     ></app-form-menu>
-    @if(hasPlates()){
-    <h2 class="month-year-heading">Menú del mes de {{ monthName }}</h2>
-
-    }
   </div>
 
   @if (hasPlates()) {

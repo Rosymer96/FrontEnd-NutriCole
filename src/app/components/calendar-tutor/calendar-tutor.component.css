@@ -1,6 +1,6 @@
 body {
   background: #454545;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   margin: 0;
   min-height: 100vh;
   box-sizing: border-box;
@@ -35,12 +35,13 @@ body {
   margin-right: 20px;
 }
 
-.title, .month-year-text {
+.title,
+.month-year-text {
   color: #fff;
   font-size: 2.2em;
   font-weight: 700;
   text-transform: uppercase;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 
 .month-year-heading {
@@ -48,7 +49,7 @@ body {
   font-size: 1.8em;
   margin: 0;
   font-weight: 700;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 
 .calendar-table {
@@ -59,7 +60,7 @@ body {
   border-radius: 32px;
   overflow: hidden;
   color: #fff;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 
 .calendar-table td {
@@ -70,7 +71,7 @@ body {
   height: 120px;
   background: #454545;
   color: #fff;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 
 .calendar-table th {
@@ -81,7 +82,7 @@ body {
   font-size: 1em;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 
 .calendar-table tbody tr:nth-child(odd) {
@@ -108,7 +109,7 @@ body {
   color: #00baff;
   margin-bottom: 8px;
   display: block;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 
 .dish-list {
@@ -129,7 +130,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 
 .action-button,
@@ -138,13 +139,13 @@ body {
   padding: 1.2rem 0 !important;
   background: linear-gradient(90deg, #01243b 0%, #1687c8 100%) !important;
   color: #fff !important;
-  font-family: 'Montserrat', Arial, sans-serif !important;
+  font-family: "Montserrat", Arial, sans-serif !important;
   font-size: 1.5rem !important;
   font-weight: bold !important;
   border: 0.5px solid #fff !important;
   border-radius: 999px !important;
   cursor: pointer !important;
-  box-shadow: 0 4px 16px 0 rgba(10,20,40,0.14) !important;
+  box-shadow: 0 4px 16px 0 rgba(10, 20, 40, 0.14) !important;
   transition: background 0.2s, box-shadow 0.2s !important;
   letter-spacing: 0.01em;
   text-align: center;
@@ -154,12 +155,12 @@ body {
 .action-button:hover,
 .primary-button:hover {
   background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%) !important;
-  box-shadow: 0 8px 24px 0 rgba(22,135,200,0.08) !important;
+  box-shadow: 0 8px 24px 0 rgba(22, 135, 200, 0.08) !important;
 }
 
 .assign-button:hover {
   background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
-  box-shadow: 0 8px 24px 0 rgba(22,135,200,0.08);
+  box-shadow: 0 8px 24px 0 rgba(22, 135, 200, 0.08);
 }
 
 .edit-button {
@@ -168,7 +169,7 @@ body {
   margin-top: 10px;
   display: block;
   width: 100%;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   border-radius: 999px;
   font-weight: bold;
   padding: 0.9em 0;
@@ -186,16 +187,14 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
-  background: #454545;
-  border: 0.5px solid #fff;
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   border-radius: 24px;
   color: #fff;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   background: #454545 !important;
@@ -203,54 +202,66 @@ html, body {
   padding: 0;
 }
 
-#main, main, .main, .page-container, .content, .container, app-root {
+#main,
+main,
+.main,
+.page-container,
+.content,
+.container,
+app-root {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
 }
 
-label[for="month"], .month-title, .mes-title, .title {
+label[for="month"],
+.month-title,
+.mes-title,
+.title {
   display: block;
   color: #fff !important;
   font-size: 2.5rem !important;
   font-weight: 700 !important;
   text-transform: uppercase;
-  font-family: 'Montserrat', Arial, sans-serif !important;
+  font-family: "Montserrat", Arial, sans-serif !important;
   letter-spacing: -0.5px;
   margin-bottom: 2.2rem;
   margin-top: 0.5rem;
 }
 
-.button-calendar, .button-calendar-main {
+.button-calendar,
+.button-calendar-main {
   width: 350px !important;
   padding: 1.2rem 0 !important;
   background: linear-gradient(90deg, #01243b 0%, #1687c8 100%) !important;
   color: #fff !important;
-  font-family: 'Montserrat', Arial, sans-serif !important;
+  font-family: "Montserrat", Arial, sans-serif !important;
   font-size: 1.5rem !important;
   font-weight: bold !important;
   border: 0.5px solid #fff !important;
   border-radius: 999px !important;
   cursor: pointer !important;
-  box-shadow: 0 4px 16px 0 rgba(10,20,40,0.14) !important;
+  box-shadow: 0 4px 16px 0 rgba(10, 20, 40, 0.14) !important;
   transition: background 0.2s, box-shadow 0.2s !important;
   letter-spacing: 0.01em;
   text-align: center;
 }
 
-button:hover, .button-calendar:hover {
+button:hover,
+.button-calendar:hover {
   background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%) !important;
-  box-shadow: 0 8px 24px 0 rgba(22,135,200,0.08) !important;
+  box-shadow: 0 8px 24px 0 rgba(22, 135, 200, 0.08) !important;
 }
 
-select, .select-month {
+select,
+.select-month {
   width: 350px !important;
   font-size: 1.4em !important;
   border-radius: 999px !important;
   border: 2px solid #c0c0c0 !important;
   background: #fff !important;
   color: #222 !important;
-  font-family: 'Montserrat', Arial, sans-serif !important;
+  font-family: "Montserrat", Arial, sans-serif !important;
   padding: 1.2rem 2rem !important;
   margin-bottom: 0.5rem !important;
   transition: border 0.2s !important;
@@ -259,7 +270,8 @@ select, .select-month {
   font-weight: 500 !important;
 }
 
-select:focus, .select-month:focus {
+select:focus,
+.select-month:focus {
   border-color: #1998d5 !important;
 }
 
@@ -267,7 +279,7 @@ select:focus, .select-month:focus {
   color: #ff7675;
   font-size: 1.15rem;
   margin-left: 0.2rem;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   margin-bottom: 0;
   font-weight: 500;
 }
@@ -281,7 +293,7 @@ select:focus, .select-month:focus {
   font-size: 2.5rem !important;
   font-weight: 700 !important;
   text-transform: uppercase;
-  font-family: 'Montserrat', Arial, sans-serif !important;
+  font-family: "Montserrat", Arial, sans-serif !important;
   letter-spacing: -0.5px;
   margin-bottom: 2.2rem;
   margin-top: 0.5rem;
@@ -293,13 +305,13 @@ select:focus, .select-month:focus {
   padding: 1.2rem 0 !important;
   background: linear-gradient(90deg, #01243b 0%, #1687c8 100%) !important;
   color: #fff !important;
-  font-family: 'Montserrat', Arial, sans-serif !important;
+  font-family: "Montserrat", Arial, sans-serif !important;
   font-size: 1.5rem !important;
   font-weight: bold !important;
   border: 0.5px solid #fff !important;
   border-radius: 999px !important;
   cursor: pointer !important;
-  box-shadow: 0 4px 16px 0 rgba(10,20,40,0.14) !important;
+  box-shadow: 0 4px 16px 0 rgba(10, 20, 40, 0.14) !important;
   transition: background 0.2s, box-shadow 0.2s !important;
   letter-spacing: 0.01em;
   text-align: center;
@@ -309,7 +321,7 @@ select:focus, .select-month:focus {
 
 .button-calendar-main:hover {
   background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%) !important;
-  box-shadow: 0 8px 24px 0 rgba(22,135,200,0.08) !important;
+  box-shadow: 0 8px 24px 0 rgba(22, 135, 200, 0.08) !important;
 }
 
 .calendar-table .edit-button,
