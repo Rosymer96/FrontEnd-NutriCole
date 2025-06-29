@@ -1,0 +1,134 @@
+
+.selection-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 350px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.form-group label {
+  color: #fff !important;
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  font-family: 'Montserrat', Arial, sans-serif !important;
+  letter-spacing: -0.5px !important;
+  margin-bottom: 2.2rem !important;
+  margin-top: 0.5rem !important;
+  display: block !important;
+  opacity: 1 !important;
+  text-transform: none !important;
+}
+
+.form-group select {
+  width: 350px !important;
+  font-size: 1.4em !important;
+  border-radius: 999px !important;
+  border: 2px solid #c0c0c0 !important;
+  background: #fff !important;
+  color: #222 !important;
+  font-family: 'Montserrat', Arial, sans-serif !important;
+  padding: 1.2rem 2rem !important;
+  margin-bottom: 0.5rem !important;
+  transition: border 0.2s !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  font-weight: 500 !important;
+}
+
+.form-group select:focus {
+  border-color: #1998d5 !important;
+  box-shadow: none !important;
+}
+
+.error-message {
+  color: #ff7675;
+  font-size: 1.15rem;
+  margin-left: 0.2rem;
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.button-align-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.action-button,
+.primary-button {
+  width: 350px !important;
+  padding: 1.2rem 0 !important;
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%) !important;
+  color: #fff !important;
+  font-family: 'Montserrat', Arial, sans-serif !important;
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  border: 0.5px solid #fff !important;
+  border-radius: 999px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 16px 0 rgba(10,20,40,0.14) !important;
+  transition: background 0.2s, box-shadow 0.2s !important;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-transform: none !important;
+  margin: 0;
+}
+
+.action-button:hover,
+.primary-button:hover {
+  background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%) !important;
+  box-shadow: 0 8px 24px 0 rgba(22,135,200,0.08) !important;
+}
+
+@media (max-width: 900px) {
+  .selection-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+  .form-group {
+    min-width: 0;
+  }
+  .action-button, .primary-button {
+    width: 100% !important;
+  }
+}
+
+.calendar-table .edit-button,
+.calendar-table .action-button {
+  width: 56px !important;
+  min-width: 0 !important;
+  max-width: 70px !important;
+  padding: 0.32rem 0 !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  border-radius: 999px !important;
+  border: 0.5px solid #fff !important;
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%) !important;
+  color: #fff !important;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 6px 0 rgba(10,20,40,0.14) !important;
+  margin: 8px auto 0 auto !important;
+  display: block !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  text-transform: none !important;
+}
+
+.calendar-table .edit-button span,
+.calendar-table .action-button span {
+  font-size: 0.9rem !important;
+}

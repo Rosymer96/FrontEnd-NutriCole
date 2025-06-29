@@ -1,13 +1,10 @@
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
 <div class="main-content-wrapper">
   <div class="calendar-container">
     <app-form-menu
       (showMenu)="onFormSubmit($event)"
       (monthsEmitted)="onHandleMonths($event)"
     ></app-form-menu>
-    @if(hasPlates()){
-    <h2 class="month-year-heading">Menú del mes de {{ monthName }}</h2>
-
-    }
   </div>
 
   @if (hasPlates()) {

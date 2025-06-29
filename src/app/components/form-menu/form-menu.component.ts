@@ -44,7 +44,6 @@ export class FormMenuComponent implements OnInit{
   ]);
 
   years = signal(['2025']);
-
   currentMonth: string = new Date().toLocaleString('en-US', {
     month: '2-digit',
     timeZone: 'Europe/Madrid',
