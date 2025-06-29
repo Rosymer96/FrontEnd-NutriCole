@@ -19,6 +19,7 @@ export class TutorDashboardComponent implements OnInit {
   students = signal<IStudent[]>([]);
   user = signal<IUser | null>(null);
   isTutor = false;
+  classId = signal <number | null>(null)
 
   ngOnInit(): void {
     this.authService.getProfile().subscribe({
@@ -41,6 +42,10 @@ export class TutorDashboardComponent implements OnInit {
       },
     });
   }
-// goToCalendar()
+goToCalendar(classId:number){
+  this.classId.set(classId)
+  console.log('clasId enviado:',this.classId())
+ // this.router.navigate[('/')]
+}
 
 }
