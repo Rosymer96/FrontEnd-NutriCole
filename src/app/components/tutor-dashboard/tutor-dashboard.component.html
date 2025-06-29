@@ -1,7 +1,7 @@
 <div>
   <div>
-    <h1>Hola,{{ user()?.name }}</h1>
-    <h2>Ver menu de:</h2>
+    <h1>¡Bienvenid&commat; ,  {{ user()?.name }}!</h1>
+    <h3>Ver menu de:</h3>
     @if (students().length > 0) { @for(student of students();track $index) {
     <div>
       <p>{{ student.name }}</p>
