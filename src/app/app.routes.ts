@@ -10,9 +10,9 @@ import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: 'user/login', pathMatch: 'full' },
+  { path: 'user/login', component: LoginComponent },
+  { path: 'user/register', component: RegisterComponent },
   { path: 'assing-menu', component: AssingMenuComponent },
   { path: 'create-menu', component: CreateMenuComponent },
   { path: 'dashboard-admin', component: AdminDashboardComponent },
