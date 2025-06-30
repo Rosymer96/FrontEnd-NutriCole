@@ -1,0 +1,35 @@
+<div class="admin-dashboard">
+  <header>
+    <h1>NutriSchool Admin</h1>
+    <button class="btn logout" (click)="logout()">Log Off</button>
+  </header>
+
+  <div class="class-list">
+    <h2>Clases:</h2>
+    @if (classes().length > 0) { @for (classItem of classes(); track $index) {
+    <div class="class-item">
+      <span>{{ classItem.name }}</span>
+      <button class="btn green" (click)="goToClass(classItem.idClass)">
+        Asignar Menu
+      </button>
+    </div>
+    } } @else {
+    <p>No hay clases disponibles.</p>
+    }
+  </div>
+  <div class="actions">
+    <form [formGroup]="form">
+      <label class="label" for="name"></label>
+      <input
+        class="input"
+        type="input"
+        id="name"
+        placeholder="Nombre de la clase"
+        maxlength="12"
+        formControlName="name"
+      />
+      <button class="btn green" (click)="addClass()">Añadir clase</button>
+    </form>
+    <button class="btn green" (click)="goToCreateDish()">Crear platos</button>
+  </div>
+</div>
