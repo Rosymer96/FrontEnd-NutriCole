@@ -1,0 +1,11 @@
+<div class="selection-form">
+  <div class="form-group">
+    <label for="monthSelect">Selecciona el mes:</label>
+    <select id="monthSelect" [(ngModel)]="monthSelected" (change)="onSubmit()">
+      <option [ngValue]="null" disabled>Selecciona un mes</option>
+      @for (month of months(); track $index) {
+      <option [ngValue]="month.value">{{ month.name }}</option>
+      }
+    </select>
+  </div>
+</div>

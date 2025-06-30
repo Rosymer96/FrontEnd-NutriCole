@@ -59,7 +59,8 @@ export class AdminDashboardComponent implements OnInit {
   }
   goToClass(classId: number): void {
     localStorage.setItem('classId', `${classId}`);
-    //this.router.navigate(Al calendario)
+    console.log('classId', classId)
+    this.router.navigate(['/assing-menu'])
   }
   logout() {
     this.authService.logout();
