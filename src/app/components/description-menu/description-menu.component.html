@@ -1,0 +1,25 @@
+<div class="description-menu-backdrop"></div>
+<div class="description-menu-container">
+  @if(menu()){
+  <div class="menu-date">
+    <p class="dish-description">
+      {{ menu()?.date | date : "EEEE, dd/MM/yyyy" }}
+    </p>
+  </div>
+  @for(dish of menu()?.dishes; track $index){
+  <div class="dish">
+    <p class="dish-name">{{ dish.name }}</p>
+    <p>{{ dish.description }}</p>
+  </div>
+  } }@else {
+  <button (click)="close()">Cerrar</button>
+  <div class="menu-date">
+    <p>{{ menuofDay()?.date | date : "EEEE, dd/MM/yyyy" }}</p>
+  </div>
+  @for(dish of menuofDay()?.menu?.dishes; track $index){
+  <div class="dish">
+    <p class="dish-name">{{ dish.name }}</p>
+    <p class="dish-description">{{ dish.description }}</p>
+  </div>
+  }}
+</div>

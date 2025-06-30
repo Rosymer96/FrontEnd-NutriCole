@@ -1,0 +1,79 @@
+<div class="main-content-wrapper">
+  <div class="form-and-title-container">
+    <div class="calendar-container">
+      <app-form-menu
+        (showMenu)="onFormSubmit($event)"
+        (monthsEmitted)="onHandleMonths($event)"
+      ></app-form-menu>
+    </div>
+    @if (rowCalendar) {
+    <div class="month-container">
+      <p class="month-year-heading">Menú de:</p>
+      <h2 class="month-year-text">{{ monthName }}</h2>
+    </div>
+    }
+  </div>
+  @if (rowCalendar) {
+  <div class="calendar-display-container calendar-container">
+    <table class="calendar-table">
+      <thead>
+        <tr>
+          <th>Lun</th>
+          <th>Mar</th>
+          <th>Mié</th>
+          <th>Jue</th>
+          <th>Vie</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (week of calendar(); track $index) {
+        <tr class="calendar-week">
+          @for (day of week; track $index) {
+          <td class="calendar-day-cell">
+            @if (day) {
+            <div class="day-content">
+              <strong class="day-date">{{ day.displayDate }}</strong>
+              <ul class="dish-list">
+                @if (day.menu) { @for (dish of day.menu.dishes; track $index) {
+                <li class="dish-item">{{ dish.name }}</li>
+                }
+                <button
+                  class="action-button assign-button"
+                  (click)="openEditMenu(day.menu)"
+                >
+                  Editar
+                </button>
+                } @else {
+                <button
+                  class="action-button"
+                  (click)="onDateSelect(day.date)"
+                >
+                  Asignar
+                </button>
+                }
+              </ul>
+            </div>
+            } @else {
+            <div class="empty-day-cell"></div>
+            }
+          </td>
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  } @if(errorMessage){
+  <div class="error">{{ errorMessage }}</div>
+  }
+</div>
+@if (selectedDate()) {
+  <app-create-menu
+    class="app-create-menu"
+    [date]="selectedDate()"
+    [classId]="classId()"
+    [existingMenu]="menuToEdit()"
+    (menuCreated)="onMenuSuccessfullyCreated()"
+    (close)="selectedDate.set(''); menuToEdit.set(null)"
+  ></app-create-menu>
+}

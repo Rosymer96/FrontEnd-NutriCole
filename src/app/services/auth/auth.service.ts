@@ -1,9 +1,9 @@
+import { IUser } from './../../interfaces/user.d';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { IUser } from '../../interfaces/user';
 import { LoginResponse } from '../../interfaces/userResponses';
-import { map, Observable } from 'rxjs';
+import { map, Observable} from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -54,6 +54,7 @@ export class AuthService {
 
   public logout() {
     localStorage.clear();
+    this.userProfile = null;
     this.router.navigate(['/login']);
   }
   public getToken(): string | null {

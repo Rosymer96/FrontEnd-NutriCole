@@ -1,0 +1,138 @@
+/* --- Estilo contenedor del formulario --- */
+.selection-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 350px;
+}
+
+/* --- Label --- */
+.form-group label {
+  text-align: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: "Montserrat", Arial, sans-serif;
+  margin: 0.5rem 0 2.2rem;
+}
+
+/* --- Select --- */
+.form-group select {
+  width: 200px;
+  align-self: center; /* centra el select horizontalmente */
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  border-radius: 999px;
+  border: 2px solid #c0c0c0;
+  background: #fff;
+  color: #222;
+  font-family: "Montserrat", Arial, sans-serif;
+  padding: 1.2rem 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  text-align: center;
+  transition: border 0.2s;
+  box-sizing: border-box;
+}
+
+.form-group select:focus {
+  border-color: #1998d5;
+  outline: none;
+}
+
+/* --- Botones generales --- */
+.action-button,
+.primary-button {
+  width: 350px;
+  padding: 1.2rem 0;
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: 0.5px solid #fff;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(10, 20, 40, 0.14);
+  transition: background 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-transform: none;
+  margin: 0;
+}
+
+.action-button:hover,
+.primary-button:hover {
+  background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
+  box-shadow: 0 8px 24px rgba(22, 135, 200, 0.08);
+}
+
+/* --- Versión mini botón en tabla --- */
+.calendar-table .edit-button,
+.calendar-table .action-button {
+  width: 56px;
+  min-width: 0;
+  max-width: 70px;
+  padding: 0.32rem 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 0.5px solid #fff;
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 6px rgba(10, 20, 40, 0.14);
+  margin: 8px auto 0;
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  text-transform: none;
+}
+
+.calendar-table .edit-button span,
+.calendar-table .action-button span {
+  font-size: 0.9rem;
+}
+
+/* --- Mensaje de error --- */
+.error-message {
+  color: #ff7675;
+  font-size: 1.15rem;
+  margin: 0 0 0 0.2rem;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-weight: 500;
+}
+
+/* --- Botón alineado arriba --- */
+.button-align-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .selection-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .form-group {
+    min-width: 0;
+  }
+
+  .action-button,
+  .primary-button {
+    width: 100%;
+  }
+}

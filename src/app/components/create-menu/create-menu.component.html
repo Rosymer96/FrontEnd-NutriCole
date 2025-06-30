@@ -1,0 +1,57 @@
+<div class="component-container">
+  <div class="top-bar">
+    <button class="close-button" (click)="cancel()">Cerrar</button>
+  </div>
+  <div class="menu-container">
+    <div class="form-container">
+      <div class="form-group">
+        <label for="first">Primero</label>
+        <select id="first" [(ngModel)]="firstDishId">
+          <option [ngValue]="null" disabled>Selecciona un primero</option>
+          @for (dish of firstDishes(); track $index) {
+          <option [ngValue]="dish.idDish">{{ dish.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="second">Segundo</label>
+        <select id="second" [(ngModel)]="secondDishId">
+          <option [ngValue]="null" disabled>Selecciona un segundo</option>
+          @for (dish of secondDishes(); track $index) {
+          <option [ngValue]="dish.idDish">{{ dish.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dessert">Postre</label>
+        <select id="dessert" [(ngModel)]="dessertDishId">
+          <option [ngValue]="null" disabled>Selecciona un postre</option>
+          @for (dish of dessertDishes(); track $index) {
+          <option [ngValue]="dish.idDish">{{ dish.name }}</option>
+          }
+        </select>
+      </div>
+
+      @if (errorMessage) {
+      <div class="error-message">{{ errorMessage }}</div>
+      } @if (!onMenuCreate) {
+      <button class="action-button primary-button" (click)="createMenu()">
+        Crear
+      </button>
+      } @else {
+      <div class="button-container">
+        <button class="action-button primary-button" (click)="editMenu()">
+          Editar
+        </button>
+        <button class="action-button primary-button" (click)="deleteMenu()">
+          Eliminar
+        </button>
+      </div>
+      }
+    </div>
+
+    <app-description-menu [menu]="menuDataForDescription()" />
+  </div>
+</div>
