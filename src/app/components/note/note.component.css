@@ -1,0 +1,30 @@
+.note-container {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  gap:0.8em
+}
+.note {
+  font-size: 0.9em;
+  line-height: 1.4;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(216, 216, 216);
+  height: 50px;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 0.8em;
+}
+.button-save {
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff;
+  font-weight: 700;
+  border: 0.5px solid #fff;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+  transition: background 0.2s;
+  width: fit-content;
+  align-self: flex-end;
+}

@@ -1,0 +1,12 @@
+<div class="note-container">
+  <textarea
+    [value]="note()"
+    (input)="note.set($any($event.target).value)"
+    placeholder="Escribe una nota..."
+    rows="4"
+    cols="50"
+    class="note"
+    maxlength="100"
+  ></textarea>
+  <button class="button-save" (click)="saveNote()">Guardar</button>
+</div>

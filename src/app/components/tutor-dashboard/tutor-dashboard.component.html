@@ -1,0 +1,19 @@
+<div class="tutor-dashboard">
+  <div class="body">
+    <h1>¡Bienvenid&commat; , {{ user()?.name }}!</h1>
+    <h2>Estudiantes:</h2>
+    <div class="student-container">
+      @if (students().length > 0) { @for(student of students();track $index) {
+      <div class="student-list">
+        <div class="student-item">
+          <p class="student-name">{{ student.name }}</p>
+          <p class="class-name">{{ student.class_name }}</p>
+        </div>
+        <button class="btn action" (click)="goToCalendar(student.class_id)">
+          Ver Menu
+        </button>
+      </div>
+      } }
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, output, signal,  } from '@angular/core';
+import { Component, OnInit, output, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,14 +8,16 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Month } from '../../interfaces/month';
+
 @Component({
   selector: 'app-form-menu',
   imports: [ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './form-menu.component.html',
   styleUrl: './form-menu.component.css',
 })
-export class FormMenuComponent {
  
+export class FormMenuComponent implements OnInit{
+
   ngOnInit(): void {
   // Emitir automáticamente el mes actual al iniciar
   this.showMenu.emit({

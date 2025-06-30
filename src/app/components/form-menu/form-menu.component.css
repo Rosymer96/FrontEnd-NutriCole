@@ -74,7 +74,6 @@
   background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
   box-shadow: 0 8px 24px rgba(22, 135, 200, 0.08);
 }
-
 /* --- Versión mini botón en tabla --- */
 .calendar-table .edit-button,
 .calendar-table .action-button {

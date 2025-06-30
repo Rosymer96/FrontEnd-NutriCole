@@ -50,7 +50,7 @@ export class LoginComponent {
           this.router.navigate(['/dashboard-admin']);
           } else if (rol === 'tutor') {
           this.router.navigate(['/dashboard-tutor']);
-          } else {
+          }  else {
             this.router.navigate(['/']);
           }
         }
@@ -66,6 +66,6 @@ export class LoginComponent {
 
   goToRegister() {
     //Enviar a la ruta para registrarse.
-    this.router.navigate(['/register']);
+    this.router.navigate(['/user/register']);
   }
 }
