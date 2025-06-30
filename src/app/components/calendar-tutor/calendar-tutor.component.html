@@ -27,7 +27,8 @@
             <div class="day-content">
               <strong class="day-date">{{ day.displayDate }}</strong>
               <ul class="dish-list">
-                @if (day.menu) { @for (dish of day.menu.dishes; track $index) {
+                @if (day.menu && day.menu.dishes?.length > 0 ) { @for (dish of
+                day.menu.dishes; track $index) {
                 <li class="dish-item">{{ dish.name }}</li>
                 }
                 <button
@@ -36,7 +37,7 @@
                 >
                   Ver más...
                 </button>
-                }
+                }@else { }
               </ul>
             </div>
             } @else {
@@ -50,7 +51,9 @@
     </table>
   </div>
   } @if(errorMessage){
-  <div class="error">{{ errorMessage }}</div>
+  <div class="error">
+    <p>{{ errorMessage }}</p>
+  </div>
   }
 </div>
 @if(menuVisible){

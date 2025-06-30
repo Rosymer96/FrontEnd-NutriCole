@@ -29,7 +29,6 @@ export class TutorDashboardComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error obteniendo perfil:', error);
-        this.router.navigate(['/login']);
       },
     });
     this.studentService.getStudentsByTutorId().subscribe({

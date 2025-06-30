@@ -5,6 +5,7 @@ import { MenuService } from '../../services/menu/menu.service';
 import { formatDate } from '@angular/common';
 import { FormMenuComponent } from '../form-menu/form-menu.component';
 import { DescriptionMenuComponent } from '../description-menu/description-menu.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar-tutor',
@@ -14,6 +15,8 @@ import { DescriptionMenuComponent } from '../description-menu/description-menu.c
 })
 export class CalendarTutorComponent implements OnInit {
   private menuService = inject(MenuService);
+  private router = inject(Router);
+
   classId = signal<string>('');
   ngOnInit(): void {
     this.classId.set(localStorage.getItem('classId') || '');
@@ -131,7 +134,7 @@ export class CalendarTutorComponent implements OnInit {
         },
         error: (err) => {
           this.menus.set([]);
-          this.errorMessage = err.error?.error || 'Calendario no encontrado.';
+          this.errorMessage = 'Este mes no tiene menús asignados.';
         },
       });
   }
