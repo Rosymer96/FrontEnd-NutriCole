@@ -23,6 +23,7 @@
   cursor: pointer;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
   transition: background 0.2s;
+  align-items: self-end;
 }
 
 .description-menu-container button:hover {
