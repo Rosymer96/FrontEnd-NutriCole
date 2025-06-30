@@ -102,8 +102,8 @@
                     Estado
                   </label>
                   <select class="form-select" id="activo" formControlName="activo">
-                    <option [value]="true">Activo</option>
-                    <option [value]="false">Inactivo</option>
+                    <option [value]="1">Activo</option>
+                    <option [value]="0">Inactivo</option>
                   </select>
                 </div>
               </div>
@@ -238,12 +238,12 @@
                   </td>
                   <td>
                     <span class="badge" [ngClass]="{
-                      'bg-success': dish.dishType === 'primero',
-                      'bg-warning text-dark': dish.dishType === 'segundo',
-                      'bg-info': dish.dishType === 'postre'
+                      'bg-success': dish.dish_type === 'primero',
+                      'bg-warning text-dark': dish.dish_type === 'segundo',
+                      'bg-info': dish.dish_type === 'postre'
                     }">
-                      {{ getIconoTipoPlato(dish.dishType) }}
-                      {{ dish.dishType | titlecase }}
+                      {{ getIconoTipoPlato(dish.dish_type) }}
+                      {{ dish.dish_type | titlecase }}
                     </span>
                   </td>
                   <td>

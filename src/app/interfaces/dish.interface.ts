@@ -1,7 +1,7 @@
 export interface Dish {
   idDish: number; // Agregar el id opcional
   name: string;
-  dishType: string;
+  dish_type: string;
   description: string;
   active: number;
 }

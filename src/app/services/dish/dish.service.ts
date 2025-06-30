@@ -3,15 +3,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { CrearDishDto, ActualizarDishDto, Dish } from '../../interfaces/dish.interface'
+import {
+  CrearDishDto,
+  ActualizarDishDto,
+  Dish,
+} from '../../interfaces/dish.interface';
 import { obtenerHeaders } from '../../utils/utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DishService {
   private http = inject(HttpClient);
-  
+
   // CAMBIAR POR TU URL BASE DEL BACKEND
   private readonly urlBase = `${environment.API_BASE_URL}/dish`;
 
@@ -29,7 +33,7 @@ export class DishService {
       },
       error: (error) => {
         console.error('Error al actualizar platos locales:', error);
-      }
+      },
     });
   }
 
@@ -38,24 +42,26 @@ export class DishService {
    * POST /api/dish/create
    */
   crearDish(dish: CrearDishDto): Observable<any> {
-    return this.http.post(`${this.urlBase}/create`, dish, {
-      headers: obtenerHeaders()
-    }).pipe(
-      map((response: any) => {
-        // Verificar si la respuesta indica error
-        if (response && response.success === false) {
-          throw new Error(response.message || 'Error al crear el plato');
-        }
-        
-        // Actualizar estado local después de crear
-        this.actualizarDishesLocales();
-        return response;
-      }),
-      catchError((error) => {
-        console.error('Error en crearDish:', error);
-        throw error;
+    return this.http
+      .post(`${this.urlBase}/create`, dish, {
+        headers: obtenerHeaders(),
       })
-    );
+      .pipe(
+        map((response: any) => {
+          // Verificar si la respuesta indica error
+          if (response && response.success === false) {
+            throw new Error(response.message || 'Error al crear el plato');
+          }
+
+          // Actualizar estado local después de crear
+          this.actualizarDishesLocales();
+          return response;
+        }),
+        catchError((error) => {
+          console.error('Error en crearDish:', error);
+          throw error;
+        })
+      );
   }
 
   /**
@@ -63,52 +69,60 @@ export class DishService {
    * GET /api/dish/list
    */
   obtenerTodos(): Observable<Dish[]> {
-    return this.http.get<any>(`${this.urlBase}/list`, {
-      headers: obtenerHeaders()
-    }).pipe(
-      map((response: any) => {
-        console.log('Respuesta obtenerTodos:', response);
-        
-        // Verificar si es un error del backend
-        if (response && response.success === false) {
-          throw new Error(response.message || 'Error al obtener los platos');
-        }
-        
-        // Si la respuesta es directamente un array
-        if (Array.isArray(response)) {
-          return response.map(dish => ({
-            ...dish,
-            active: dish.active ?? 1,
-            id: dish.idDish ?? 0
-          }));
-        }
-        
-        // Si la respuesta tiene formato { data: [...] }
-        if (response && Array.isArray(response.data)) {
-          return response.data.map((dish: any) => ({
-            ...dish,
-            active: dish.active ?? 1,
-            id: dish.idDish ?? 0
-          }));
-        }
-        
-        // Si no hay datos válidos, retornar array vacío
-        console.warn('Formato de respuesta no reconocido en obtenerTodos:', response);
-        return [];
-      }),
-      catchError((error) => {
-        console.error('Error en obtenerTodos:', error);
-        
-        // Si es un error de autenticación, retornar array vacío en lugar de fallar
-        if (error.status === 401 || (error.error && error.error.message === 'El token es obligatorio')) {
-          console.warn('Error de autenticación, retornando array vacío');
-          return []; // Retorna array vacío en lugar de lanzar error
-        }
-        
-        // Para otros errores, retornar array vacío también para evitar romper la app
-        return [];
+    return this.http
+      .get<any>(`${this.urlBase}/list`, {
+        headers: obtenerHeaders(),
       })
-    );
+      .pipe(
+        map((response: any) => {
+          console.log('Respuesta obtenerTodos:', response);
+
+          // Verificar si es un error del backend
+          if (response && response.success === false) {
+            throw new Error(response.message || 'Error al obtener los platos');
+          }
+
+          // Si la respuesta es directamente un array
+          if (Array.isArray(response)) {
+            return response.map((dish) => ({
+              ...dish,
+              active: dish.active ?? 1,
+              id: dish.idDish ?? 0,
+            }));
+          }
+
+          // Si la respuesta tiene formato { data: [...] }
+          if (response && Array.isArray(response.data)) {
+            return response.data.map((dish: any) => ({
+              ...dish,
+              active: dish.active ?? 1,
+              id: dish.idDish ?? 0,
+            }));
+          }
+
+          // Si no hay datos válidos, retornar array vacío
+          console.warn(
+            'Formato de respuesta no reconocido en obtenerTodos:',
+            response
+          );
+          return [];
+        }),
+        catchError((error) => {
+          console.error('Error en obtenerTodos:', error);
+
+          // Si es un error de autenticación, retornar array vacío en lugar de fallar
+          if (
+            error.status === 401 ||
+            (error.error && error.error.message === 'El token es obligatorio')
+          ) {
+            console.warn('Error de autenticación, retornando array vacío');
+            return []; // Retorna array vacío en lugar de lanzar error
+          }
+
+          // Para otros errores, retornar array vacío también para evitar romper la app
+          return [];
+        })
+      );
   }
 
   /**
@@ -116,47 +130,59 @@ export class DishService {
    * GET /api/dish/listByType/:dishType
    */
   obtenerPorTipo(tipoDish: string): Observable<Dish[]> {
-    return this.http.get<any>(`${this.urlBase}/listByType/${tipoDish}`, {
-      headers: obtenerHeaders()
-    }).pipe(
-      map((response: any) => {
-        console.log('Respuesta obtenerPorTipo:', response);
-        
-        // Verificar si es un error del backend
-        if (response && response.success === false) {
-          throw new Error(response.message || 'Error al obtener platos por tipo');
-        }
-        
-        // Tu backend devuelve: { success: true, data: [...], count: X }
-        let dishes: Dish[] = [];
-        
-        if (response && Array.isArray(response.data)) {
-          dishes = response.data;
-        } else if (Array.isArray(response)) {
-          dishes = response;
-        } else {
-          console.warn('Formato de respuesta no reconocido en obtenerPorTipo:', response);
-          return [];
-        }
-
-        return dishes.map(dish => ({
-          ...dish,
-          active: dish.active ?? 1,
-          idDish: dish.idDish ?? 0
-        }));
-      }),
-      catchError((error) => {
-        console.error('Error en obtenerPorTipo:', error);
-        
-        // Si es un error de autenticación, retornar array vacío
-        if (error.status === 401 || (error.error && error.error.message === 'El token es obligatorio')) {
-          console.warn('Error de autenticación en obtenerPorTipo, retornando array vacío');
-          return [];
-        }
-        
-        return [];
+    return this.http
+      .get<any>(`${this.urlBase}/listByType/${tipoDish}`, {
+        headers: obtenerHeaders(),
       })
-    );
+      .pipe(
+        map((response: any) => {
+          console.log('Respuesta obtenerPorTipo:', response);
+
+          // Verificar si es un error del backend
+          if (response && response.success === false) {
+            throw new Error(
+              response.message || 'Error al obtener platos por tipo'
+            );
+          }
+
+          // Tu backend devuelve: { success: true, data: [...], count: X }
+          let dishes: Dish[] = [];
+
+          if (response && Array.isArray(response.data)) {
+            dishes = response.data;
+          } else if (Array.isArray(response)) {
+            dishes = response;
+          } else {
+            console.warn(
+              'Formato de respuesta no reconocido en obtenerPorTipo:',
+              response
+            );
+            return [];
+          }
+
+          return dishes.map((dish) => ({
+            ...dish,
+            active: dish.active ?? 1,
+            idDish: dish.idDish ?? 0,
+          }));
+        }),
+        catchError((error) => {
+          console.error('Error en obtenerPorTipo:', error);
+
+          // Si es un error de autenticación, retornar array vacío
+          if (
+            error.status === 401 ||
+            (error.error && error.error.message === 'El token es obligatorio')
+          ) {
+            console.warn(
+              'Error de autenticación en obtenerPorTipo, retornando array vacío'
+            );
+            return [];
+          }
+
+          return [];
+        })
+      );
   }
 
   /**
@@ -164,47 +190,49 @@ export class DishService {
    * GET /api/dish/:id
    */
   obtenerPorId(id: number): Observable<Dish> {
-    return this.http.get<any>(`${this.urlBase}/${id}`, {
-      headers: obtenerHeaders()
-    }).pipe(
-      map((response: any) => {
-        console.log('Respuesta obtenerPorId:', response);
-        
-        // Verificar si es un error del backend
-        if (response && response.success === false) {
-          throw new Error(response.message || 'Error al obtener el plato');
-        }
-        
-        // Manejar diferentes formatos de respuesta del backend
-        let dish: Dish;
-        
-        if (response && response.name) {
-          // Si la respuesta es directamente el dish
-          dish = response;
-        } else if (response && response.data && response.data.name) {
-          // Si la respuesta tiene formato { data: {...} }
-          dish = response.data;
-        } else if (response && response.dish && response.dish.name) {
-          // Si la respuesta tiene formato { dish: {...} }
-          dish = response.dish;
-        } else if (response && response.result && response.result.name) {
-          // Si la respuesta tiene formato { result: {...} }
-          dish = response.result;
-        } else {
-          throw new Error('Formato de respuesta no válido en obtenerPorId');
-        }
-
-        return {
-          ...dish,
-          active: dish.active ?? 1,
-          idDish: dish.idDish ?? id
-        };
-      }),
-      catchError((error) => {
-        console.error('Error en obtenerPorId:', error);
-        throw error;
+    return this.http
+      .get<any>(`${this.urlBase}/${id}`, {
+        headers: obtenerHeaders(),
       })
-    );
+      .pipe(
+        map((response: any) => {
+          console.log('Respuesta obtenerPorId:', response);
+
+          // Verificar si es un error del backend
+          if (response && response.success === false) {
+            throw new Error(response.message || 'Error al obtener el plato');
+          }
+
+          // Manejar diferentes formatos de respuesta del backend
+          let dish: Dish;
+
+          if (response && response.name) {
+            // Si la respuesta es directamente el dish
+            dish = response;
+          } else if (response && response.data && response.data.name) {
+            // Si la respuesta tiene formato { data: {...} }
+            dish = response.data;
+          } else if (response && response.dish && response.dish.name) {
+            // Si la respuesta tiene formato { dish: {...} }
+            dish = response.dish;
+          } else if (response && response.result && response.result.name) {
+            // Si la respuesta tiene formato { result: {...} }
+            dish = response.result;
+          } else {
+            throw new Error('Formato de respuesta no válido en obtenerPorId');
+          }
+
+          return {
+            ...dish,
+            active: dish.active ?? 1,
+            idDish: dish.idDish ?? id,
+          };
+        }),
+        catchError((error) => {
+          console.error('Error en obtenerPorId:', error);
+          throw error;
+        })
+      );
   }
 
   /**
@@ -218,27 +246,30 @@ export class DishService {
       name: dish.name,
       dishType: dish.dishType,
       description: dish.description,
+      active: dish.active,
       // No enviar 'active' en el update normal, solo en toggle
     };
 
-    return this.http.put(`${this.urlBase}/${id}`, dishCompleto, {
-      headers: obtenerHeaders()
-    }).pipe(
-      map((response: any) => {
-        // Verificar si es un error del backend
-        if (response && response.success === false) {
-          throw new Error(response.message || 'Error al actualizar el plato');
-        }
-        
-        // Tu backend devuelve: { message: "Plato actualizado correctamente" }
-        this.actualizarDishesLocales();
-        return response;
-      }),
-      catchError((error) => {
-        console.error('Error en actualizarDish:', error);
-        throw error;
+    return this.http
+      .put(`${this.urlBase}/${id}`, dishCompleto, {
+        headers: obtenerHeaders(),
       })
-    );
+      .pipe(
+        map((response: any) => {
+          // Verificar si es un error del backend
+          if (response && response.success === false) {
+            throw new Error(response.message || 'Error al actualizar el plato');
+          }
+
+          // Tu backend devuelve: { message: "Plato actualizado correctamente" }
+          this.actualizarDishesLocales();
+          return response;
+        }),
+        catchError((error) => {
+          console.error('Error en actualizarDish:', error);
+          throw error;
+        })
+      );
   }
 
   /**
@@ -246,24 +277,26 @@ export class DishService {
    * DELETE /api/dish/:id
    */
   eliminarDish(id: number): Observable<any> {
-    return this.http.delete(`${this.urlBase}/${id}`, {
-      headers: obtenerHeaders()
-    }).pipe(
-      map((response: any) => {
-        // Verificar si es un error del backend
-        if (response && response.success === false) {
-          throw new Error(response.message || 'Error al eliminar el plato');
-        }
-        
-        // Actualizar estado local después de eliminar
-        this.actualizarDishesLocales();
-        return response;
-      }),
-      catchError((error) => {
-        console.error('Error en eliminarDish:', error);
-        throw error;
+    return this.http
+      .delete(`${this.urlBase}/${id}`, {
+        headers: obtenerHeaders(),
       })
-    );
+      .pipe(
+        map((response: any) => {
+          // Verificar si es un error del backend
+          if (response && response.success === false) {
+            throw new Error(response.message || 'Error al eliminar el plato');
+          }
+
+          // Actualizar estado local después de eliminar
+          this.actualizarDishesLocales();
+          return response;
+        }),
+        catchError((error) => {
+          console.error('Error en eliminarDish:', error);
+          throw error;
+        })
+      );
   }
 
   /**
@@ -271,24 +304,30 @@ export class DishService {
    * PATCH /api/dish/softdelete/:id
    */
   desactivarDish(id: number): Observable<any> {
-    return this.http.patch(`${this.urlBase}/softdelete/${id}`, {}, {
-      headers: obtenerHeaders()
-    }).pipe(
-      map((response: any) => {
-        // Verificar si es un error del backend
-        if (response && response.success === false) {
-          throw new Error(response.message || 'Error al desactivar el plato');
+    return this.http
+      .patch(
+        `${this.urlBase}/softdelete/${id}`,
+        {},
+        {
+          headers: obtenerHeaders(),
         }
-        
-        // Actualizar estado local después de desactivar
-        this.actualizarDishesLocales();
-        return response;
-      }),
-      catchError((error) => {
-        console.error('Error en desactivarDish:', error);
-        throw error;
-      })
-    );
+      )
+      .pipe(
+        map((response: any) => {
+          // Verificar si es un error del backend
+          if (response && response.success === false) {
+            throw new Error(response.message || 'Error al desactivar el plato');
+          }
+
+          // Actualizar estado local después de desactivar
+          this.actualizarDishesLocales();
+          return response;
+        }),
+        catchError((error) => {
+          console.error('Error en desactivarDish:', error);
+          throw error;
+        })
+      );
   }
 
   /**
@@ -304,7 +343,7 @@ export class DishService {
    */
   toggleEstadoDish(id: number, estadoActual: number): Observable<any> {
     const nuevoEstado = estadoActual === 1 ? 0 : 1;
-    
+
     if (nuevoEstado === 0) {
       // Usar softdelete para desactivar
       return this.desactivarDish(id);
@@ -342,7 +381,7 @@ export class DishService {
    */
   obtenerActivos(): Observable<Dish[]> {
     return this.obtenerTodos().pipe(
-      map(dishes => dishes.filter(dish => dish.active === 1))
+      map((dishes) => dishes.filter((dish) => dish.active === 1))
     );
   }
 
@@ -351,7 +390,7 @@ export class DishService {
    */
   obtenerInactivos(): Observable<Dish[]> {
     return this.obtenerTodos().pipe(
-      map(dishes => dishes.filter(dish => dish.active === 0))
+      map((dishes) => dishes.filter((dish) => dish.active === 0))
     );
   }
 
@@ -360,11 +399,12 @@ export class DishService {
    */
   buscarDishes(termino: string): Observable<Dish[]> {
     return this.obtenerTodos().pipe(
-      map(dishes => {
+      map((dishes) => {
         const terminoLower = termino.toLowerCase().trim();
-        return dishes.filter(dish => 
-          dish.name.toLowerCase().includes(terminoLower) ||
-          dish.description.toLowerCase().includes(terminoLower)
+        return dishes.filter(
+          (dish) =>
+            dish.name.toLowerCase().includes(terminoLower) ||
+            dish.description.toLowerCase().includes(terminoLower)
         );
       })
     );
@@ -379,30 +419,31 @@ export class DishService {
     busqueda?: string;
   }): Observable<Dish[]> {
     return this.obtenerTodos().pipe(
-      map(dishes => {
+      map((dishes) => {
         let dishesFiltrados = [...dishes];
 
         // Filtro por tipo
         if (filtros.tipo) {
-          dishesFiltrados = dishesFiltrados.filter(dish => 
-            dish.dishType === filtros.tipo
+          dishesFiltrados = dishesFiltrados.filter(
+            (dish) => dish.dish_type === filtros.tipo
           );
         }
 
         // Filtro por estado
         if (filtros.estado) {
           const estadoFiltro = filtros.estado === 'activo' ? 1 : 0;
-          dishesFiltrados = dishesFiltrados.filter(dish => 
-            dish.active === estadoFiltro
+          dishesFiltrados = dishesFiltrados.filter(
+            (dish) => dish.active === estadoFiltro
           );
         }
 
         // Filtro por búsqueda
         if (filtros.busqueda?.trim()) {
           const termino = filtros.busqueda.toLowerCase().trim();
-          dishesFiltrados = dishesFiltrados.filter(dish =>
-            dish.name.toLowerCase().includes(termino) ||
-            dish.description.toLowerCase().includes(termino)
+          dishesFiltrados = dishesFiltrados.filter(
+            (dish) =>
+              dish.name.toLowerCase().includes(termino) ||
+              dish.description.toLowerCase().includes(termino)
           );
         }
 
@@ -423,13 +464,13 @@ export class DishService {
     postres: number;
   }> {
     return this.obtenerTodos().pipe(
-      map(dishes => ({
+      map((dishes) => ({
         total: dishes.length,
-        activos: dishes.filter(d => d.active === 1).length,
-        inactivos: dishes.filter(d => d.active === 0).length,
-        primeros: dishes.filter(d => d.dishType === 'primero').length,
-        segundos: dishes.filter(d => d.dishType === 'segundo').length,
-        postres: dishes.filter(d => d.dishType === 'postre').length,
+        activos: dishes.filter((d) => d.active === 1).length,
+        inactivos: dishes.filter((d) => d.active === 0).length,
+        primeros: dishes.filter((d) => d.dish_type === 'primero').length,
+        segundos: dishes.filter((d) => d.dish_type === 'segundo').length,
+        postres: dishes.filter((d) => d.dish_type === 'postre').length,
       }))
     );
   }
@@ -439,11 +480,11 @@ export class DishService {
    */
   validarNombreUnico(nombre: string, idExcluir?: number): Observable<boolean> {
     return this.obtenerTodos().pipe(
-      map(dishes => {
+      map((dishes) => {
         const nombreLower = nombre.toLowerCase().trim();
-        const existe = dishes.some(dish => 
-          dish.name.toLowerCase() === nombreLower && 
-          dish.idDish !== idExcluir
+        const existe = dishes.some(
+          (dish) =>
+            dish.name.toLowerCase() === nombreLower && dish.idDish !== idExcluir
         );
         return !existe; // Retorna true si es único (no existe)
       })
@@ -476,7 +517,10 @@ export class DishService {
    * Método para manejar errores de autenticación globalmente
    */
   private handleAuthError(error: any): Observable<never> {
-    if (error.status === 401 || (error.error && error.error.message === 'El token es obligatorio')) {
+    if (
+      error.status === 401 ||
+      (error.error && error.error.message === 'El token es obligatorio')
+    ) {
       console.warn('Usuario no autenticado. Redirigir al login.');
       // Aquí puedes agregar lógica para redirigir al login
       // this.router.navigate(['/login']);

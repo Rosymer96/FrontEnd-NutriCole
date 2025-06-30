@@ -47,14 +47,14 @@ export class MenuCreationComponent implements OnInit {
   public formulario = new FormGroup({
     nombre: new FormControl<string>('', [
       Validators.required,
-      Validators.maxLength(100)
+      Validators.maxLength(100),
     ]),
     tipoDish: new FormControl<string>('', [Validators.required]),
     descripcion: new FormControl<string>('', [
       Validators.required,
       Validators.maxLength(500),
     ]),
-    activo: new FormControl<boolean>(true),
+    activo: new FormControl<number>(1),
   });
 
   ngOnInit() {
@@ -65,7 +65,7 @@ export class MenuCreationComponent implements OnInit {
   cargarDishes() {
     this.cargando = true;
     this.mensajeError = '';
-    
+
     this.dishService.obtenerTodos().subscribe({
       next: (dishes) => {
         console.log('✅ Dishes cargados correctamente:', dishes);
@@ -75,7 +75,8 @@ export class MenuCreationComponent implements OnInit {
       },
       error: (err) => {
         console.error('❌ Error al cargar dishes:', err);
-        this.mensajeError = 'Error al cargar la lista de platos. Verifique la conexión con el servidor.';
+        this.mensajeError =
+          'Error al cargar la lista de platos. Verifique la conexión con el servidor.';
         this.cargando = false;
         this.dishes = [];
         this.dishesFiltrados = [];
@@ -85,6 +86,7 @@ export class MenuCreationComponent implements OnInit {
 
   // Métodos para crear/editar
   guardarDish() {
+    console.log('🧪 Ejecutando guardarDish()');
     if (this.formulario.invalid) {
       this.formulario.markAllAsTouched();
       return;
@@ -98,7 +100,7 @@ export class MenuCreationComponent implements OnInit {
       name: capitalizeWords(this.formulario.value.nombre!.trim()),
       dishType: this.formulario.value.tipoDish!,
       description: this.formulario.value.descripcion?.trim() || '',
-      active: this.formulario.value.activo ? 1 : 0,
+      active: this.formulario.value.activo
     };
 
     if (this.modoEdicion && this.dishEditando) {
@@ -109,14 +111,15 @@ export class MenuCreationComponent implements OnInit {
         this.guardando = false;
         return;
       }
-      
+
       // Enviar todos los campos requeridos por tu backend
       const datosCompletos = {
         name: datosDish.name,
         dishType: datosDish.dishType,
-        description: datosDish.description
+        description: datosDish.description,
+        active: datosDish.active
       };
-      
+      console.log('DATOS COMPLETOS: ', datosCompletos);
       this.dishService.actualizarDish(dishId, datosCompletos).subscribe({
         next: (respuesta) => {
           this.mensajeRespuesta = 'Plato actualizado con éxito.';
@@ -124,10 +127,14 @@ export class MenuCreationComponent implements OnInit {
           this.cargarDishes();
           this.guardando = false;
           this.limpiarMensajeDespuesDeTiempo();
+          console.log('Datos actualizar:', dishId, datosCompletos);
         },
         error: (err) => {
           console.error('Error al actualizar dish:', err);
-          this.mensajeError = err.error?.error || err.error?.message || 'Error al actualizar el plato.';
+          this.mensajeError =
+            err.error?.error ||
+            err.error?.message ||
+            'Error al actualizar el plato.';
           this.guardando = false;
           this.limpiarMensajeDespuesDeTiempo();
         },
@@ -141,10 +148,14 @@ export class MenuCreationComponent implements OnInit {
           this.cargarDishes();
           this.guardando = false;
           this.limpiarMensajeDespuesDeTiempo();
+          console.log('✅ Plato creado:', respuesta);
         },
         error: (err) => {
           console.error('Error al crear dish:', err);
-          this.mensajeError = err.error?.error || err.error?.message || 'Error al crear el plato.';
+          this.mensajeError =
+            err.error?.error ||
+            err.error?.message ||
+            'Error al crear el plato.';
           this.guardando = false;
           this.limpiarMensajeDespuesDeTiempo();
         },
@@ -156,12 +167,12 @@ export class MenuCreationComponent implements OnInit {
     this.modoEdicion = true;
     this.dishEditando = dish;
     this.mostrarFormulario = true;
-    
+
     this.formulario.patchValue({
       nombre: dish.name,
-      tipoDish: dish.dishType,
+      tipoDish: dish.dish_type,
       descripcion: dish.description,
-      activo: dish.active === 1,
+      activo: dish.active,
     });
 
     // Scroll al formulario
@@ -179,7 +190,7 @@ export class MenuCreationComponent implements OnInit {
 
   resetearFormulario() {
     this.formulario.reset();
-    this.formulario.patchValue({ activo: true });
+    this.formulario.patchValue({ activo: 1 });
     this.mostrarFormulario = false;
     this.modoEdicion = false;
     this.dishEditando = null;
@@ -192,10 +203,10 @@ export class MenuCreationComponent implements OnInit {
     console.log('🗑️ Confirmando eliminación de:', dish.name);
     this.dishAEliminar = dish;
     this.modalVisible = true;
-    
+
     // Aplicar estilo al body para evitar scroll
     document.body.style.overflow = 'hidden';
-    
+
     // Agregar backdrop
     this.crearBackdrop();
   }
@@ -214,7 +225,9 @@ export class MenuCreationComponent implements OnInit {
 
     this.dishService.eliminarDish(dishId).subscribe({
       next: () => {
-        this.mensajeRespuesta = `Plato "${this.dishAEliminar!.name}" eliminado con éxito.`;
+        this.mensajeRespuesta = `Plato "${
+          this.dishAEliminar!.name
+        }" eliminado con éxito.`;
         this.cancelarEliminacion();
         this.cargarDishes();
         this.limpiarMensajeDespuesDeTiempo();
@@ -232,10 +245,10 @@ export class MenuCreationComponent implements OnInit {
     console.log('❌ Cancelando eliminación');
     this.dishAEliminar = null;
     this.modalVisible = false;
-    
+
     // Restaurar scroll del body
     document.body.style.overflow = 'auto';
-    
+
     // Remover backdrop
     this.removerBackdrop();
   }
@@ -244,7 +257,8 @@ export class MenuCreationComponent implements OnInit {
   toggleEstadoDish(dish: Dish) {
     const dishId = dish.idDish;
     if (!dishId) {
-      this.mensajeError = 'Error: No se puede cambiar el estado del plato sin ID.';
+      this.mensajeError =
+        'Error: No se puede cambiar el estado del plato sin ID.';
       return;
     }
 
@@ -258,7 +272,8 @@ export class MenuCreationComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error al desactivar dish:', err);
-          this.mensajeError = err.error?.message || 'Error al desactivar el plato.';
+          this.mensajeError =
+            err.error?.message || 'Error al desactivar el plato.';
           this.limpiarMensajeDespuesDeTiempo();
         },
       });
@@ -267,11 +282,11 @@ export class MenuCreationComponent implements OnInit {
       // porque tu backend no tiene un endpoint específico para activar
       const datosCompletos = {
         name: dish.name,
-        dishType: dish.dishType,
+        dishType: dish.dish_type,
         description: dish.description,
-        active: 1
+        active: 1,
       };
-      
+
       this.dishService.actualizarDish(dishId, datosCompletos).subscribe({
         next: () => {
           this.mensajeRespuesta = `Plato "${dish.name}" activado con éxito.`;
@@ -280,7 +295,8 @@ export class MenuCreationComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error al activar dish:', err);
-          this.mensajeError = err.error?.message || 'Error al activar el plato.';
+          this.mensajeError =
+            err.error?.message || 'Error al activar el plato.';
           this.limpiarMensajeDespuesDeTiempo();
         },
       });
@@ -294,24 +310,25 @@ export class MenuCreationComponent implements OnInit {
     // Filtro por texto (nombre o descripción)
     if (this.filtroTexto.trim()) {
       const texto = this.filtroTexto.toLowerCase().trim();
-      dishesFiltrados = dishesFiltrados.filter(dish =>
-        dish.name.toLowerCase().includes(texto) ||
-        dish.description.toLowerCase().includes(texto)
+      dishesFiltrados = dishesFiltrados.filter(
+        (dish) =>
+          dish.name.toLowerCase().includes(texto) ||
+          dish.description.toLowerCase().includes(texto)
       );
     }
 
     // Filtro por tipo
     if (this.filtroTipo) {
-      dishesFiltrados = dishesFiltrados.filter(dish => 
-        dish.dishType === this.filtroTipo
+      dishesFiltrados = dishesFiltrados.filter(
+        (dish) => dish.dish_type === this.filtroTipo
       );
     }
 
     // Filtro por estado
     if (this.filtroEstado) {
       const estadoFiltro = this.filtroEstado === 'activo' ? 1 : 0;
-      dishesFiltrados = dishesFiltrados.filter(dish => 
-        dish.active === estadoFiltro
+      dishesFiltrados = dishesFiltrados.filter(
+        (dish) => dish.active === estadoFiltro
       );
     }
 
@@ -354,16 +371,16 @@ export class MenuCreationComponent implements OnInit {
         opacity: 0;
         transition: opacity 0.15s linear;
       `;
-      
+
       // Cerrar modal al hacer click en el backdrop
       backdrop.addEventListener('click', (e) => {
         if (e.target === backdrop) {
           this.cancelarEliminacion();
         }
       });
-      
+
       document.body.appendChild(backdrop);
-      
+
       // Animar entrada
       setTimeout(() => {
         backdrop!.style.opacity = '1';
@@ -461,8 +478,8 @@ export class MenuCreationComponent implements OnInit {
       case 'editar':
         return `Editar plato: ${dish.name}`;
       case 'toggle':
-        return dish.active === 1 
-          ? `Desactivar plato: ${dish.name}` 
+        return dish.active === 1
+          ? `Desactivar plato: ${dish.name}`
           : `Activar plato: ${dish.name}`;
       case 'eliminar':
         return `Eliminar permanentemente: ${dish.name}`;
