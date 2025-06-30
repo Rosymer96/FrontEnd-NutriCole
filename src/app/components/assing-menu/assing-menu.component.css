@@ -1,18 +1,3 @@
-.calendar-container {
-  background-color: #ffffff;
-  padding: 25px;
-}
-.main-content-wrapper {
-  position: relative; /* Agregado para que los hijos con position absolute se posicionen aquí */
-  max-width: 1200px;
-  margin: 0px auto;
-  padding: 0 20px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  display: flex;
-}
-
 /* Estilo para el componente que flota encima */
 .app-create-menu {
   position: absolute; /* O 'fixed' si quieres que flote aunque hagas scroll */
@@ -29,47 +14,53 @@
   max-height: 80vh;
   overflow-y: auto; /* Para scroll interno si es contenido largo */
 }
-.month-container{
+.main-content-wrapper {
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-top: 100px;
-  margin-right: 20px;
+  width: fit-content;
 }
+
+.calendar-container {
+  background: #454545;
+  padding: 32px 20px;
+  border-radius: 48px;
+  border: 0.5px solid #fff;
+  max-width: 1200px;
+  margin-top: 0;
+  height: fit-content;
+}
+
+/* === Títulos === */
 .title,
-.month-year-text {
-  color: #2c3e50;
-  font-size: 2.2em;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
+.month-title,
+.mes-title,
+.month-year-text,
 .month-year-heading {
-  color: #2c3e50;
-  font-size: 1.8em;
-  margin: 0;
-  font-weight: 600;
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  margin: 0.5rem 0 2.2rem 0;
 }
 
-/* Tabla del calendario */
+/* === Tabla del calendario === */
 .calendar-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-}
-
-.calendar-table td {
-  border: 1px solid #e0e0e0;
-  padding: 15px;
-  text-align: center;
-  vertical-align: top;
-  height: 120px;
+  border-radius: 32px;
+  color: white;
+  overflow: hidden;
 }
 
 .calendar-table th {
-  background-color: #f4f7f6;
-  color: #555;
-  font-weight: 600;
+  background: #222b36;
+  color: #fff;
+  font-weight: 700;
   padding: 12px 0;
   font-size: 1em;
   text-transform: uppercase;
@@ -77,74 +68,165 @@
 }
 
 .calendar-table tbody tr:nth-child(odd) {
-  background-color: #fdfdfd;
+  background: #3b4148;
 }
 
+.calendar-table td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+  vertical-align: top;
+  height: 80px;
+  background: #f9f8f8;
+}
+
+/* === Celdas y contenido diario === */
 .calendar-day-cell {
-  background-color: #ffffff;
+  background: #454545;
 }
 
 .empty-day-cell {
-  background-color: #f9f9f9;
+  background: #32363c;
 }
 
 .day-content {
   display: flex;
   flex-direction: column;
   height: 100%;
+  justify-content: space-between;
 }
 
 .day-date {
-  font-size: 1.1em;
+  font-size: 0.8em;
   font-weight: bold;
-  color: #007bff;
+  color: black;
   margin-bottom: 8px;
-  display: block;
 }
 
+/* === Lista de platos === */
 .dish-list {
   list-style: none;
   padding: 0;
-  margin: 0;
-  flex-grow: 1;
+  margin: 0 0 5px 0;
   text-align: left;
-  margin-bottom: 5px;
+  font-size: 0.9em;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .dish-item {
-  font-size: 0.9em;
-  color: #444;
+  font-size: 0.99em;
+  color: black;
   margin-bottom: 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Botones dentro de la celda */
-.assign-button {
-  background-color: #28a745;
-  color: white;
-  margin-top: 10px;
+/* === En versión simplificada dentro de la tabla === */
+.calendar-table .edit-button {
+  background: none;
+  border: none;
+  color: #26c6f9;
+  text-decoration: underline;
+  font-size: 0.8rem;
+  font-weight: 700;
+  width: fit-content;
+  margin-left: auto; /* Esto empuja el botón a la derecha */
+  margin-top: 12px;
   display: block;
-  width: 100%;
+  text-align: right;
+  white-space: nowrap;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
 }
 
-.assign-button:hover {
-  background-color: #218838;
-  transform: translateY(-1px);
+.calendar-table .edit-button:hover {
+  color: #09a1e2;
 }
 
-.edit-button {
-  background-color: #ffc107;
-  color: #333;
-  margin-top: 10px;
+/* === Botones Generales === */
+
+.action-button {
+  display: flex;
+  width: fit-content;
+  padding: 0.1rem 1.2rem;
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff;
+  font-weight: bold;
+  border: 0.5px solid #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(10, 20, 40, 0.14);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  transition: background 0.2s, box-shadow 0.2s;
+  margin-left: auto;
+}
+
+.button-calendar-main {
+  margin-left: 2rem;
+}
+
+.button-calendar:hover,
+.button-calendar-main:hover,
+.primary-button:hover,
+.action-button:hover {
+  background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
+  box-shadow: 0 8px 24px rgba(22, 135, 200, 0.08);
+}
+
+/* === Select === */
+select,
+.select-month {
+  width: 350px;
+  font-size: 1.4em;
+  border-radius: 999px;
+  border: 2px solid #c0c0c0;
+  background: #fff;
+  color: #222;
+  padding: 1.2rem 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  transition: border 0.2s;
+  outline: none;
+}
+
+select:focus,
+.select-month:focus {
+  border-color: #1998d5;
+}
+
+/* === Menú de descripción === */
+.description-menu-wrapper {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  border-radius: 24px;
+  color: #fff;
+}
+
+/* === Errores === */
+.error {
+  display: flex;
+  color: #ff7675;
+  font-size: 1.15rem;
+  margin-left: 0.2rem;
+  margin-bottom: 0;
+  font-weight: 500;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.calendar-container app-form-menu {
+  max-width: 250px; /* o el tamaño que necesites */
+  font-size: 0.85rem; /* reduce el tamaño del texto */
   display: block;
-  width: 100%;
-}
-
-.edit-button:hover {
-  background-color: #e0a800;
-  transform: translateY(-1px);
+  height: 100vh;
 }

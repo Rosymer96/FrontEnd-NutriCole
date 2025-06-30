@@ -38,14 +38,14 @@
                 <li class="dish-item">{{ dish.name }}</li>
                 }
                 <button
-                  class="action-button edit-button"
+                  class="action-button assign-button"
                   (click)="openEditMenu(day.menu)"
                 >
                   Editar
                 </button>
                 } @else {
                 <button
-                  class="action-button assign-button"
+                  class="action-button"
                   (click)="onDateSelect(day.date)"
                 >
                   Asignar
