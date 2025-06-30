@@ -1,21 +1,25 @@
 /* --- Barra superior --- */
+.component-container {
+  display: flex;
+  flex-direction: column;
+}
 .top-bar {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 1rem;
+  margin: 0;
 }
-.menu-container{
+.menu-container {
   display: flex;
 }
 /* --- Contenedor principal --- */
 .form-container {
-  max-width: 1200px;
+  display: flex;
+  width: 40%;
   margin: 30px auto;
   padding: 20px;
   background-color: #ffffff;
-  display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 1rem;
   align-items: flex-start;
 }
 
@@ -37,7 +41,7 @@
   padding: 12px 15px;
   border: 1px solid #c0c0c0;
   border-radius: 6px;
-  font-size: 1em;
+  font-size: 0.9em;
   background-color: #fafafa;
   cursor: pointer;
   appearance: none;
@@ -55,7 +59,8 @@
 }
 
 /* --- Botones --- */
-.action-button, .close-button {
+.action-button,
+.close-button {
   padding: 12px 25px;
   border: none;
   border-radius: 6px;
@@ -74,7 +79,8 @@
   margin-top: 20px;
 }
 
-.primary-button, .close-button {
+.primary-button,
+.close-button {
   background-color: #007bff;
   color: white;
 }
@@ -138,4 +144,25 @@ p {
   font-size: 0.9em;
   line-height: 1.4;
   margin: 0;
+}
+.action-button,
+.close-button {
+  display: flex;
+  width: fit-content;
+  padding: 0.4rem 1.2rem;
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff;
+  font-weight: bold;
+  border: 0.5px solid #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(10, 20, 40, 0.14);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  transition: background 0.2s, box-shadow 0.2s;
+  margin-left: auto;
+}
+.action-button:hover {
+  background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
+  box-shadow: 0 8px 24px rgba(22, 135, 200, 0.08);
 }

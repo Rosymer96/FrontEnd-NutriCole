@@ -15,6 +15,17 @@ import { Month } from '../../interfaces/month';
   styleUrl: './form-menu.component.css',
 })
 export class FormMenuComponent {
+ 
+  ngOnInit(): void {
+  // Emitir automáticamente el mes actual al iniciar
+  this.showMenu.emit({
+    month: this.monthSelected(),
+    year: this.years()[0],
+  });
+
+  // Emitir la lista de meses también
+  this.monthsEmitted.emit(this.months());
+}
   showMenu = output<{ month: string; year: string }>();
   monthsEmitted = output<Month[]>();
 
@@ -33,14 +44,16 @@ export class FormMenuComponent {
   ]);
 
   years = signal(['2025']);
-
-
-  monthSelected = signal<string>('');
+  currentMonth: string = new Date().toLocaleString('en-US', {
+    month: '2-digit',
+    timeZone: 'Europe/Madrid',
+  });
+  monthSelected = signal<string>(this.currentMonth);
 
   //Metodo para enviar los datos recogidos del form:
   onSubmit() {
     this.showMenu.emit({
-      month:this.monthSelected(),
+      month: this.monthSelected(),
       year: this.years()[0],
     });
     this.onEmitMonths();
