@@ -1,0 +1,67 @@
+.tutor-dashboard {
+  display: flex;
+  flex-direction: column;
+  background: #f0f0f0;
+  min-height: 100vh;
+  border-radius: 48px;
+  padding: 32px 20px;
+  align-items: center;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 1rem;
+}
+.body h2 {
+  color: #333;
+}
+.body h1{
+    text-align: center;
+}
+.student-container {
+  display: flex;
+  gap: 4rem;
+}
+.student-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border-right: black solid 3px;
+  padding-right: 3rem;
+}
+
+.student-item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+}
+.student-name {
+  font-size: 1.2rem;
+}
+.class-name {
+  font-size: 1rem;
+}
+
+.btn {
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff;
+  font-weight: 700;
+  border: 0.5px solid #fff;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+  transition: background 0.2s;
+  width: 200px;
+  font-family: "Montserrat", Arial, sans-serif;
+}
+
+.btn.action {
+  border-radius: 999px;
+  width: 180px;
+}
