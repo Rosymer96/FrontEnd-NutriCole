@@ -21,4 +21,19 @@ export class StudentService {
       }
     );
   }
+  public getStudentsByClassId(
+    classId: string | number
+  ): Observable<StudentsResponse> {
+    return this.httpClient
+      .get<StudentsResponse>(`${this.baseUrl}/listByClass/${classId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      })
+      .pipe(catchError(this.error));
+  }
+
+  private error(err: HttpErrorResponse) {
+    return throwError(() => err);
+  }
 }

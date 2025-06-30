@@ -9,6 +9,7 @@ export interface IStudent {
 }
 
 export interface StudentsResponse {
+  data: IStudent[];
   success: string;
   students: IStudent[];
 }
