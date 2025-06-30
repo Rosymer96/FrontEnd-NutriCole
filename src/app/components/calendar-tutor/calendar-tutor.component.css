@@ -1,10 +1,11 @@
 
-body {
-  background: #454545;
-  font-family: "Montserrat", Arial, sans-serif;
-  margin: 0;
-  min-height: 100vh;
-  box-sizing: border-box;
+.main-content-wrapper {
+  position: relative;
+  max-width: 100vw;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
+  display: flex;
 }
 
 .calendar-container {
@@ -12,67 +13,32 @@ body {
   padding: 32px 20px;
   border-radius: 48px;
   border: 0.5px solid #fff;
-  box-shadow: none;
   max-width: 1200px;
-  margin: 3.5rem auto 0 auto;
+  margin-top: 0;
 }
 
-.main-content-wrapper {
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0;
-  background: transparent;
-  border-radius: 12px;
-  box-shadow: none;
-  display: flex;
-}
-
-.month-container {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-top: 70px;
-  margin-right: 20px;
-}
-
+/* === Títulos === */
 .title,
-.month-year-text {
-  color: #fff;
-  font-size: 2.2em;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-family: "Montserrat", Arial, sans-serif;
-}
-
+.month-title,
+.mes-title,
+.month-year-text,
 .month-year-heading {
   color: #fff;
-  font-size: 1.8em;
-  margin: 0;
+  font-size: 2.2rem;
   font-weight: 700;
-  font-family: "Montserrat", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  margin: 0.5rem 0 2.2rem 0;
 }
 
+/* === Tabla del calendario === */
 .calendar-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  background: #454545;
   border-radius: 32px;
+  color: white;
   overflow: hidden;
-  color: #fff;
-  font-family: "Montserrat", Arial, sans-serif;
-}
-
-.calendar-table td {
-  border: 1px solid #fff;
-  padding: 15px;
-  text-align: center;
-  vertical-align: top;
-  height: 120px;
-  background: #454545;
-  color: #fff;
-  font-family: "Montserrat", Arial, sans-serif;
 }
 
 .calendar-table th {
@@ -83,13 +49,22 @@ body {
   font-size: 1em;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-family: "Montserrat", Arial, sans-serif;
 }
 
 .calendar-table tbody tr:nth-child(odd) {
   background: #3b4148;
 }
 
+.calendar-table td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+  vertical-align: top;
+  height: 80px;
+  background: #f9f8f8;
+}
+
+/* === Celdas y contenido diario === */
 .calendar-day-cell {
   background: #454545;
 }
@@ -102,86 +77,116 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
+  justify-content: space-between;
 }
 
 .day-date {
-  font-size: 1.1em;
+  font-size: 0.8em;
   font-weight: bold;
-  color: #00baff;
+  color: black;
   margin-bottom: 8px;
-  display: block;
-  font-family: "Montserrat", Arial, sans-serif;
 }
 
+/* === Lista de platos === */
 .dish-list {
   list-style: none;
   padding: 0;
-  margin: 0;
-  flex-grow: 1;
+  margin: 0 0 5px 0;
   text-align: left;
-  margin-bottom: 5px;
+  font-size: 0.9em;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .dish-item {
   font-size: 0.99em;
-  color: #d8eeff;
+  color: black;
   margin-bottom: 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-family: "Montserrat", Arial, sans-serif;
 }
 
+/* === En versión simplificada dentro de la tabla === */
+.calendar-table .edit-button {
+  background: none;
+  border: none;
+  color: #26c6f9;
+  text-decoration: underline;
+  font-size: 0.8rem;
+  font-weight: 700;
+  width: fit-content;
+  margin-left: auto; /* Esto empuja el botón a la derecha */
+  margin-top: 12px;
+  display: block;
+  text-align: right;
+  white-space: nowrap;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.calendar-table .edit-button:hover {
+  color: #09a1e2;
+}
+
+/* === Botones Generales === */
+.button-calendar,
+.button-calendar-main,
 .action-button,
 .primary-button {
-  width: 350px !important;
-  padding: 1.2rem 0 !important;
-  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%) !important;
-  color: #fff !important;
-  font-family: "Montserrat", Arial, sans-serif !important;
-  font-size: 1.5rem !important;
-  font-weight: bold !important;
-  border: 0.5px solid #fff !important;
-  border-radius: 999px !important;
-  cursor: pointer !important;
-  box-shadow: 0 4px 16px 0 rgba(10, 20, 40, 0.14) !important;
-  transition: background 0.2s, box-shadow 0.2s !important;
+  width: 350px;
+  padding: 1.2rem 0;
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: 0.5px solid #fff;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(10, 20, 40, 0.14);
   letter-spacing: 0.01em;
   text-align: center;
-  text-transform: none !important;
-}
-
-.action-button:hover,
-.primary-button:hover {
-  background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%) !important;
-  box-shadow: 0 8px 24px 0 rgba(22, 135, 200, 0.08) !important;
-}
-
-.assign-button:hover {
-  background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
-  box-shadow: 0 8px 24px 0 rgba(22, 135, 200, 0.08);
-}
-
-.edit-button {
-  background: #ffc107;
-  color: #333;
-  margin-top: 10px;
-  display: block;
-  width: 100%;
+  text-transform: none;
+  transition: background 0.2s, box-shadow 0.2s;
   font-family: "Montserrat", Arial, sans-serif;
+}
+
+.button-calendar-main {
+  margin-left: 2rem;
+}
+
+.button-calendar:hover,
+.button-calendar-main:hover,
+.primary-button:hover,
+.action-button:hover {
+  background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
+  box-shadow: 0 8px 24px rgba(22, 135, 200, 0.08);
+}
+
+/* === Select === */
+select,
+.select-month {
+  width: 350px;
+  font-size: 1.4em;
   border-radius: 999px;
-  font-weight: bold;
-  padding: 0.9em 0;
-  border: none;
+  border: 2px solid #c0c0c0;
+  background: #fff;
+  color: #222;
+  padding: 1.2rem 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  transition: border 0.2s;
+  outline: none;
 }
 
-.edit-button:hover {
-  background: #e0a800;
-  transform: translateY(-1px);
+select:focus,
+.select-month:focus {
+  border-color: #1998d5;
 }
 
+/* === Menú de descripción === */
 .description-menu-wrapper {
   position: absolute;
   top: 100px;
@@ -191,163 +196,18 @@ body {
   padding: 1rem;
   border-radius: 24px;
   color: #fff;
-  font-family: "Montserrat", Arial, sans-serif;
 }
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  background: #454545 !important;
-  margin: 0;
-  padding: 0;
-}
-
-#main,
-main,
-.main,
-.page-container,
-.content,
-.container,
-app-root {
-  background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-label[for="month"],
-.month-title,
-.mes-title,
-.title {
-  display: block;
-  color: #fff !important;
-  font-size: 2.5rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase;
-  font-family: "Montserrat", Arial, sans-serif !important;
-  letter-spacing: -0.5px;
-  margin-bottom: 2.2rem;
-  margin-top: 0.5rem;
-}
-
-.button-calendar,
-.button-calendar-main {
-  width: 350px !important;
-  padding: 1.2rem 0 !important;
-  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%) !important;
-  color: #fff !important;
-  font-family: "Montserrat", Arial, sans-serif !important;
-  font-size: 1.5rem !important;
-  font-weight: bold !important;
-  border: 0.5px solid #fff !important;
-  border-radius: 999px !important;
-  cursor: pointer !important;
-  box-shadow: 0 4px 16px 0 rgba(10, 20, 40, 0.14) !important;
-  transition: background 0.2s, box-shadow 0.2s !important;
-  letter-spacing: 0.01em;
-  text-align: center;
-}
-
-button:hover,
-.button-calendar:hover {
-  background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%) !important;
-  box-shadow: 0 8px 24px 0 rgba(22, 135, 200, 0.08) !important;
-}
-
-select,
-.select-month {
-  width: 350px !important;
-  font-size: 1.4em !important;
-  border-radius: 999px !important;
-  border: 2px solid #c0c0c0 !important;
-  background: #fff !important;
-  color: #222 !important;
-  font-family: "Montserrat", Arial, sans-serif !important;
-  padding: 1.2rem 2rem !important;
-  margin-bottom: 0.5rem !important;
-  transition: border 0.2s !important;
-  outline: none !important;
-  box-sizing: border-box !important;
-  font-weight: 500 !important;
-}
-
-select:focus,
-.select-month:focus {
-  border-color: #1998d5 !important;
-}
-
+/* === Errores === */
 .error {
   color: #ff7675;
   font-size: 1.15rem;
   margin-left: 0.2rem;
-  font-family: "Montserrat", Arial, sans-serif;
   margin-bottom: 0;
   font-weight: 500;
 }
-
-.calendar-container label,
-.calendar-container label[for="month"],
-.calendar-container .month-title,
-.calendar-container .mes-title,
-.calendar-container .title {
-  color: #fff !important;
-  font-size: 2.5rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase;
-  font-family: "Montserrat", Arial, sans-serif !important;
-  letter-spacing: -0.5px;
-  margin-bottom: 2.2rem;
-  margin-top: 0.5rem;
-  display: block !important;
-  opacity: 1 !important;
-}
-.button-calendar-main {
-  width: 350px !important;
-  padding: 1.2rem 0 !important;
-  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%) !important;
-  color: #fff !important;
-  font-family: "Montserrat", Arial, sans-serif !important;
-  font-size: 1.5rem !important;
-  font-weight: bold !important;
-  border: 0.5px solid #fff !important;
-  border-radius: 999px !important;
-  cursor: pointer !important;
-  box-shadow: 0 4px 16px 0 rgba(10, 20, 40, 0.14) !important;
-  transition: background 0.2s, box-shadow 0.2s !important;
-  letter-spacing: 0.01em;
-  text-align: center;
-  text-transform: none !important;
-  margin-left: 2rem;
-}
-
-.button-calendar-main:hover {
-  background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%) !important;
-  box-shadow: 0 8px 24px 0 rgba(22, 135, 200, 0.08) !important;
-}
-
-.calendar-table .edit-button,
-.calendar-table .assign-button {
-  background: none !important;
-  border: none !important;
-  color: #26c6f9 !important;
-  text-decoration: underline !important;
-  font-size: 0.9rem !important;
-  font-weight: 700 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: 100%;
-  padding: 0 !important;
-  margin: 8px auto 0 auto !important;
-  display: inline-block !important;
-  text-align: center !important;
-  white-space: nowrap !important;
-  text-transform: none !important;
-  cursor: pointer !important;
-}
-
-.calendar-table .edit-button:hover,
-.calendar-table .assign-button:hover {
-  color: #09a1e2 !important;
+.calendar-container app-form-menu {
+  max-width: 250px;   /* o el tamaño que necesites */
+  font-size: 0.85rem; /* reduce el tamaño del texto */
+  display: block;
 }
