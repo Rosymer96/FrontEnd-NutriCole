@@ -66,6 +66,6 @@ export class LoginComponent {
 
   goToRegister() {
     //Enviar a la ruta para registrarse.
-    this.router.navigate(['/register']);
+    this.router.navigate(['/user/register']);
   }
 }
