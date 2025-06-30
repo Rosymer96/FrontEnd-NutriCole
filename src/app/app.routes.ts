@@ -8,7 +8,8 @@ export const routes: Routes = [
   { path: '', redirectTo: 'user/login', pathMatch: 'full' },
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },
-  { path: 'menu-creation', component: MenuCreationComponent },
+  { path: 'user/menu-creation', component: MenuCreationComponent }, 
+
 ];
 
 //Ejemplo de paths usando la verificacion de las guards:
