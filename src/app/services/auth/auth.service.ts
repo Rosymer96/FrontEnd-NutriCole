@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { LoginResponse } from '../../interfaces/userResponses';
-import { map, Observable} from 'rxjs';
+import { map, Observable, of} from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -79,7 +79,4 @@ export class AuthService {
     const user = this.getCurrentUser();
     return user?.rol || '';
   }
-}
-function of(userProfile: IUser): Observable<IUser> {
-  throw new Error('Function not implemented.');
 }

@@ -47,7 +47,7 @@ export class LoginComponent {
           console.log('Login exitoso', user);
           const rol = user.rol;
           if (rol === 'administrador') {
-          //  this.router.navigate(['/admin/dashboard']); AQUI COLOCAR LA RUTA DEL DASHBOARD
+          this.router.navigate(['/dashboard-admin']);
           } else if (rol === 'tutor') {
           //  this.router.navigate(['/tutor/dashboard']); AQUI COLOCAR LA RUTA DEL DASHBOARD
           } else {
