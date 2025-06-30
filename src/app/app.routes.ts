@@ -12,7 +12,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'assing-menu', component: AssingMenuComponent },
   { path: 'create-menu', component: CreateMenuComponent },
-  { path: 'dashboard/admin', component: AdminDashboardComponent },
+  { path: 'dashboard-admin', component: AdminDashboardComponent },
 ];
 
 //Ejemplo de paths usando la verificacion de las guards:
