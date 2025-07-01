@@ -80,7 +80,7 @@ export class CrearEstudianteComponent implements OnInit {
           this.messageResponse = 'La cuenta ha sido registrada con éxito.';
           this.form.reset();
           this.errorMessage = '';
-          this.cancel();
+          this.close.emit();
         },
         error: (err) => {
           console.error('Error en register:', err);
@@ -88,8 +88,5 @@ export class CrearEstudianteComponent implements OnInit {
             err.error?.message || 'No se pudo completar el registro.';
         },
       });
-  }
-  cancel() {
-    this.close.emit();
   }
 }

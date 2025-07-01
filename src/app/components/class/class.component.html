@@ -81,7 +81,9 @@
   @if(formStudent){
   <div class="modal-overlay">
     <div class="modal-content">
-      <app-crear-estudiante></app-crear-estudiante>
+      <app-crear-estudiante
+        (close)="formStudent = false"
+      ></app-crear-estudiante>
     </div>
   </div>
   }
