@@ -1,4 +1,4 @@
-/* --- Barra superior --- */
+/*  Barra superior  */
 .component-container {
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
 .menu-container {
   display: flex;
 }
-/* --- Contenedor principal --- */
+/*  Contenedor principal  */
 .form-container {
   display: flex;
   width: 40%;
@@ -23,7 +23,7 @@
   align-items: flex-start;
 }
 
-/* --- Cada grupo de selección (Primero, Segundo, Postre) --- */
+/*  Cada grupo de selección (Primero, Segundo, Postre)  */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -58,7 +58,7 @@
   outline: none;
 }
 
-/* --- Botones --- */
+/*  Botones  */
 .action-button,
 .close-button {
   padding: 12px 25px;
@@ -79,25 +79,33 @@
   margin-top: 20px;
 }
 
-.primary-button,
+.primary-button {
+  background: linear-gradient(90deg, #28a745 0%, #218838 100%);
+  color: white;
+}
 .close-button {
-  background-color: #007bff;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #dc3545 0%, #c82333 100%);
   color: white;
 }
 
 .primary-button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(90deg, #1e7e34 0%, #1c7430 100%);
   transform: translateY(-1px);
 }
 
-/* --- Error --- */
+.close-button:hover {
+  background: linear-gradient(90deg, #bd2130 0%, #b21f2d 100%);
+}
+
+/*  Error  */
 .error-message {
   color: #dc3545;
   font-size: 0.85em;
   margin-top: 5px;
 }
 
-/* --- Contenido de descripción (vista en tiempo real) --- */
+/*  Contenido de descripción (vista en tiempo real)  */
 .description-menu-container {
   font-family: "Handlee", cursive;
   border: 3px solid black;
@@ -122,7 +130,7 @@
   text-align: end;
 }
 
-/* --- Cada plato mostrado --- */
+/*  Cada plato mostrado */
 .dish {
   border: 2px solid black;
   border-radius: 10px;
@@ -145,8 +153,7 @@ p {
   line-height: 1.4;
   margin: 0;
 }
-.action-button,
-.close-button {
+.action-button {
   display: flex;
   width: fit-content;
   padding: 0.4rem 1.2rem;
@@ -165,4 +172,40 @@ p {
 .action-button:hover {
   background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
   box-shadow: 0 8px 24px rgba(22, 135, 200, 0.08);
+}
+
+/* Corrector estilos para botones del menú */
+.top-bar .close-button {
+  border-radius: 999px !important;
+}
+.action-button {
+  background: linear-gradient(90deg, #28a745 0%, #218838 100%) !important;
+}
+.action-button:hover {
+  background: linear-gradient(90deg, #1e7e34 0%, #1c7430 100%) !important;
+}
+/* .close-button {
+  background: linear-gradient(90deg, #dc3545 0%, #c82333 100%) !important;
+  border-radius: 20px !important;
+}
+.close-button:hover {
+  background: linear-gradient(90deg, #bd2130 0%, #b21f2d 100%) !important;
+  transform: translateY(-1px) !important;
+} */
+
+/* --- Botón de cerrar (close) --- */
+.top-bar .close-button {
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%) !important;
+  color: #fff;
+}
+
+.button-container .close-button {
+  background: linear-gradient(90deg, #dc3545 0%, #c82333 100%) !important;
+  border-radius: 20px !important;
+  color: #fff;
+}
+.button-container .close-button:hover {
+  background: linear-gradient(90deg, #bd2130 0%, #b21f2d 100%) !important;
+  transform: translateY(-1px) !important;
 }

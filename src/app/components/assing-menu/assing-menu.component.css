@@ -1,3 +1,19 @@
+/* === Sidebar and Flex Layout === */
+.sidebar {
+  width: 180px; /* adjust as needed */
+  flex-shrink: 0;
+  padding-bottom: 50px;
+}
+
+:host {
+  display: flex;
+  align-items: flex-start;
+}
+
+.calendar-container-wrapper {
+  flex: 1;
+}
+
 /* Estilo para el componente que flota encima */
 .app-create-menu {
   position: absolute; /* O 'fixed' si quieres que flote aunque hagas scroll */
@@ -21,17 +37,18 @@
   background: transparent;
   display: flex;
   max-width: 100vw;
-  height: 1;
 }
 
 .calendar-container {
+  flex: 1 1 auto;
   background: #454545;
-  padding: 10px 20px;
-  border-radius: 48px;
+  padding: 10px;
+  border-radius: 24px;
   border: 0.5px solid #fff;
-  max-width: 1200px;
+  max-width: 980px;
   margin-top: 0;
-  height: 100%;
+  height: auto;
+  padding-bottom: 50px;
 }
 
 /* === Títulos === */
@@ -186,13 +203,13 @@
 /* === Select === */
 select,
 .select-month {
-  width: 350px;
+  width: 250px;
   font-size: 1.4em;
-  border-radius: 999px;
+  border-radius: 30px;
   border: 2px solid #c0c0c0;
   background: #fff;
   color: #222;
-  padding: 1.2rem 2rem;
+  padding: 0.6rem 1.5rem;
   margin-bottom: 0.5rem;
   font-weight: 500;
   transition: border 0.2s;
@@ -233,5 +250,10 @@ select:focus,
   max-width: 250px; /* o el tamaño que necesites */
   font-size: 0.85rem; /* reduce el tamaño del texto */
   display: block;
-  height: 100vh;
+  height: auto;
+}
+
+/* Sidebar fixed width */
+.sidebar {
+  flex: 0 0 250px;
 }
