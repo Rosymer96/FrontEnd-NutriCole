@@ -1,6 +1,15 @@
 import { ClassService } from './../../services/class/class.service';
 import { StudentService } from './../../services/students/students.service';
-import { Component, inject, input, OnInit, output, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  input,
+  OnChanges,
+  OnInit,
+  output,
+  signal,
+  SimpleChanges,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import {
   FormControl,
@@ -18,7 +27,7 @@ import { IStudent } from '../../interfaces/student';
   templateUrl: './crear-estudiante.component.html',
   styleUrl: './crear-estudiante.component.css',
 })
-export class CrearEstudianteComponent implements OnInit {
+export class CrearEstudianteComponent implements OnInit, OnChanges {
   private studentService = inject(StudentService);
   private classService = inject(ClassService);
   private router = inject(Router);
@@ -40,16 +49,15 @@ export class CrearEstudianteComponent implements OnInit {
         console.error('Error obteniendo las clases', err);
       },
     });
-
-    this.studentService.getStudentById(this.idStudent()!).subscribe({
-      next: (res) => {
-        console.log('ESTUDIANTE EDITADO:', res.student);
-        this.student.set(res.student);
-      },
-      error: (err) => {
-        console.error('Error al editar estudiante', err);
-      },
-    });
+    console.log(this.idStudent());
+    if (this.idStudent()) {
+      this.loadStudent();
+    }
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['idStudent'] && !changes['idStudent'].firstChange) {
+      this.loadStudent();
+    }
   }
 
   public form = new FormGroup({
@@ -99,6 +107,53 @@ export class CrearEstudianteComponent implements OnInit {
           console.error('Error en register:', err);
           this.errorMessage =
             err.error?.message || 'No se pudo completar el registro.';
+        },
+      });
+  }
+
+  loadStudent() {
+    console.log('prueba1');
+    console.log('prueba2');
+
+    this.studentService.getStudentById(this.idStudent()!).subscribe({
+      next: (res) => {
+        console.log('ESTUDIANTE EDITADO:', res.student);
+        this.student.set(res.student);
+        this.form.patchValue({
+          name: res.student.name,
+          studentDni: res.student.student_dni,
+          classId: res.student.class_id,
+          tutorDni: res.student.tutor_dni,
+        });
+      },
+      error: (err) => {
+        console.error('Error al cargar estudiante', err);
+      },
+    });
+  }
+  editStudent() {
+    console.log('editando estudiante');
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+    }
+
+    // Normalizar datos antes de enviar
+    const name = capitalizeWords(this.form.value.name!);
+    const studentDni = this.form.value.studentDni!.trim().toUpperCase();
+    const classId = Number(this.form.value.classId);
+    const tutorDni = this.form.value.tutorDni!.trim().toUpperCase();
+    this.studentService
+      .editStudent(this.idStudent()!, name, studentDni, classId, tutorDni)
+      .subscribe({
+        next: (res) => {
+          console.log('Editado exitoso', res);
+          this.messageResponse = 'La cuenta ha sido editada con éxito.';
+          this.form.reset();
+          this.errorMessage = '';
+          this.close.emit();
+        },
+        error: (err) => {
+          console.error('Error al editar estudiante', err);
         },
       });
   }

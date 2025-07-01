@@ -34,7 +34,6 @@ export class ClassComponent implements OnInit {
       },
     });
   }
-  editStudent(idStudent: number) {}
   toggleActive(idStudent: number, active: number) {
     console.log(idStudent, active);
     if (active === 0) {
@@ -89,5 +88,10 @@ export class ClassComponent implements OnInit {
   }
   openFormStudent() {
     this.formStudent = true;
+  }
+  onCloseForm() {
+    this.formStudent = false;
+    this.loadStudents();
+    this.idStudent.set(null);
   }
 }

@@ -1,5 +1,9 @@
 <div class="register-container">
+  @if(student()){
+  <h2 class="title">Editar estudiante</h2>
+  }@else {
   <h2 class="title">Crear estudiante</h2>
+  }
   <form [formGroup]="form" (ngSubmit)="createStudent()">
     <label class="label" for="name">Nombre</label>
     <input class="input" id="name" type="text" formControlName="name" />
@@ -65,8 +69,12 @@
     </div>
     } @if (errorMessage) {
     <div class="error">{{ errorMessage }}</div>
-    }
-
+    } @if(student()){
+    <button class="btn action" type="button" (click)="editStudent()">
+      Editar
+    </button>
+    }@else {
     <button class="btn action" type="submit">Registrar</button>
+    }
   </form>
 </div>

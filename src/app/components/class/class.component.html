@@ -9,6 +9,7 @@
             <tr>
               <th>ID</th>
               <th>Nombre</th>
+              <th>DNI</th>
               <th>Estado</th>
               <th>Tutor</th>
               <th>Acciones</th>
@@ -19,6 +20,7 @@
             <tr>
               <td>{{ student.idStudent }}</td>
               <td>{{ student.name }}</td>
+              <td>{{ student.student_dni }}</td>
               <td>
                 {{ student.active === 1 ? "Activo" : "Inactivo" }}
               </td>
@@ -80,7 +82,7 @@
     <div class="modal-content">
       <app-crear-estudiante
         [idStudent]="idStudent()"
-        (close)="formStudent = false"
+        (close)="onCloseForm()"
       ></app-crear-estudiante>
     </div>
   </div>
