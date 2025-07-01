@@ -1,13 +1,15 @@
 .register-container {
   background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
-  padding: 1rem 4rem;
+  padding: 1rem 2rem;
   border-radius: 10px;
-  width: 30vw;
+  width: fit-content;
   color: #fff;
   font-family: "Montserrat", Arial, sans-serif;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
 }
-
+.register-container.form-group {
+  padding: 1rem 4rem;
+}
 .register-container .title {
   text-align: center;
   font-size: 1.5rem;
@@ -21,17 +23,21 @@
   font-weight: 600;
   font-size: 0.9rem;
 }
-
+.form-group {
+  padding: 0 1rem;
+}
 .input {
-  width: 100%;
-  padding: 0.75rem 0;
+  width: 350px;
+  padding: 0.75rem 0.5rem;
   border-radius: 5px;
   border: none;
   font-size: 1rem;
   font-family: "Montserrat", Arial, sans-serif;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
-
+.input.class {
+  width: 365px;
+}
 .input:focus {
   outline: none;
   box-shadow: 0 0 0 2px #fff, 0 0 10px #1687c8;
@@ -75,7 +81,17 @@
 }
 
 .btn.action {
+  display: flex;
   border-radius: 999px;
   width: 180px;
   margin-top: 2rem;
+  margin-left: auto;
+}
+.btn.close {
+  display: flex;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  margin-left: auto;
+  border: none;
+  background-color: none;
 }

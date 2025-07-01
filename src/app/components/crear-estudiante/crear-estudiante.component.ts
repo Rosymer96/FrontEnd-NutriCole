@@ -157,4 +157,8 @@ export class CrearEstudianteComponent implements OnInit, OnChanges {
         },
       });
   }
+  closeModal() {
+    console.log('probando boton de cerrar');
+    this.close.emit();
+  }
 }

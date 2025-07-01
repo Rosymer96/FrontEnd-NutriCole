@@ -1,10 +1,11 @@
 <div class="register-container">
+  <button class="btn close" (click)="closeModal()">X</button>
   @if(student()){
   <h2 class="title">Editar estudiante</h2>
   }@else {
   <h2 class="title">Crear estudiante</h2>
   }
-  <form [formGroup]="form" (ngSubmit)="createStudent()">
+  <form [formGroup]="form" (ngSubmit)="createStudent()" class="form-group">
     <label class="label" for="name">Nombre</label>
     <input class="input" id="name" type="text" formControlName="name" />
     @if (form.controls['name'].touched && form.controls['name'].invalid) {
@@ -38,8 +39,8 @@
     }
 
     <label class="label" for="class">Clase</label>
-    <select class="input" id="class" formControlName="classId">
-      <option [ngValue]="null">Seleccione una clase</option>
+    <select class="input class" id="class" formControlName="classId">
+      <option class="option" [ngValue]="null">Seleccione una clase</option>
       @for(class of this.classes(); track $index){
       <option [ngValue]="class.idClass">{{ class.name }}</option>
       }
