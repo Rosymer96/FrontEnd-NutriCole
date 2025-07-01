@@ -14,4 +14,7 @@ export class DishService {
   public getAllDishes(): Observable<DishResponse> {
     return this.httpClient.get<DishResponse>(`${this.API_URL}/list`);
   }
+  public getAllDishesActive(): Observable<DishResponse> {
+    return this.httpClient.get<DishResponse>(`${this.API_URL}/list-active`);
+  }
 }

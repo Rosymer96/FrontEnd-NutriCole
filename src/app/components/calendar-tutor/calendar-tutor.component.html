@@ -8,6 +8,11 @@
 
   @if (hasPlates()) {
   <div class="calendar-display-container calendar-container">
+    <div class="back-container">
+      <button class="back-button" (click)="goToDashboard()">
+        <i class="fa-solid fa-backward-fast icon-back"></i>Regresar
+      </button>
+    </div>
     <table class="calendar-table">
       <thead>
         <tr>

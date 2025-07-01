@@ -6,15 +6,14 @@
         (monthsEmitted)="onHandleMonths($event)"
       ></app-form-menu>
     </div>
-    @if (rowCalendar) {
-    <div class="month-container">
-      <p class="month-year-heading">Menú de:</p>
-      <h2 class="month-year-text">{{ monthName }}</h2>
-    </div>
-    }
   </div>
   @if (rowCalendar) {
   <div class="calendar-display-container calendar-container">
+    <div class="back-container">
+      <button class="back-button" (click)="goToDashboard()">
+        <i class="fa-solid fa-backward-fast icon-back"></i>Regresar
+      </button>
+    </div>
     <table class="calendar-table">
       <thead>
         <tr>
@@ -44,10 +43,7 @@
                   Editar
                 </button>
                 } @else {
-                <button
-                  class="action-button"
-                  (click)="onDateSelect(day.date)"
-                >
+                <button class="action-button" (click)="onDateSelect(day.date)">
                   Asignar
                 </button>
                 }
@@ -68,12 +64,12 @@
   }
 </div>
 @if (selectedDate()) {
-  <app-create-menu
-    class="app-create-menu"
-    [date]="selectedDate()"
-    [classId]="classId()"
-    [existingMenu]="menuToEdit()"
-    (menuCreated)="onMenuSuccessfullyCreated()"
-    (close)="selectedDate.set(''); menuToEdit.set(null)"
-  ></app-create-menu>
+<app-create-menu
+  class="app-create-menu"
+  [date]="selectedDate()"
+  [classId]="classId()"
+  [existingMenu]="menuToEdit()"
+  (menuCreated)="onMenuSuccessfullyCreated()"
+  (close)="selectedDate.set(''); menuToEdit.set(null)"
+></app-create-menu>
 }

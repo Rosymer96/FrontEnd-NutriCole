@@ -5,9 +5,11 @@
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
   font-family: "Montserrat", Arial, sans-serif;
   max-width: 700px;
-  height: 80vh;
+  min-width: 280px;
+  min-height: 75%;
+  height: fit-content;
   margin: 30px auto;
-  padding: 1.5rem;
+  padding: 1rem;
   position: relative;
   z-index: 99999;
 }
@@ -30,6 +32,17 @@
   background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
 }
 
+.menu-date{
+  width: 100%;
+  display: flex;
+  color:white;
+  font-weight: bold;
+  justify-content: flex-end; 
+}
+.date{
+  text-align: right;
+}
+
 .dish {
   background: white;
   border-radius: 15px;
@@ -49,6 +62,7 @@
 }
 .dish-description {
   font-size: 0.8em;
+  color: white;
 }
 
 .dish-note {

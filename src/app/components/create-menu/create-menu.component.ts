@@ -196,6 +196,7 @@ export class CreateMenuComponent implements OnInit {
           });
           console.log(this.menuDataForDescription());
           console.log(res);
+          this.cancel();
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'No se pudo crear el menú';
@@ -244,6 +245,7 @@ export class CreateMenuComponent implements OnInit {
             dishes: res.menu,
           });
           console.log(this.menuDataForDescription());
+          this.cancel();
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'No se pudo editar el menú';

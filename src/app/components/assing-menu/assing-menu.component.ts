@@ -6,6 +6,7 @@ import { CommonModule, formatDate } from '@angular/common';
 import { FormMenuComponent } from '../form-menu/form-menu.component';
 import { Month } from '../../interfaces/month';
 import { CreateMenuComponent } from '../create-menu/create-menu.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assing-menu',
@@ -20,6 +21,7 @@ import { CreateMenuComponent } from '../create-menu/create-menu.component';
 })
 export class AssingMenuComponent {
   private menuService = inject(MenuService);
+  private router = inject(Router);
 
   //Se tiene que cambiar por la classId guardada en el localStorage almomento de dar click al boton.
   classId = signal<string>(localStorage.getItem('classId') ?? '');
@@ -184,7 +186,10 @@ export class AssingMenuComponent {
   }
   openEditMenu(menu: MenuResponse) {
     this.menuToEdit.set(menu);
-    console.log('menutoedit:', this.menuToEdit())
+    console.log('menutoedit:', this.menuToEdit());
     this.selectedDate.set(menu.date);
+  }
+  goToDashboard() {
+    this.router.navigate(['/dashboard-admin']);
   }
 }

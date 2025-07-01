@@ -20,17 +20,18 @@
   padding: 0;
   background: transparent;
   display: flex;
-  width: fit-content;
+  max-width: 100vw;
+  height: 1;
 }
 
 .calendar-container {
   background: #454545;
-  padding: 32px 20px;
+  padding: 10px 20px;
   border-radius: 48px;
   border: 0.5px solid #fff;
   max-width: 1200px;
   margin-top: 0;
-  height: fit-content;
+  height: 100%;
 }
 
 /* === Títulos === */
@@ -124,23 +125,30 @@
 }
 
 /* === En versión simplificada dentro de la tabla === */
-.calendar-table .edit-button {
+.back-container{
+  display: flex;
+  justify-content: end;
+}
+ .back-button {
   background: none;
   border: none;
-  color: #26c6f9;
-  text-decoration: underline;
-  font-size: 0.8rem;
+  color: white;
+  font-size: 1rem;
   font-weight: 700;
   width: fit-content;
   margin-left: auto; /* Esto empuja el botón a la derecha */
   margin-top: 12px;
+  margin-bottom: 20px;
   display: block;
   text-align: right;
   white-space: nowrap;
   border-radius: 0;
   box-shadow: none;
-  padding: 0;
+  padding: 0 1rem;
   cursor: pointer;
+}
+.icon-back{
+  padding: 1rem;
 }
 
 .calendar-table .edit-button:hover {

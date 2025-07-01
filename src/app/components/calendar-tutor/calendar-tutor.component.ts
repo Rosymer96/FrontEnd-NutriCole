@@ -155,4 +155,7 @@ export class CalendarTutorComponent implements OnInit {
 
     console.log('Menú y fecha seleccionados en menuOfDay:', this.menuOfDay());
   }
+  goToDashboard(){
+    this.router.navigate(['/dashboard-tutor'])
+  }
 }

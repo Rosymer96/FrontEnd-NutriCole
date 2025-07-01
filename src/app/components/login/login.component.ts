@@ -32,7 +32,6 @@ export class LoginComponent {
   });
 
   onLogin() {
-    console.log('haciendo login');
     if (this.form.invalid) {
       this.form.markAllAsTouched();
     }
@@ -44,7 +43,6 @@ export class LoginComponent {
     this.authService.login(email, password).subscribe({
       next: (user) => {
         if (user) {
-          console.log('Login exitoso', user);
           const rol = user.rol;
           if (rol === 'administrador') {
           this.router.navigate(['/dashboard-admin']);

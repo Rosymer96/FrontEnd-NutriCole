@@ -2,8 +2,8 @@
 <div class="description-menu-container">
   @if(menu()){
   <div class="menu-date">
-    <p class="dish-description">
-      {{ menu()?.date | date : "EEEE, dd/MM/yyyy" }}
+    <p class="date">
+      {{ menu()?.date | date : "EEEE, dd/MM/yyyy" | titlecase }}
     </p>
   </div>
   @for(dish of menu()?.dishes; track $index){
@@ -14,7 +14,7 @@
   } }@else {
   <button (click)="close()">Cerrar</button>
   <div class="menu-date">
-    <p>{{ menuofDay()?.date | date : "EEEE, dd/MM/yyyy" }}</p>
+    <p class="date">{{ menuofDay()?.date | date : "EEEE, dd/MM/yyyy" }}</p>
   </div>
   @for(dish of menuofDay()?.menu?.dishes; track $index){
   <div class="dish">
