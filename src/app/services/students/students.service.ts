@@ -22,12 +22,31 @@ export class StudentService {
       { name, studentDni, classId, tutorDni }
     );
   }
+  public editStudent(
+    idStudent: number,
+    name: string,
+    studentDni: string,
+    classId: number,
+    tutorDni: string
+  ): Observable<{ message: string }> {
+    return this.httpClient.put<{ message: string }>(
+      `${this.baseUrl}/${idStudent}`,
+      { name, studentDni, classId, tutorDni }
+    );
+  }
   public getStudentsByTutorId(): Observable<StudentsResponse> {
     return this.httpClient.get<StudentsResponse>(`${this.baseUrl}/listByTutor`);
   }
   public getStudentsByClassId(classId: number): Observable<StudentsResponse> {
     return this.httpClient.get<StudentsResponse>(
       `${this.baseUrl}/class/${classId}`
+    );
+  }
+  public getStudentById(
+    idStudent: number
+  ): Observable<{ message: string; student: IStudent }> {
+    return this.httpClient.get<{ message: string; student: IStudent }>(
+      `${this.baseUrl}/${idStudent}`
     );
   }
   public activeStudent(idStudent: number): Observable<{ message: string }> {

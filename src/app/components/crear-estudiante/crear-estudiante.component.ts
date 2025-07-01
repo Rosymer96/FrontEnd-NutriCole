@@ -1,6 +1,6 @@
 import { ClassService } from './../../services/class/class.service';
 import { StudentService } from './../../services/students/students.service';
-import { Component, inject, OnInit, output, signal } from '@angular/core';
+import { Component, inject, input, OnInit, output, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   FormControl,
@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { capitalizeWords } from '../../utils/string-utils';
 import { IClass } from '../../interfaces/class';
+import { IStudent } from '../../interfaces/student';
 @Component({
   selector: 'app-crear-estudiante',
   imports: [ReactiveFormsModule, FormsModule],
@@ -26,6 +27,8 @@ export class CrearEstudianteComponent implements OnInit {
   messageResponse: string = '';
   classes = signal<IClass[]>([]);
   close = output<void>();
+  idStudent = input<number | null>(null);
+  student = signal<IStudent | null>(null);
 
   ngOnInit(): void {
     this.classService.getClasses().subscribe({
@@ -35,6 +38,16 @@ export class CrearEstudianteComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error obteniendo las clases', err);
+      },
+    });
+
+    this.studentService.getStudentById(this.idStudent()!).subscribe({
+      next: (res) => {
+        console.log('ESTUDIANTE EDITADO:', res.student);
+        this.student.set(res.student);
+      },
+      error: (err) => {
+        console.error('Error al editar estudiante', err);
       },
     });
   }

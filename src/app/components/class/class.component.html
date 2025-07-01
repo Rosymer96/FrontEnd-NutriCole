@@ -27,7 +27,7 @@
                 <!-- Botón editar -->
                 <button
                   class="btn-edit"
-                  (click)="editStudent(student.idStudent)"
+                  (click)="getIdForEdit(student.idStudent)"
                 >
                   <i class="fa-solid fa-pen"></i>
                 </button>
@@ -46,10 +46,7 @@
                 </button>
 
                 <!-- Botón eliminar -->
-                <button
-                  class="btn-edit"
-                  (click)="getIdForDelete(student.idStudent)"
-                >
+                <button class="btn-edit" (click)="getId(student.idStudent)">
                   <i class="fa-solid fa-trash"></i>
                 </button>
               </td>
@@ -59,7 +56,7 @@
         </table>
       </div>
     </div>
-    @if(idStudent()){
+    @if(deleteStudentModal){
     <div class="modal-overlay">
       <div class="delete-confirmation">
         <p>
@@ -82,6 +79,7 @@
   <div class="modal-overlay">
     <div class="modal-content">
       <app-crear-estudiante
+        [idStudent]="idStudent()"
         (close)="formStudent = false"
       ></app-crear-estudiante>
     </div>

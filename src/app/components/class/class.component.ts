@@ -1,6 +1,6 @@
+import { IStudent } from './../../interfaces/student.d';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { StudentService } from '../../services/students/students.service';
-import { IStudent } from '../../interfaces/student';
 import { CommonModule } from '@angular/common';
 import { CrearEstudianteComponent } from '../crear-estudiante/crear-estudiante.component';
 
@@ -17,6 +17,7 @@ export class ClassComponent implements OnInit {
   className = signal<string>('');
   idStudent = signal<number | null>(null);
   formStudent = false;
+  deleteStudentModal = false;
 
   ngOnInit(): void {
     this.loadStudents();
@@ -59,9 +60,16 @@ export class ClassComponent implements OnInit {
     }
   }
 
-  getIdForDelete(idStudent: number) {
+  getId(idStudent: number) {
     this.idStudent.set(idStudent);
+    this.deleteStudentModal = true;
   }
+  getIdForEdit(idStudent: number) {
+    this.idStudent.set(idStudent);
+    console.log('ENVIANDO ID', this.idStudent());
+    this.formStudent = true;
+  }
+
   deleteStudent(idStudent: number) {
     console.log('IDPARABORRAR:', idStudent);
     this.studentService.deleteStudent(idStudent).subscribe({
@@ -75,10 +83,11 @@ export class ClassComponent implements OnInit {
       },
     });
   }
+
   close() {
-    this.idStudent.set(null);
+    this.deleteStudentModal = false;
   }
-  openFormStudent(){
-    this.formStudent = true
+  openFormStudent() {
+    this.formStudent = true;
   }
 }
