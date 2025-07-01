@@ -136,3 +136,27 @@
   justify-content: space-around;
   align-items: center;
 }
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(1, 36, 59, 0.75); /* fondo oscuro con opacidad */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 50vw;
+  width: 40%;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+}

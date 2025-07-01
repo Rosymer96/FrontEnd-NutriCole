@@ -1,0 +1,69 @@
+<div class="register-container">
+  <h2 class="title">Crear estudiante</h2>
+  <form [formGroup]="form" (ngSubmit)="createStudent()">
+    <label class="label" for="name">Nombre</label>
+    <input class="input" id="name" type="text" formControlName="name" />
+    @if (form.controls['name'].touched && form.controls['name'].invalid) {
+    <div class="error">
+      @if (form.get('name')?.errors?.['required']) {
+      <div>Nombre obligatorio.</div>
+      } @if (form.get('name')?.errors?.['maxlength']) {
+      <div>Máximo 50 caracteres.</div>
+      }
+    </div>
+    }
+
+    <label class="label" for="studentDNI">DNI/NIE del Estudiante</label>
+    <input
+      class="input"
+      id="studentDNI"
+      type="studentDNI"
+      formControlName="studentDni"
+    />
+    @if (form.controls['studentDni'].touched &&
+    form.controls['studentDni'].invalid) {
+    <div class="error">
+      @if (form.get('studentDni')?.errors?.['required']) {
+      <div>El DNI obligatorio.</div>
+      } @if (form.get('studentDni')?.errors?.['maxlength']) {
+      <div>Máximo 9 caracteres.</div>
+      } @if (form.get('studentDni')?.errors?.['pattern']) {
+      <div>Solo letras mayúsculas y números.</div>
+      }
+    </div>
+    }
+
+    <label class="label" for="classId">Clase</label>
+    <input class="input" id="classId" type="text" formControlName="classId" />
+    @if (form.controls['classId'].touched && form.controls['classId'].invalid) {
+    <div class="error">
+      @if (form.get('classId')?.errors?.['required']) {
+      <div>Clase obligatoria.</div>
+      } @if (form.get('classId')?.errors?.['maxlength']) {
+      <div>Máximo 2 números.</div>
+      }
+    </div>
+    }
+
+    <label class="label" for="tutorDni">DNI/NIE del Tutor</label>
+    <input class="input" id="tutorDni" type="text" formControlName="tutorDni" />
+    @if (form.controls['tutorDni'].touched && form.controls['tutorDni'].invalid)
+    {
+    <div class="error">
+      @if (form.get('tutorDni')?.errors?.['required']) {
+      <div>El DNI es obligatorio.</div>
+      } @if (form.get('tutorDni')?.errors?.['maxlength']) {
+      <div>Máximo 9 caracteres.</div>
+      } @if (form.get('tutorDni')?.errors?.['pattern']) {
+      <div>Solo letras mayúsculas y números.</div>
+      }
+    </div>
+    } @if (errorMessage) {
+    <div class="error">{{ errorMessage }}</div>
+    } @else {
+    <div class="messageRegister">{{ messageResponse }}</div>
+    }
+
+    <button class="btn action" type="submit">Registrar</button>
+  </form>
+</div>

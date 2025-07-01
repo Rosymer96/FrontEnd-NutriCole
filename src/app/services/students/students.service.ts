@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IStudent, StudentsResponse } from '../../interfaces/student';
@@ -11,6 +11,17 @@ export class StudentService {
   private httpClient = inject(HttpClient);
   private baseUrl = `${environment.API_BASE_URL}/student`;
 
+  public createStudent(
+    name: string,
+    studentDni: string,
+    classId: number,
+    tutorDni: string
+  ): Observable<{ message: string; idStudent: number }> {
+    return this.httpClient.patch<{ message: string; idStudent: number }>(
+      `${this.baseUrl}/create`,
+      { name, studentDni, classId, tutorDni }
+    );
+  }
   public getStudentsByTutorId(): Observable<StudentsResponse> {
     return this.httpClient.get<StudentsResponse>(`${this.baseUrl}/listByTutor`);
   }

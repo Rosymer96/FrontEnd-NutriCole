@@ -2,7 +2,7 @@
   <div class="body">
     <div class="student-list">
       <h2>Clase: {{ className() }}</h2>
-      <button class="btn-action">Agregar</button>
+      <button class="btn-action" (click)="openFormStudent()">Agregar</button>
       <div class="student-item">
         <table>
           <thead>
@@ -66,8 +66,11 @@
           ¿Estás seguro que deseas eliminar permanentemente a este estudiante?
         </p>
         <div class="btn-delete">
-          <button class="btn-action delete " (click)="close()">Cancelar</button>
-          <button class="btn-action delete" (click)="deleteStudent(idStudent()!)">
+          <button class="btn-action delete" (click)="close()">Cancelar</button>
+          <button
+            class="btn-action delete"
+            (click)="deleteStudent(idStudent()!)"
+          >
             Eliminar
           </button>
         </div>
@@ -75,4 +78,11 @@
     </div>
     }
   </div>
+  @if(formStudent){
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <app-crear-estudiante></app-crear-estudiante>
+    </div>
+  </div>
+  }
 </div>

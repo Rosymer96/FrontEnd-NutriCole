@@ -9,6 +9,7 @@ export interface IStudent {
   active: number;
 }
 
+
 export interface StudentsResponse {
   success: string;
   class?: string;

@@ -2,10 +2,11 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { StudentService } from '../../services/students/students.service';
 import { IStudent } from '../../interfaces/student';
 import { CommonModule } from '@angular/common';
+import { CrearEstudianteComponent } from '../crear-estudiante/crear-estudiante.component';
 
 @Component({
   selector: 'app-class',
-  imports: [CommonModule],
+  imports: [CommonModule, CrearEstudianteComponent],
   templateUrl: './class.component.html',
   styleUrl: './class.component.css',
 })
@@ -15,6 +16,7 @@ export class ClassComponent implements OnInit {
   students = signal<IStudent[] | null>(null);
   className = signal<string>('');
   idStudent = signal<number | null>(null);
+  formStudent = false;
 
   ngOnInit(): void {
     this.loadStudents();
@@ -75,5 +77,8 @@ export class ClassComponent implements OnInit {
   }
   close() {
     this.idStudent.set(null);
+  }
+  openFormStudent(){
+    this.formStudent = true;
   }
 }
