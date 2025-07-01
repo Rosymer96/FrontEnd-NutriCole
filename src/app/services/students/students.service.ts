@@ -14,10 +14,26 @@ export class StudentService {
   public getStudentsByTutorId(): Observable<StudentsResponse> {
     return this.httpClient.get<StudentsResponse>(`${this.baseUrl}/listByTutor`);
   }
-  public getStudentsByClassId(
-    classId:number
-  ): Observable<StudentsResponse> {
-    return this.httpClient
-      .get<StudentsResponse>(`${this.baseUrl}/class/${classId}`)
+  public getStudentsByClassId(classId: number): Observable<StudentsResponse> {
+    return this.httpClient.get<StudentsResponse>(
+      `${this.baseUrl}/class/${classId}`
+    );
+  }
+  public activeStudent(idStudent: number): Observable<{ message: string }> {
+    return this.httpClient.patch<{ message: string }>(
+      `${this.baseUrl}/active`,
+      { idStudent }
+    );
+  }
+  public desactiveStudent(idStudent: number): Observable<{ message: string }> {
+    return this.httpClient.patch<{ message: string }>(
+      `${this.baseUrl}/desactive`,
+      { idStudent }
+    );
+  }
+  public deleteStudent(idStudent: number): Observable<{ message: string }> {
+    return this.httpClient.delete<{ message: string }>(
+      `${this.baseUrl}/${idStudent}`
+    );
   }
 }

@@ -14,6 +14,7 @@ export class ClassComponent implements OnInit {
   classId = signal<number>(Number(localStorage.getItem('classId')) ?? 0);
   students = signal<IStudent[] | null>(null);
   className = signal<string>('');
+  idStudent = signal<number | null>(null);
 
   ngOnInit(): void {
     this.loadStudents();
@@ -23,20 +24,56 @@ export class ClassComponent implements OnInit {
       next: (res) => {
         console.log('STUDENTS:', res.students);
         this.students.set(res.students);
-        this.className.set(res.class!)
+        this.className.set(res.class!);
       },
       error(err) {
         console.error('Error loading students:', err);
       },
     });
   }
-  editStudent(idStudent:number){
-
+  editStudent(idStudent: number) {}
+  toggleActive(idStudent: number, active: number) {
+    console.log(idStudent, active);
+    if (active === 0) {
+      this.studentService.activeStudent(idStudent).subscribe({
+        next: (res) => {
+          console.log(res.message);
+          this.loadStudents();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+    } else {
+      this.studentService.desactiveStudent(idStudent).subscribe({
+        next: (res) => {
+          console.log(res.message);
+          this.loadStudents();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+    }
   }
-  toggleActive(idStudent:number){
 
+  getIdForDelete(idStudent: number) {
+    this.idStudent.set(idStudent);
   }
-  deleteStudent(idStudent:number){
-
+  deleteStudent(idStudent: number) {
+    console.log('IDPARABORRAR:', idStudent);
+    this.studentService.deleteStudent(idStudent).subscribe({
+      next: (res) => {
+        console.log(res.message);
+        this.loadStudents();
+        this.close();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+  close() {
+    this.idStudent.set(null);
   }
 }

@@ -96,3 +96,43 @@
   font-family: "Montserrat", Arial, sans-serif;
   margin-left: auto;
 }
+
+.btn-action.delete {
+  margin: 0;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(1, 36, 59, 0.75); /* semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.delete-confirmation {
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+}
+
+.btn-group {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+.btn-delete {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
