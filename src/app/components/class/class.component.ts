@@ -79,6 +79,6 @@ export class ClassComponent implements OnInit {
     this.idStudent.set(null);
   }
   openFormStudent(){
-    this.formStudent = true;
+    this.formStudent = true
   }
 }

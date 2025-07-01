@@ -17,7 +17,7 @@ export class StudentService {
     classId: number,
     tutorDni: string
   ): Observable<{ message: string; idStudent: number }> {
-    return this.httpClient.patch<{ message: string; idStudent: number }>(
+    return this.httpClient.post<{ message: string; idStudent: number }>(
       `${this.baseUrl}/create`,
       { name, studentDni, classId, tutorDni }
     );

@@ -33,8 +33,13 @@
     </div>
     }
 
-    <label class="label" for="classId">Clase</label>
-    <input class="input" id="classId" type="text" formControlName="classId" />
+    <label class="label" for="class">Clase</label>
+    <select class="input" id="class" formControlName="classId">
+      <option [ngValue]="null">Seleccione una clase</option>
+      @for(class of this.classes(); track $index){
+      <option [ngValue]="class.idClass">{{ class.name }}</option>
+      }
+    </select>
     @if (form.controls['classId'].touched && form.controls['classId'].invalid) {
     <div class="error">
       @if (form.get('classId')?.errors?.['required']) {
@@ -60,8 +65,6 @@
     </div>
     } @if (errorMessage) {
     <div class="error">{{ errorMessage }}</div>
-    } @else {
-    <div class="messageRegister">{{ messageResponse }}</div>
     }
 
     <button class="btn action" type="submit">Registrar</button>

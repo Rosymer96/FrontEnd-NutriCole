@@ -1,5 +1,6 @@
+import { ClassService } from './../../services/class/class.service';
 import { StudentService } from './../../services/students/students.service';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, output, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   FormControl,
@@ -9,18 +10,34 @@ import {
   Validators,
 } from '@angular/forms';
 import { capitalizeWords } from '../../utils/string-utils';
+import { IClass } from '../../interfaces/class';
 @Component({
   selector: 'app-crear-estudiante',
   imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './crear-estudiante.component.html',
   styleUrl: './crear-estudiante.component.css',
 })
-export class CrearEstudianteComponent {
+export class CrearEstudianteComponent implements OnInit {
   private studentService = inject(StudentService);
+  private classService = inject(ClassService);
   private router = inject(Router);
 
   errorMessage: string = '';
   messageResponse: string = '';
+  classes = signal<IClass[]>([]);
+  close = output<void>();
+
+  ngOnInit(): void {
+    this.classService.getClasses().subscribe({
+      next: (response) => {
+        this.classes.set(response.data);
+        console.log(this.classes());
+      },
+      error: (err) => {
+        console.error('Error obteniendo las clases', err);
+      },
+    });
+  }
 
   public form = new FormGroup({
     name: new FormControl<string | null>(null, [
@@ -52,7 +69,7 @@ export class CrearEstudianteComponent {
     // Normalizar datos antes de enviar
     const name = capitalizeWords(this.form.value.name!);
     const studentDni = this.form.value.studentDni!.trim().toUpperCase();
-    const classId = Number(this.form.value.classId!);
+    const classId = Number(this.form.value.classId);
     const tutorDni = this.form.value.tutorDni!.trim().toUpperCase();
 
     this.studentService
@@ -63,6 +80,7 @@ export class CrearEstudianteComponent {
           this.messageResponse = 'La cuenta ha sido registrada con éxito.';
           this.form.reset();
           this.errorMessage = '';
+          this.cancel();
         },
         error: (err) => {
           console.error('Error en register:', err);
@@ -70,5 +88,8 @@ export class CrearEstudianteComponent {
             err.error?.message || 'No se pudo completar el registro.';
         },
       });
+  }
+  cancel() {
+    this.close.emit();
   }
 }
