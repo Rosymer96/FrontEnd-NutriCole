@@ -57,10 +57,15 @@ export class AdminDashboardComponent implements OnInit {
       //this.router.navigate(['/admin/create-dish']); Ruta aun no creada
     }
   }
+  goToClassMenu(classId: number): void {
+    localStorage.setItem('classId', `${classId}`);
+    console.log('classId', classId);
+    this.router.navigate(['/assing-menu']);
+  }
   goToClass(classId: number): void {
     localStorage.setItem('classId', `${classId}`);
-    console.log('classId', classId)
-    this.router.navigate(['/assing-menu'])
+    console.log('classId', classId);
+    this.router.navigate(['/class']);
   }
   logout() {
     this.authService.logout();

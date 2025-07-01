@@ -12,28 +12,12 @@ export class StudentService {
   private baseUrl = `${environment.API_BASE_URL}/student`;
 
   public getStudentsByTutorId(): Observable<StudentsResponse> {
-    return this.httpClient.get<StudentsResponse>(
-      `${this.baseUrl}/listByTutor`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-        },
-      }
-    );
+    return this.httpClient.get<StudentsResponse>(`${this.baseUrl}/listByTutor`);
   }
   public getStudentsByClassId(
-    classId: string | number
+    classId:number
   ): Observable<StudentsResponse> {
     return this.httpClient
-      .get<StudentsResponse>(`${this.baseUrl}/listByClass/${classId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-        },
-      })
-      .pipe(catchError(this.error));
-  }
-
-  private error(err: HttpErrorResponse) {
-    return throwError(() => err);
+      .get<StudentsResponse>(`${this.baseUrl}/class/${classId}`)
   }
 }

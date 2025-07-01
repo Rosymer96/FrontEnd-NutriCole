@@ -1,0 +1,54 @@
+<div class="class-container">
+  <div class="body">
+    <div class="student-list">
+      <h2>Clase: {{ className() }}</h2>
+      <button class="btn-action">Agregar</button>
+      <div class="student-item">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Estado</th>
+              <th>Tutor</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (student of students(); track $index) {
+            <tr>
+              <td>{{ student.idStudent }}</td>
+              <td>{{ student.name }}</td>
+              <td>
+                {{ student.active === 1 ? "Activo" : "Inactivo" }}
+              </td>
+              <td>{{ student.tutor_dni }}</td>
+              <td>
+                <!-- Botón editar -->
+                <button class="btn-edit" (click)="editStudent(student.idStudent)">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+
+                <!-- Botón activar/desactivar -->
+                <button class="btn-edit" (click)="toggleActive(student.idStudent)">
+                  <i
+                    class="fa-solid"
+                    [ngClass]="
+                      student.active === 1 ? 'fa-user-slash' : 'fa-user'
+                    "
+                  ></i>
+                </button>
+
+                <!-- Botón eliminar -->
+                <button class="btn-edit" (click)="deleteStudent(student.idStudent)">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

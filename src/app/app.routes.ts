@@ -8,6 +8,7 @@ import { CalendarTutorComponent } from './components/calendar-tutor/calendar-tut
 import { TutorDashboardComponent } from './components/tutor-dashboard/tutor-dashboard.component';
 import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
+import { ClassComponent } from './components/class/class.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'user/login', pathMatch: 'full' },
@@ -28,6 +29,7 @@ export const routes: Routes = [
     data: { role: 'tutor' },
     component: CalendarTutorComponent,
   },
+  { path: 'class', component: ClassComponent },
 ];
 //Ejemplo de paths usando la verificacion de las guards:
 //  {
