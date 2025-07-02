@@ -9,13 +9,15 @@
 }
 
 .calendar-container {
+  flex: 1 1 auto;
   background: #454545;
-  border-radius: 48px;
+  padding: 10px;
+  border-radius: 24px;
   border: 0.5px solid #fff;
-  width: fit-content;
+  max-width: 980px;
   margin-top: 0;
-  padding: 0 1rem 1rem 1rem;
   height: auto;
+  padding-bottom: 50px;
 }
 .calendar-container.form {
   padding: 1rem;
@@ -243,7 +245,7 @@ select:focus,
   max-width: 250px; /* o el tamaño que necesites */
   font-size: 0.85rem; /* reduce el tamaño del texto */
   display: block;
-  height: 100vh;
+  height: auto;
 }
 .modal-overlay {
   position: fixed;

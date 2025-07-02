@@ -1,40 +1,12 @@
-/* === Sidebar and Flex Layout === */
-.sidebar {
-  width: 180px; /* adjust as needed */
-  flex-shrink: 0;
-  padding-bottom: 50px;
-}
-
-:host {
-  display: flex;
-  align-items: flex-start;
-}
-
 .calendar-container-wrapper {
   flex: 1;
 }
 
-/* Estilo para el componente que flota encima */
-.app-create-menu {
-  position: absolute; /* O 'fixed' si quieres que flote aunque hagas scroll */
-  top: 50%; /* Centrado vertical */
-  left: 50%; /* Centrado horizontal */
-  transform: translate(-50%, -50%);
-  z-index: 9999; /* Asegura que esté por encima */
-  background-color: white; /* Fondo blanco para que destaque */
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  max-width: 50vw;
-  max-height: 80vh;
-  overflow-y: auto; /* Para scroll interno si es contenido largo */
-}
 .main-content-wrapper {
   position: relative;
   margin: 0 auto;
-  padding: 0;
-  background: transparent;
+  padding: 32px 20px;
+  background: #f0f0f0;
   display: flex;
   max-width: 100vw;
 }
@@ -269,4 +241,21 @@ select:focus,
   align-items: center;
   z-index: 9999;
   padding: 1rem;
+}
+
+/* Estilo para el componente que flota encima */
+.app-create-menu {
+  position: absolute; /* O 'fixed' si quieres que flote aunque hagas scroll */
+  top: 50%; /* Centrado vertical */
+  left: 50%; /* Centrado horizontal */
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Asegura que esté por encima */
+  background-color: white; /* Fondo blanco para que destaque */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 50vw;
+  max-height: 80vh;
+  overflow-y: auto; /* Para scroll interno si es contenido largo */
 }

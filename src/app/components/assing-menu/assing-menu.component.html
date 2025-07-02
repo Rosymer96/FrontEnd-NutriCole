@@ -1,12 +1,11 @@
 <div class="main-content-wrapper">
-  <div class="form-and-title-container">
-    <div class="calendar-container">
-      <app-form-menu
-        (showMenu)="onFormSubmit($event)"
-        (monthsEmitted)="onHandleMonths($event)"
-      ></app-form-menu>
-    </div>
+  <div class="calendar-container">
+    <app-form-menu
+      (showMenu)="onFormSubmit($event)"
+      (monthsEmitted)="onHandleMonths($event)"
+    ></app-form-menu>
   </div>
+
   @if (rowCalendar) {
   <div class="calendar-display-container calendar-container">
     <div class="back-container">
