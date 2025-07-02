@@ -37,8 +37,9 @@ export class CrearEstudianteComponent implements OnInit, OnChanges {
   classes = signal<IClass[]>([]);
   close = output<void>();
   idStudent = input<number | null>(null);
+  classId = input<number | null>(null);
+  classIdforUpdate = signal<number | null>(null);
   student = signal<IStudent | null>(null);
-
   ngOnInit(): void {
     this.classService.getClasses().subscribe({
       next: (response) => {
@@ -70,10 +71,6 @@ export class CrearEstudianteComponent implements OnInit, OnChanges {
       Validators.maxLength(9),
       Validators.pattern(/^[A-Z0-9]+$/),
     ]),
-    classId: new FormControl<number | null>(null, [
-      Validators.required,
-      Validators.maxLength(2),
-    ]),
     tutorDni: new FormControl<string | null>(null, [
       Validators.required,
       Validators.maxLength(9),
@@ -90,11 +87,16 @@ export class CrearEstudianteComponent implements OnInit, OnChanges {
     // Normalizar datos antes de enviar
     const name = capitalizeWords(this.form.value.name!);
     const studentDni = this.form.value.studentDni!.trim().toUpperCase();
-    const classId = Number(this.form.value.classId);
     const tutorDni = this.form.value.tutorDni!.trim().toUpperCase();
-
+    console.log(
+      'PROBANDO DATOS A API:',
+      name,
+      studentDni,
+      tutorDni,
+      this.classId()
+    );
     this.studentService
-      .createStudent(name, studentDni, classId, tutorDni)
+      .createStudent(name, studentDni, this.classId()!, tutorDni)
       .subscribe({
         next: (res) => {
           console.log('Registro exitoso', res);
@@ -106,7 +108,7 @@ export class CrearEstudianteComponent implements OnInit, OnChanges {
         error: (err) => {
           console.error('Error en register:', err);
           this.errorMessage =
-            err.error?.message || 'No se pudo completar el registro.';
+            err.error?.error || 'No se pudo completar el registro.';
         },
       });
   }
@@ -122,9 +124,9 @@ export class CrearEstudianteComponent implements OnInit, OnChanges {
         this.form.patchValue({
           name: res.student.name,
           studentDni: res.student.student_dni,
-          classId: res.student.class_id,
           tutorDni: res.student.tutor_dni,
         });
+        this.classIdforUpdate.set(res.student.class_id);
       },
       error: (err) => {
         console.error('Error al cargar estudiante', err);
@@ -140,10 +142,16 @@ export class CrearEstudianteComponent implements OnInit, OnChanges {
     // Normalizar datos antes de enviar
     const name = capitalizeWords(this.form.value.name!);
     const studentDni = this.form.value.studentDni!.trim().toUpperCase();
-    const classId = Number(this.form.value.classId);
     const tutorDni = this.form.value.tutorDni!.trim().toUpperCase();
+    const classId = this.classIdforUpdate;
     this.studentService
-      .editStudent(this.idStudent()!, name, studentDni, classId, tutorDni)
+      .editStudent(
+        this.idStudent()!,
+        name,
+        studentDni,
+        this.classIdforUpdate()!,
+        tutorDni
+      )
       .subscribe({
         next: (res) => {
           console.log('Editado exitoso', res);

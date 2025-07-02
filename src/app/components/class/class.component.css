@@ -43,6 +43,7 @@
   text-align: left;
   border-bottom: 1px solid #e0e0e0;
   font-size: 0.9rem;
+  font-weight: bolder;
 }
 
 .student-list th {
@@ -149,5 +150,3 @@
   z-index: 9999;
   padding: 1rem;
 }
-
-
