@@ -1,0 +1,320 @@
+<div class="container mt-4 pill-modern-dark">
+  <!-- Encabezado -->
+  <div class="row mb-4">
+    <div class="col-md-8">
+      <h2 class="h3">Gestión de Platos</h2>
+    </div>
+    <div class="col-md-4 text-end">
+      <button 
+        class="btn btn-primary" 
+        (click)="mostrarFormulario = !mostrarFormulario"
+        [class.btn-secondary]="mostrarFormulario">
+        <i class="fas fa-plus me-2" *ngIf="!mostrarFormulario"></i>
+        <i class="fas fa-times me-2" *ngIf="mostrarFormulario"></i>
+        {{ mostrarFormulario ? 'Cancelar' : 'Nuevo Plato' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Mensajes -->
+  <div class="row mb-3" *ngIf="mensajeError || mensajeRespuesta">
+    <div class="col-12">
+      <div class="alert alert-danger alert-dismissible fade show" *ngIf="mensajeError">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        {{ mensajeError }}
+        <button type="button" class="btn-close" (click)="mensajeError = ''"></button>
+      </div>
+      <div class="alert alert-success alert-dismissible fade show" *ngIf="mensajeRespuesta">
+        <i class="fas fa-check-circle me-2"></i>
+        {{ mensajeRespuesta }}
+        <button type="button" class="btn-close" (click)="mensajeRespuesta = ''"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario de Creación/Edición -->
+  <div class="row mb-4" *ngIf="mostrarFormulario">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-utensils me-2"></i>
+            {{ modoEdicion ? 'Editar Plato' : 'Crear Nuevo Plato' }}
+          </h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="formulario" (ngSubmit)="guardarDish()">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label" for="nombre">
+                    <i class="fas fa-tag me-1"></i>
+                    Nombre del Plato *
+                  </label>
+                  <input 
+                    class="form-control" 
+                    [class.is-invalid]="formulario.controls['nombre'].touched && formulario.controls['nombre'].invalid"
+                    type="text" 
+                    id="nombre" 
+                    formControlName="nombre"
+                    placeholder="Ingresa el nombre del plato">
+                  <div class="invalid-feedback" *ngIf="formulario.controls['nombre'].touched && formulario.controls['nombre'].invalid">
+                    <div *ngIf="formulario.get('nombre')?.errors?.['required']">
+                      <i class="fas fa-exclamation-circle me-1"></i>
+                      Nombre del plato obligatorio.
+                    </div>
+                    <div *ngIf="formulario.get('nombre')?.errors?.['maxlength']">
+                      <i class="fas fa-exclamation-circle me-1"></i>
+                      Máximo 100 caracteres.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <label class="form-label" for="tipoDish">
+                    <i class="fas fa-list me-1"></i>
+                    Tipo de Plato *
+                  </label>
+                  <select class="form-select" 
+                          [class.is-invalid]="formulario.controls['tipoDish'].touched && formulario.controls['tipoDish'].invalid"
+                          id="tipoDish" 
+                          formControlName="tipoDish">
+                    <option value="">Seleccionar...</option>
+                    <option value="primero">Primero</option>
+                    <option value="segundo">Segundo</option>
+                    <option value="postre">Postre</option>
+                  </select>
+                  <div class="invalid-feedback" *ngIf="formulario.controls['tipoDish'].touched && formulario.controls['tipoDish'].invalid">
+                    <div *ngIf="formulario.get('tipoDish')?.errors?.['required']">
+                      <i class="fas fa-exclamation-circle me-1"></i>
+                      Tipo de plato obligatorio.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <label class="form-label" for="activo">
+                    <i class="fas fa-toggle-on me-1"></i>
+                    Estado
+                  </label>
+                  <select class="form-select" id="activo" formControlName="activo">
+                    <option [value]="1">Activo</option>
+                    <option [value]="0">Inactivo</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-3">
+                  <label class="form-label" for="descripcion">
+                    <i class="fas fa-align-left me-1"></i>
+                    Descripción *
+                  </label>
+                  <textarea 
+                    class="form-control" 
+                    [class.is-invalid]="formulario.controls['descripcion'].touched && formulario.controls['descripcion'].invalid"
+                    id="descripcion" 
+                    formControlName="descripcion" 
+                    rows="3"
+                    placeholder="Describe el plato y sus ingredientes principales...">
+                  </textarea>
+                  <div class="invalid-feedback" *ngIf="formulario.controls['descripcion'].touched && formulario.controls['descripcion'].invalid">
+                    <div *ngIf="formulario.get('descripcion')?.errors?.['required']">
+                      <i class="fas fa-exclamation-circle me-1"></i>
+                      Descripción obligatoria.
+                    </div>
+                    <div *ngIf="formulario.get('descripcion')?.errors?.['maxlength']">
+                      <i class="fas fa-exclamation-circle me-1"></i>
+                      Máximo 500 caracteres.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button class="btn btn-success" 
+                      type="submit" 
+                      [disabled]="formulario.invalid || guardando">
+                <i class="fas fa-save me-2" *ngIf="!guardando"></i>
+                <i class="fas fa-spinner fa-spin me-2" *ngIf="guardando"></i>
+                {{ guardando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Crear Plato') }}
+              </button>
+              <button class="btn btn-outline-secondary" 
+                      type="button" 
+                      (click)="cancelarEdicion()">
+                <i class="fas fa-times me-2"></i>
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtros -->
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <div class="input-group">
+    
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Buscar platos..."
+          [(ngModel)]="filtroTexto"
+          (input)="aplicarFiltros()">
+      </div>
+    </div>
+    <div class="col-md-3">
+      <select class="form-select" [(ngModel)]="filtroTipo" (change)="aplicarFiltros()">
+        <option value="">Todos los tipos</option>
+        <option value="primero">Primeros</option>
+        <option value="segundo">Segundos</option>
+        <option value="postre">Postres</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select class="form-select" [(ngModel)]="filtroEstado" (change)="aplicarFiltros()">
+        <option value="">Todos los estados</option>
+        <option value="activo">Activos</option>
+        <option value="inactivo">Inactivos</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-outline-secondary w-100" (click)="limpiarFiltros()">
+        <i class="fas fa-eraser me-1"></i>
+        Limpiar
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="text-center py-5" *ngIf="cargando">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p class="mt-2">Cargando platos...</p>
+  </div>
+
+  <!-- Lista de Platos -->
+  <div class="row" *ngIf="!cargando">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-list me-2"></i>
+            Lista de Platos ({{ dishesFiltrados.length }})
+          </h5>
+          <button class="btn btn-outline-primary btn-sm" (click)="cargarDishes()">
+            <i class="fas fa-sync-alt me-1"></i>
+            Refrescar
+          </button>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col" class="text-center">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col" class="text-center">Estado</th>
+                  <th scope="col" class="text-center">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dish of dishesFiltrados; let i = index; trackBy: trackByDishId">
+                  <td class="text-center">{{ i + 1 }}</td>
+                  <td>
+                    <strong>{{ dish.name }}</strong>
+                  </td>
+                  <td>
+                    <span class="badge" [ngClass]="{
+                      'bg-success': dish.dish_type === 'primero',
+                      'bg-warning text-dark': dish.dish_type === 'segundo',
+                      'bg-info': dish.dish_type === 'postre'
+                    }">
+                      {{ getIconoTipoPlato(dish.dish_type) }}
+                      {{ dish.dish_type | titlecase }}
+                    </span>
+                  </td>
+                  <td>
+                    <span class="text-muted" [title]="dish.description">
+                      {{ dish.description | slice:0:50 }}{{ dish.description && dish.description.length > 50 ? '...' : '' }}
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <span class="badge" [ngClass]="dish.active === 1 ? 'bg-success' : 'bg-secondary'">
+                      {{ getIconoEstado(dish.active) }}
+                      {{ dish.active === 1 ? 'Activo' : 'Inactivo' }}
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <div class="btn-group btn-group-sm" role="group">
+                      <button class="btn btn-outline-primary" 
+                              (click)="editarDish(dish)"
+                              [title]="getTooltipAccion(dish, 'editar')">
+                        {{ getIconoAccion('editar') }}
+                      </button>
+                      <button class="btn" 
+                              [ngClass]="getClaseBotonEstado(dish)"
+                              (click)="toggleEstadoDish(dish)"
+                              [title]="getTooltipAccion(dish, 'toggle')">
+                        {{ dish.active === 1 ? getIconoAccion('desactivar') : getIconoAccion('activar') }}
+                      </button>
+                      <button class="btn btn-outline-danger" 
+                              (click)="confirmarEliminar(dish)"
+                              [title]="getTooltipAccion(dish, 'eliminar')">
+                        {{ getIconoAccion('eliminar') }}
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="dishesFiltrados.length === 0">
+                  <td colspan="6" class="text-center py-4 text-muted">
+                    <i class="fas fa-search fa-2x mb-2 d-block"></i>
+                    No se encontraron platos que coincidan con los filtros.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmación - SIN BOOTSTRAP -->
+<div class="modal" [class.show]="modalVisible" [style.display]="modalVisible ? 'block' : 'none'" *ngIf="dishAEliminar">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ getIconoAccion('warning') }} Confirmar Eliminación
+        </h5>
+        <button type="button" class="btn-close" (click)="cancelarEliminacion()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de que deseas eliminar el plato <strong>"{{ dishAEliminar.name }}"</strong>?</p>
+        <p class="text-muted mb-0">Esta acción no se puede deshacer.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancelarEliminacion()">
+          {{ getIconoAccion('cancelar') }} Cancelar
+        </button>
+        <button type="button" class="btn btn-outline-danger" (click)="eliminarDish()">
+          {{ getIconoAccion('eliminar') }} Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import { roleGuard } from './guards/role.guard';
 import { ClassComponent } from './components/class/class.component';
 import { NavbarComponentComponent } from './components/navbar-component/navbar-component.component';
 import { FooterComponentComponent } from './components/footer-component/footer-component.component';
+import { MenuCreationComponent } from './components/menu-creation/menu-creation.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'user/login', pathMatch: 'full' },
@@ -33,7 +34,8 @@ export const routes: Routes = [
   },
   { path: 'class', component: ClassComponent },
   {path: 'header',component: NavbarComponentComponent},
-  {path: 'footer',component:FooterComponentComponent}
+  {path: 'footer',component:FooterComponentComponent},
+  { path: 'user/menu-creation', component: MenuCreationComponent }
 ]
 
 //Ejemplo de paths usando la verificacion de las guards:
