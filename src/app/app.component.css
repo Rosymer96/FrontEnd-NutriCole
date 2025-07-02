@@ -1,0 +1,20 @@
+.main-content {
+  display: flex;
+  padding-top: 56px; /* Mismo alto que la navbar */
+  min-height: calc(100vh - 56px);
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 601px) {
+  .main-content {
+    padding-top: 64px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .main-content {
+    padding-top: 72px;
+    min-height: calc(100vh - 72px);
+  }
+}

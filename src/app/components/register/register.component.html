@@ -1,6 +1,6 @@
 <div class="register-container">
-  <h2 class="title">Registro</h2>
-  <form [formGroup]="form" (ngSubmit)="onRegister()">
+  <h2 class="title">Registro NutriCole</h2>
+  <form [formGroup]="form" (ngSubmit)="onRegister()" class="form">
     <label class="label" for="name">Nombre</label>
     <input class="input" id="name" type="text" formControlName="name" />
     @if (form.controls['name'].touched && form.controls['name'].invalid) {
