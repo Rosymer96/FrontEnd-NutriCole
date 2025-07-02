@@ -64,10 +64,7 @@ export class RegisterComponent {
           this.messageResponse = 'La cuenta ha sido registrada con éxito.';
           this.form.reset();
           this.errorMessage = '';
-        } else {
-          alert('Registro fallido.');
         }
-        this.errorMessage = '';
       },
       error: (err) => {
         console.error('Error en register:', err);
@@ -76,7 +73,7 @@ export class RegisterComponent {
       },
     });
   }
-  goToLogin(){
+  goToLogin() {
     this.router.navigate(['/']);
   }
 }

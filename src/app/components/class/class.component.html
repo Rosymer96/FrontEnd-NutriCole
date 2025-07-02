@@ -1,0 +1,103 @@
+<div class="class-container">
+  <div class="back-container"></div>
+  <div class="body">
+    <div class="student-list">
+      <button class="btn-action back-button" (click)="goToDashboard()">
+        <i class="fa-solid fa-backward-fast icon-back"></i>Regresar
+      </button>
+      <div class="title">
+        <h2>Clase: {{ className() }}</h2>
+        <button class="btn-add" (click)="openFormStudent()"  title="Agregar estudiante">+</button>
+      </div>
+      <div class="student-item">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>DNI</th>
+              <th>Estado</th>
+              <th>Tutor</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (student of students(); track $index) {
+            <tr [ngClass]="student.active === 1 ? '' : 'desactive'">
+              <td>{{ student.idStudent }}</td>
+              <td>{{ student.name }}</td>
+              <td>{{ student.student_dni }}</td>
+              <td>
+                {{ student.active === 1 ? "Activo" : "Inactivo" }}
+              </td>
+              <td>{{ student.tutor_dni }}</td>
+              <td class="btn-group">
+                <!-- Botón editar -->
+                <button
+                  title="Editar estudiante"
+                  class="btn-edit"
+                  (click)="getIdForEdit(student.idStudent)"
+                >
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+
+                <!-- Botón activar/desactivar -->
+                <button
+                  title="Desactivar estudiante"
+                  class="btn-edit"
+                  (click)="toggleActive(student.idStudent, student.active)"
+                >
+                  <i
+                    class="fa-solid"
+                    [ngClass]="
+                      student.active === 1 ? 'fa-user-slash' : 'fa-user'
+                    "
+                  ></i>
+                </button>
+
+                <!-- Botón eliminar -->
+                <button
+                  title="Eliminar estudiante"
+                  class="btn-edit"
+                  (click)="getId(student.idStudent)"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    @if(deleteStudentModal){
+    <div class="modal-overlay">
+      <div class="delete-confirmation">
+        <p>
+          ¿Estás seguro que deseas eliminar permanentemente a este estudiante?
+        </p>
+        <div class="btn-delete">
+          <button class="btn-action delete" (click)="close()">Cancelar</button>
+          <button
+            class="btn-action delete"
+            (click)="deleteStudent(idStudent()!)"
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  @if(formStudent){
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <app-crear-estudiante
+        [idStudent]="idStudent()"
+        (close)="onCloseForm()"
+        [classId]="classId()"
+      ></app-crear-estudiante>
+    </div>
+  </div>
+  }
+</div>

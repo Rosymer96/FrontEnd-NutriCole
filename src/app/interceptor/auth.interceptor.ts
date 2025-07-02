@@ -12,24 +12,22 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const publicRoutes = ['/user/login', '/user/register'];
 
   const isPublic = publicRoutes.some((url) => req.url.includes(url));
-
-  if (authToken) {
-    const authReq = req.clone({
+  let authReq = req;
+  if (authToken && !isPublic) {
+    authReq = req.clone({
       setHeaders: {
         Authorization: `Bearer ${authToken}`,
       },
     });
-    return next(authReq).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 401 || error.status === 403) {
-          // Borra token y redirige al login
-          authService.logout?.(); // si tienes un método para limpiar tokens
-          router.navigate(['/user/login']);
-        }
-        return throwError(() => error);
-      })
-    );
   }
-
-  return next(req);
+  return next(authReq).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 401 || error.status === 403) {
+        // Borra token y redirige al login
+        authService.logout?.(); // si tienes un método para limpiar tokens
+        router.navigate(['/user/login']);
+      }
+      return throwError(() => error);
+    })
+  );
 };

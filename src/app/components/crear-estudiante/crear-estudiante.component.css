@@ -1,0 +1,97 @@
+.register-container {
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  width: fit-content;
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+.register-container.form-group {
+  padding: 1rem 4rem;
+}
+.register-container .title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.label {
+  display: block;
+  margin: 0.8rem 0 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.form-group {
+  padding: 0 1rem;
+}
+.input {
+  width: 350px;
+  padding: 0.75rem 0.5rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  font-family: "Montserrat", Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.input.class {
+  width: 365px;
+}
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 10px #1687c8;
+}
+
+.error {
+  color: #ffcccc;
+  background-color: rgba(255, 0, 0, 0.1);
+  border-left: 3px solid #ff4d4d;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  border-radius: 4px;
+}
+
+.messageRegister {
+  color: #d4ffd4;
+  background-color: rgba(0, 255, 0, 0.1);
+  border-left: 3px solid #00cc66;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+}
+
+/* Botón reutiliza tus estilos existentes */
+.btn {
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff;
+  font-weight: 700;
+  border: 0.5px solid #fff;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+  transition: background 0.2s;
+  width: 200px;
+  align-self: flex-end;
+  font-family: "Montserrat", Arial, sans-serif;
+}
+
+.btn.action {
+  display: flex;
+  border-radius: 999px;
+  width: 180px;
+  margin-top: 2rem;
+  margin-left: auto;
+}
+.btn.close {
+  display: flex;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  margin-left: auto;
+  border: none;
+  background-color: none;
+}

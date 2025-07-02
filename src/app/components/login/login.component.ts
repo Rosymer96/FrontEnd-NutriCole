@@ -38,17 +38,17 @@ export class LoginComponent {
     // Normalizar datos antes de enviar
     const email = this.form.value.email?.trim().toLowerCase() || '';
     const password = this.form.value.password || '';
-
+    console.log('email', email, 'pasword:', password);
     //Si los datos son correctos va al profile.
     this.authService.login(email, password).subscribe({
       next: (user) => {
         if (user) {
           const rol = user.rol;
           if (rol === 'administrador') {
-          this.router.navigate(['/dashboard-admin']);
+            this.router.navigate(['/dashboard-admin']);
           } else if (rol === 'tutor') {
-          this.router.navigate(['/dashboard-tutor']);
-          }  else {
+            this.router.navigate(['/dashboard-tutor']);
+          } else {
             this.router.navigate(['/']);
           }
         }
