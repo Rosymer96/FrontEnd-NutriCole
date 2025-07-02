@@ -14,10 +14,10 @@ import { obtenerHeaders } from '../../utils/utils';
   providedIn: 'root',
 })
 export class DishService {
-  private http = inject(HttpClient);
+  private httpClient = inject(HttpClient);
 
   // CAMBIAR POR TU URL BASE DEL BACKEND
-  private readonly urlBase = `${environment.API_BASE_URL}/dish`;
+  private readonly API_URL = `${environment.API_BASE_URL}/dish`;
 
   // BehaviorSubject para mantener el estado de los platos
   private dishesSubject = new BehaviorSubject<Dish[]>([]);
@@ -42,8 +42,8 @@ export class DishService {
    * POST /api/dish/create
    */
   crearDish(dish: CrearDishDto): Observable<any> {
-    return this.http
-      .post(`${this.urlBase}/create`, dish, {
+    return this.httpClient
+      .post(`${this.API_URL}/create`, dish, {
         headers: obtenerHeaders(),
       })
       .pipe(
@@ -69,8 +69,8 @@ export class DishService {
    * GET /api/dish/list
    */
   obtenerTodos(): Observable<Dish[]> {
-    return this.http
-      .get<any>(`${this.urlBase}/list`, {
+    return this.httpClient
+      .get<any>(`${this.API_URL}/list`, {
         headers: obtenerHeaders(),
       })
       .pipe(
@@ -130,8 +130,8 @@ export class DishService {
    * GET /api/dish/listByType/:dishType
    */
   obtenerPorTipo(tipoDish: string): Observable<Dish[]> {
-    return this.http
-      .get<any>(`${this.urlBase}/listByType/${tipoDish}`, {
+    return this.httpClient
+      .get<any>(`${this.API_URL}/listByType/${tipoDish}`, {
         headers: obtenerHeaders(),
       })
       .pipe(
@@ -190,8 +190,8 @@ export class DishService {
    * GET /api/dish/:id
    */
   obtenerPorId(id: number): Observable<Dish> {
-    return this.http
-      .get<any>(`${this.urlBase}/${id}`, {
+    return this.httpClient
+      .get<any>(`${this.API_URL}/${id}`, {
         headers: obtenerHeaders(),
       })
       .pipe(
@@ -250,8 +250,8 @@ export class DishService {
       // No enviar 'active' en el update normal, solo en toggle
     };
 
-    return this.http
-      .put(`${this.urlBase}/${id}`, dishCompleto, {
+    return this.httpClient
+      .put(`${this.API_URL}/${id}`, dishCompleto, {
         headers: obtenerHeaders(),
       })
       .pipe(
@@ -277,8 +277,8 @@ export class DishService {
    * DELETE /api/dish/:id
    */
   eliminarDish(id: number): Observable<any> {
-    return this.http
-      .delete(`${this.urlBase}/${id}`, {
+    return this.httpClient
+      .delete(`${this.API_URL}/${id}`, {
         headers: obtenerHeaders(),
       })
       .pipe(
@@ -304,9 +304,9 @@ export class DishService {
    * PATCH /api/dish/softdelete/:id
    */
   desactivarDish(id: number): Observable<any> {
-    return this.http
+    return this.httpClient
       .patch(
-        `${this.urlBase}/softdelete/${id}`,
+        `${this.API_URL}/softdelete/${id}`,
         {},
         {
           headers: obtenerHeaders(),

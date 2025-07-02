@@ -20,3 +20,4 @@ export interface ActualizarDishDto {
   description?: string;
   active?: number;
 }
+
