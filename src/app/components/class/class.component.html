@@ -1,8 +1,14 @@
 <div class="class-container">
+  <div class="back-container"></div>
   <div class="body">
     <div class="student-list">
-      <h2>Clase: {{ className() }}</h2>
-      <button class="btn-action" (click)="openFormStudent()">Agregar</button>
+      <button class="btn-action back-button" (click)="goToDashboard()">
+        <i class="fa-solid fa-backward-fast icon-back"></i>Regresar
+      </button>
+      <div class="title">
+        <h2>Clase: {{ className() }}</h2>
+        <button class="btn-add" (click)="openFormStudent()"  title="Agregar estudiante">+</button>
+      </div>
       <div class="student-item">
         <table>
           <thead>
@@ -17,7 +23,7 @@
           </thead>
           <tbody>
             @for (student of students(); track $index) {
-            <tr>
+            <tr [ngClass]="student.active === 1 ? '' : 'desactive'">
               <td>{{ student.idStudent }}</td>
               <td>{{ student.name }}</td>
               <td>{{ student.student_dni }}</td>
@@ -28,6 +34,7 @@
               <td class="btn-group">
                 <!-- Botón editar -->
                 <button
+                  title="Editar estudiante"
                   class="btn-edit"
                   (click)="getIdForEdit(student.idStudent)"
                 >
@@ -36,6 +43,7 @@
 
                 <!-- Botón activar/desactivar -->
                 <button
+                  title="Desactivar estudiante"
                   class="btn-edit"
                   (click)="toggleActive(student.idStudent, student.active)"
                 >
@@ -48,7 +56,11 @@
                 </button>
 
                 <!-- Botón eliminar -->
-                <button class="btn-edit" (click)="getId(student.idStudent)">
+                <button
+                  title="Eliminar estudiante"
+                  class="btn-edit"
+                  (click)="getId(student.idStudent)"
+                >
                   <i class="fa-solid fa-trash"></i>
                 </button>
               </td>

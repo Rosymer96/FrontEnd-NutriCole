@@ -4,13 +4,40 @@
   background: #f0f0f0;
   min-height: 100vh;
   border-radius: 48px;
-  padding: 32px 20px;
-  align-items: center;
+}
+.back-container {
+  display: flex;
+  justify-content: end;
+  margin-right: 10rem;
+}
+
+.icon-back {
+  padding: 1rem;
+}
+.title {
+  display: flex;
+  justify-content: center;
+}
+.btn-add {
+  display: flex;
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff;
+  border: 0.5px solid #fff;
+  border-radius: 14px;
+  font-size: 2.5rem;
+  padding: 0 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+  transition: background 0.2s;
+  align-self: flex-end;
+  font-family: "Montserrat", Arial, sans-serif;
+  margin-left: auto;
 }
 .body {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 0 2rem;
+  align-items: center;
 }
 .body h2 {
   color: #333;
@@ -43,11 +70,10 @@
   text-align: left;
   border-bottom: 1px solid #e0e0e0;
   font-size: 0.9rem;
-  font-weight: bolder;
 }
 
-.student-list th {
-  font-weight: 700;
+.student-list td {
+  font-weight: bold;
 }
 
 .student-list tr:last-child td {
@@ -88,7 +114,7 @@
   font-weight: 700;
   border: 0.5px solid #fff;
   border-radius: 14px;
-  font-size: 0.8rem;
+  font-size: 1rem;
   padding: 0.8rem 1.5rem;
   cursor: pointer;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
@@ -96,6 +122,20 @@
   align-self: flex-end;
   font-family: "Montserrat", Arial, sans-serif;
   margin-left: auto;
+}
+.back-button {
+  display: flex;
+  background: none;
+  border: none;
+  color: rgb(3, 3, 3);
+  font-size: 1rem;
+  font-weight: 700;
+  width: fit-content;
+  margin-top: 12px;
+  display: block;
+  box-shadow: none;
+  padding: 0 1rem;
+  cursor: pointer;
 }
 
 .btn-action.delete {
@@ -149,4 +189,8 @@
   align-items: center;
   z-index: 9999;
   padding: 1rem;
+}
+
+.desactive {
+  color: gray;
 }

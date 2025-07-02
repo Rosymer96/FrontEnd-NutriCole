@@ -3,6 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { StudentService } from '../../services/students/students.service';
 import { CommonModule } from '@angular/common';
 import { CrearEstudianteComponent } from '../crear-estudiante/crear-estudiante.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-class',
@@ -12,6 +13,9 @@ import { CrearEstudianteComponent } from '../crear-estudiante/crear-estudiante.c
 })
 export class ClassComponent implements OnInit {
   private studentService = inject(StudentService);
+  private router = inject(Router);
+
+
   classId = signal<number>(Number(localStorage.getItem('classId')) ?? 0);
   students = signal<IStudent[] | null>(null);
   className = signal<string>('');
@@ -93,5 +97,8 @@ export class ClassComponent implements OnInit {
     this.formStudent = false;
     this.loadStudents();
     this.idStudent.set(null);
+  }
+  goToDashboard() {
+    this.router.navigate(['/dashboard-admin']);
   }
 }
