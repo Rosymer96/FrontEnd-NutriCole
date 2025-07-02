@@ -24,6 +24,7 @@
       id="studentDNI"
       type="studentDNI"
       formControlName="studentDni"
+      maxlength="9"
     />
     @if (form.controls['studentDni'].touched &&
     form.controls['studentDni'].invalid) {
@@ -39,7 +40,13 @@
     }
 
     <label class="label" for="tutorDni">DNI/NIE del Tutor</label>
-    <input class="input" id="tutorDni" type="text" formControlName="tutorDni" />
+    <input
+      class="input"
+      id="tutorDni"
+      type="text"
+      formControlName="tutorDni"
+      maxlength="9"
+    />
     @if (form.controls['tutorDni'].touched && form.controls['tutorDni'].invalid)
     {
     <div class="error">
