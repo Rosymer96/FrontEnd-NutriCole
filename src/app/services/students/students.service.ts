@@ -35,7 +35,7 @@ export class StudentService {
     );
   }
   public getStudentsByTutorId(): Observable<StudentsResponse> {
-    return this.httpClient.get<StudentsResponse>(`${this.baseUrl}/listByTutor`);
+    return this.httpClient.get<StudentsResponse>(`${this.baseUrl}/by/tutor`);
   }
   public getStudentsByClassId(classId: number): Observable<StudentsResponse> {
     return this.httpClient.get<StudentsResponse>(
