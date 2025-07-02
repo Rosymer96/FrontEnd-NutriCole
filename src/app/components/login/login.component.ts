@@ -42,6 +42,7 @@ export class LoginComponent {
     //Si los datos son correctos va al profile.
     this.authService.login(email, password).subscribe({
       next: (user) => {
+        console.log('PROBANDO LOGIN', user);
         if (user) {
           const rol = user.rol;
           if (rol === 'administrador') {

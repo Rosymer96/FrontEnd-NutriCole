@@ -24,6 +24,7 @@ export class TutorDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getProfile().subscribe({
       next: (profile) => {
+        console.log('PROFILE PORBANDO', profile);
         this.user.set(profile);
         this.isTutor = profile.rol === 'tutor';
       },
