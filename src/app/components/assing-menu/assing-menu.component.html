@@ -64,12 +64,14 @@
   }
 </div>
 @if (selectedDate()) {
-<app-create-menu
-  class="app-create-menu"
-  [date]="selectedDate()"
-  [classId]="classId()"
-  [existingMenu]="menuToEdit()"
-  (menuCreated)="onMenuSuccessfullyCreated()"
-  (close)="selectedDate.set(''); menuToEdit.set(null)"
-></app-create-menu>
+<div class="modal-overlay">
+  <app-create-menu
+    class="app-create-menu"
+    [date]="selectedDate()"
+    [classId]="classId()"
+    [existingMenu]="menuToEdit()"
+    (menuCreated)="onMenuSuccessfullyCreated()"
+    (close)="selectedDate.set(''); menuToEdit.set(null)"
+  ></app-create-menu>
+</div>
 }

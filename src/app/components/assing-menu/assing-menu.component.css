@@ -142,11 +142,11 @@
 }
 
 /* === En versión simplificada dentro de la tabla === */
-.back-container{
+.back-container {
   display: flex;
   justify-content: end;
 }
- .back-button {
+.back-button {
   background: none;
   border: none;
   color: white;
@@ -164,7 +164,7 @@
   padding: 0 1rem;
   cursor: pointer;
 }
-.icon-back{
+.icon-back {
   padding: 1rem;
 }
 
@@ -256,4 +256,17 @@ select:focus,
 /* Sidebar fixed width */
 .sidebar {
   flex: 0 0 250px;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(1, 36, 59, 0.75); /* fondo oscuro con opacidad */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 1rem;
 }

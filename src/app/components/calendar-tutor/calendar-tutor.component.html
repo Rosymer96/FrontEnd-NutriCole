@@ -62,10 +62,13 @@
   }
 </div>
 @if(menuVisible){
-
-<app-description-menu
-  [menuofDay]="menuOfDay()"
-  (closeMenu)="menuVisible = false"
-  class="description-menu-wrapper"
-></app-description-menu>
+<div class="modal-overlay">
+  <div class="modal-content">
+    <app-description-menu
+      [menuofDay]="menuOfDay()"
+      (closeMenu)="menuVisible = false"
+      class="description-menu-wrapper"
+    ></app-description-menu>
+  </div>
+</div>
 }
