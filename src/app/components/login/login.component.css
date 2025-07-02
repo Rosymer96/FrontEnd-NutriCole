@@ -1,17 +1,12 @@
-body {
-  background: #454545;
-  font-family: 'Montserrat', Arial, sans-serif;
-  margin: 0;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
+
 
 .login-container {
+  width: 100%;
   max-width: 480px;
-  margin: 3.5rem auto;
-  padding: 3rem 2.5rem 2.5rem 2.5rem;
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
   background: #454545;
-  border-radius: 48px;
+  border-radius: 32px;
   border: 0.5px solid #fff;
   display: flex;
   flex-direction: column;
@@ -20,36 +15,46 @@ body {
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 2.2rem;
+  margin-bottom: 2rem;
   text-align: center;
   letter-spacing: -0.5px;
-  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-input {
+  width: 100%;
+  max-width: 400px;
 }
 
 .label {
   display: block;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.4rem;
-  margin-left: 0.8rem;
+  margin-left: 0.6rem;
   letter-spacing: 0.01em;
-  font-family: 'Montserrat', Arial, sans-serif;
 }
 
 .input {
   width: 100%;
-  padding: 1.1rem 1.5rem;
+  padding: 1rem 1.4rem;
   margin-bottom: 1.2rem;
   border: 2px solid #c0c0c0;
   border-radius: 999px;
   background: #555;
   color: #fff;
-  font-size: 1.08rem;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1rem;
   box-sizing: border-box;
   outline: none;
   transition: border 0.2s;
@@ -59,7 +64,6 @@ body {
   color: #e3e3e3;
   opacity: 1;
   font-weight: 400;
-  font-family: 'Montserrat', Arial, sans-serif;
 }
 
 .input:focus {
@@ -68,42 +72,40 @@ body {
 
 .error {
   color: #ff7675;
-  font-size: 1.12rem;
-  margin-bottom: 1.1rem;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
   text-align: left;
-  font-family: 'Montserrat', Arial, sans-serif;
-  margin-left: 0.8rem;
+  margin-left: 0.6rem;
   font-weight: 500;
 }
 
 .button {
   width: 100%;
-  padding: 1.15rem 0;
+  max-width: 400px;
+  padding: 1rem 0;
   background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
   color: #fff;
-  font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: bold;
   border: 0.5px solid #fff;
   border-radius: 999px;
-  margin: 1.1rem 0 0.2rem 0;
+  margin-top: 1rem;
   cursor: pointer;
-  box-shadow: 0 4px 16px 0 rgba(10,20,40,0.14);
+  box-shadow: 0 4px 16px 0 rgba(10, 20, 40, 0.14);
   transition: background 0.2s, box-shadow 0.2s;
   letter-spacing: 0.01em;
 }
 
 .button:hover {
   background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
-  box-shadow: 0 8px 24px 0 rgba(22,135,200,0.08);
+  box-shadow: 0 8px 24px 0 rgba(22, 135, 200, 0.08);
 }
 
 .register-link {
   text-align: center;
-  margin-top: 1.3rem;
-  font-size: 1.08rem;
+  margin-top: 1.2rem;
+  font-size: 1rem;
   color: #fff;
-  font-family: 'Montserrat', Arial, sans-serif;
 }
 
 .register-link a {
@@ -112,7 +114,6 @@ body {
   font-weight: 500;
   opacity: 0.9;
   transition: opacity 0.15s;
-  font-family: 'Montserrat', Arial, sans-serif;
 }
 
 .register-link a:hover {
@@ -123,4 +124,67 @@ body {
   -webkit-box-shadow: 0 0 0 100px #555 inset !important;
   -webkit-text-fill-color: #fff !important;
   border: 2px solid #c0c0c0;
+}
+
+/* ===================== */
+/* TABLET: 601px - 1024px */
+/* ===================== */
+@media (min-width: 601px) {
+  .title {
+    font-size: 2.3rem;
+  }
+
+  .label {
+    font-size: 1.1rem;
+  }
+
+  .input {
+    font-size: 1.1rem;
+  }
+
+  .error {
+    font-size: 1.05rem;
+  }
+
+  .button {
+    font-size: 1.2rem;
+  }
+
+  .register-link {
+    font-size: 1.05rem;
+  }
+}
+
+/* ===================== */
+/* DESKTOP: 1025px+       */
+/* ===================== */
+@media (min-width: 1025px) {
+  .login-container {
+    padding: 3rem 2.5rem;
+    border-radius: 48px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .label {
+    font-size: 1.2rem;
+  }
+
+  .input {
+    font-size: 1.15rem;
+  }
+
+  .error {
+    font-size: 1.12rem;
+  }
+
+  .button {
+    font-size: 1.25rem;
+  }
+
+  .register-link {
+    font-size: 1.08rem;
+  }
 }
