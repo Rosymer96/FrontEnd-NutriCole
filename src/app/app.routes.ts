@@ -9,6 +9,8 @@ import { TutorDashboardComponent } from './components/tutor-dashboard/tutor-dash
 import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
 import { ClassComponent } from './components/class/class.component';
+import { NavbarComponentComponent } from './components/navbar-component/navbar-component.component';
+import { FooterComponentComponent } from './components/footer-component/footer-component.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'user/login', pathMatch: 'full' },
@@ -30,7 +32,10 @@ export const routes: Routes = [
     component: CalendarTutorComponent,
   },
   { path: 'class', component: ClassComponent },
-];
+  {path: 'header',component: NavbarComponentComponent},
+  {path: 'footer',component:FooterComponentComponent}
+]
+
 //Ejemplo de paths usando la verificacion de las guards:
 //  {
 //     path: 'admin',

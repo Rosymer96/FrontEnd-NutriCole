@@ -1,0 +1,12 @@
+<nav class="navbar">
+  <a class="logo" routerLink="/">NutriCole</a>
+  <div class="spacer"></div>
+
+  <button class="icon-btn" (click)="goTo('/login')" aria-label="Login">
+    <span class="btn-label"><i class="fa-solid fa-circle-user"></i></span>
+  </button>
+
+  <button class="icon-btn" (click)="logout()" aria-label="Logout">
+    <span class="material-icons"><i class="fa-solid fa-right-from-bracket"></i></span>
+  </button>
+</nav>
