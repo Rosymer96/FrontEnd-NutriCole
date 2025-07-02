@@ -763,3 +763,201 @@ html {
 .titlecase {
   text-transform: capitalize;
 }
+.pill-modern-dark body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: #454545;
+  color: #fff;
+}
+
+.pill-modern-dark .h3, .pill-modern-dark h2, .pill-modern-dark h5, .pill-modern-dark .card-title, .pill-modern-dark .modal-title {
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.pill-modern-dark .btn, .pill-modern-dark button {
+  font-family: 'Montserrat', Arial, sans-serif;
+  border-radius: 999px !important;
+  font-weight: 600;
+  font-size: 1.07rem;
+  padding: 0.7rem 2.2rem;
+  border: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.pill-modern-dark .btn-primary {
+  background: linear-gradient(90deg, #01243b 0%, #1687c8 100%);
+  color: #fff !important;
+  border: 0.5px solid #fff;
+}
+.pill-modern-dark .btn-primary:hover {
+  background: linear-gradient(90deg, #065184 0%, #1ac3fd 100%);
+}
+
+.pill-modern-dark .btn-outline-secondary, .pill-modern-dark .btn-outline-primary {
+  border: 2px solid #26c6f9 !important;
+  color: #26c6f9 !important;
+  background: none !important;
+}
+.pill-modern-dark .btn-outline-secondary:hover, .pill-modern-dark .btn-outline-primary:hover {
+  background: #26c6f9 !important;
+  color: #fff !important;
+}
+
+.pill-modern-dark .btn-outline-danger {
+  border: 2px solid #e9465b !important;
+  color: #e9465b !important;
+  background: none !important;
+}
+.pill-modern-dark .btn-outline-danger:hover {
+  background: #e9465b !important;
+  color: #fff !important;
+}
+
+.pill-modern-dark .card {
+  background: #393939 !important;
+  border-radius: 26px !important;
+  border: 2px solid #fff !important;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.19) !important;
+  color: #fff;
+}
+
+.pill-modern-dark .card-header {
+  background: #444 !important;
+  border-radius: 26px 26px 0 0 !important;
+  border-bottom: 1.5px solid #fff !important;
+  color: #fff;
+}
+
+.pill-modern-dark .card-body {
+  padding: 1.4rem 1.8rem !important;
+}
+
+.pill-modern-dark .table {
+  background: #23272b !important;
+  color: #fff !important;
+  border-radius: 14px !important;
+  overflow: hidden;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.pill-modern-dark .table th, .pill-modern-dark .table td {
+  border-top: 1.5px solid #555 !important;
+  color: #fff !important;
+  padding: 0.95rem 0.6rem !important;
+}
+
+.pill-modern-dark .table th {
+  background: #282c34 !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+}
+
+.pill-modern-dark .table-hover tbody tr:hover {
+  background: #01243b22 !important;
+  color: #fff !important;
+}
+
+.pill-modern-dark .form-label, .pill-modern-dark label {
+  color: #fff !important;
+  font-family: 'Montserrat', Arial, sans-serif !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.7rem;
+}
+
+.pill-modern-dark .form-control, .pill-modern-dark .form-select {
+  font-family: 'Montserrat', Arial, sans-serif !important;
+  background: #23272b !important;
+  color: #fff !important;
+  border-radius: 15px !important;
+  border: 1.8px solid #b6e0f7 !important;
+  padding: 0.82rem 1.1rem !important;
+  margin-bottom: 0.3rem !important;
+  font-size: 1rem !important;
+  transition: border 0.2s, background 0.15s;
+}
+
+.pill-modern-dark .form-control:focus, .pill-modern-dark .form-select:focus {
+  background: #202328 !important;
+  border-color: #26c6f9 !important;
+  color: #fff !important;
+  outline: none !important;
+  box-shadow: 0 0 0 0.13rem #26c6f944 !important;
+}
+.pill-modern-dark .form-control::placeholder {
+  color: #c3c3c3 !important;
+  opacity: 1;
+}
+
+.pill-modern-dark .is-invalid {
+  border-color: #e9465b !important;
+}
+.pill-modern-dark .is-invalid:focus {
+  border-color: #e9465b !important;
+  box-shadow: 0 0 0 0.14rem #e9465b44 !important;
+}
+.pill-modern-dark .invalid-feedback {
+  color: #e9465b !important;
+  font-size: 0.97rem;
+}
+
+.pill-modern-dark .input-group {
+  border-radius: 15px !important;
+  overflow: hidden !important;
+}
+
+.pill-modern-dark .badge {
+  font-family: 'Montserrat', Arial, sans-serif !important;
+  font-size: 1rem !important;
+  border-radius: 12px !important;
+  padding: 0.37em 0.98em !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px;
+}
+.pill-modern-dark .bg-success {
+  background-color: #43e486 !important;
+  color: #183726 !important;
+}
+.pill-modern-dark .bg-warning {
+  background-color: #f6c94a !important;
+  color: #7d6313 !important;
+}
+.pill-modern-dark .bg-info {
+  background-color: #26c6f9 !important;
+  color: #01243b !important;
+}
+.pill-modern-dark .bg-secondary {
+  background-color: #8f8f8f !important;
+  color: #fff !important;
+}
+.pill-modern-dark .text-muted {
+  color: #b6e0f7 !important;
+}
+
+.pill-modern-dark .modal {
+  background: rgba(30,30,30,0.55) !important;
+}
+.pill-modern-dark .modal-content {
+  background: #393939 !important;
+  border-radius: 28px !important;
+  border: 2px solid #fff !important;
+  color: #fff !important;
+  box-shadow: 0 10px 56px 0 rgba(0,0,0,0.26) !important;
+}
+.pill-modern-dark .modal-header, .pill-modern-dark .modal-footer {
+  background: #2e2e2e !important;
+  border-radius: 28px 28px 0 0 !important;
+  color: #fff !important;
+  border-bottom: 1.5px solid #fff !important;
+}
+
+@media (max-width: 800px) {
+  .pill-modern-dark .container { padding-left: 0.7rem; padding-right: 0.7rem; }
+  .pill-modern-dark .modal-content { padding: 1.1rem 0.6rem; }
+  .pill-modern-dark .card-body, .pill-modern-dark .modal-body { padding: 1.2rem 0.6rem; }
+}
+@media (max-width: 600px) {
+  .pill-modern-dark .card, .pill-modern-dark .modal-content { border-radius: 15px !important; }
+  .pill-modern-dark .card-header, .pill-modern-dark .modal-header, .pill-modern-dark .modal-footer { border-radius: 15px 15px 0 0 !important; }
+}
