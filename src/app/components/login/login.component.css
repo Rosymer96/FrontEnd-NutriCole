@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 480px;
   margin: 1rem auto;
-  padding: 2rem 1.5rem;
+  padding: 2rem 2.5rem;
   background: #454545;
   border-radius: 32px;
   border: 0.5px solid #fff;
@@ -13,7 +13,7 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #fff;
   margin-bottom: 2rem;
