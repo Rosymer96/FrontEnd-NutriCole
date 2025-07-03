@@ -83,7 +83,9 @@ export class MenuCreationComponent implements OnInit {
       },
     });
   }
-
+  goToDashboard() {
+    this.router.navigate(['/dashboard-admin']);
+  }
   // Métodos para crear/editar
   guardarDish() {
     console.log('🧪 Ejecutando guardarDish()');
@@ -100,7 +102,7 @@ export class MenuCreationComponent implements OnInit {
       name: capitalizeWords(this.formulario.value.nombre!.trim()),
       dishType: this.formulario.value.tipoDish!,
       description: this.formulario.value.descripcion?.trim() || '',
-      active: this.formulario.value.activo
+      active: this.formulario.value.activo,
     };
 
     if (this.modoEdicion && this.dishEditando) {
@@ -117,7 +119,7 @@ export class MenuCreationComponent implements OnInit {
         name: datosDish.name,
         dishType: datosDish.dishType,
         description: datosDish.description,
-        active: datosDish.active
+        active: datosDish.active,
       };
       console.log('DATOS COMPLETOS: ', datosCompletos);
       this.dishService.actualizarDish(dishId, datosCompletos).subscribe({

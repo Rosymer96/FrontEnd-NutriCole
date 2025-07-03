@@ -4,7 +4,10 @@
     <h2>Estudiantes:</h2>
     <div class="student-container">
       @if (students().length > 0) { @for(student of students();track $index) {
-      <div class="student-list">
+      <div
+        class="student-list"
+        [ngClass]="students().length === 1 ? 'only' : ''"
+      >
         <div class="student-item">
           <p class="student-name">{{ student.name }}</p>
           <p class="class-name">{{ student.class_name }}</p>

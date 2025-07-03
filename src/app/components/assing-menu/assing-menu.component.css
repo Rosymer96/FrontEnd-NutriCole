@@ -251,11 +251,12 @@ select:focus,
   transform: translate(-50%, -50%);
   z-index: 9999; /* Asegura que esté por encima */
   background-color: white; /* Fondo blanco para que destaque */
-  padding: 20px;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
   width: 100%;
   max-width: 50vw;
   max-height: 80vh;
+  padding-top: 20px;
+  padding-right: 20px;
   overflow-y: auto; /* Para scroll interno si es contenido largo */
 }

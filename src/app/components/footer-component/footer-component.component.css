@@ -1,9 +1,12 @@
+.footer-container {
+  width: 100vw;
+}
 .footer {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 48px;
-  width: 100vw;
+  width: 100%;
   background-color: #f5f5f5;
   color: #555;
   font-size: 0.875rem;

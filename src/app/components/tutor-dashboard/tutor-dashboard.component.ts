@@ -4,10 +4,11 @@ import { IStudent } from '../../interfaces/student';
 import { Router, RouterOutlet } from '@angular/router';
 import { StudentService } from '../../services/students/students.service';
 import { IUser } from '../../interfaces/user';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-tutor-dashboard',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './tutor-dashboard.component.html',
   styleUrl: './tutor-dashboard.component.css',
 })

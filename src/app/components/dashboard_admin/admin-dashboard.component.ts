@@ -53,9 +53,7 @@ export class AdminDashboardComponent implements OnInit {
   });
 
   goToCreateDish() {
-    if (this.isAdmin) {
-      //this.router.navigate(['/admin/create-dish']); Ruta aun no creada
-    }
+    this.router.navigate(['/admin/dishes']);
   }
   goToClassMenu(classId: number): void {
     localStorage.setItem('classId', `${classId}`);

@@ -2,6 +2,7 @@
 .component-container {
   display: flex;
   flex-direction: column;
+  width: fit-content;
 }
 .top-bar {
   display: flex;
@@ -14,7 +15,7 @@
 /*  Contenedor principal  */
 .form-container {
   display: flex;
-  width: 40%;
+  width: 35%;
   margin: 30px auto;
   padding: 20px;
   background-color: #ffffff;
@@ -22,12 +23,15 @@
   gap: 1rem;
   align-items: flex-start;
 }
-
+.menu-container{
+  display: flex;
+  gap:2rem
+}
 /*  Cada grupo de selección (Primero, Segundo, Postre)  */
 .form-group {
   display: flex;
   flex-direction: column;
-  min-width: 250px;
+  width: 250px;
 }
 
 .form-group label {
@@ -39,6 +43,7 @@
 
 .form-group select {
   padding: 12px 15px;
+  width: 200px;
   border: 1px solid #c0c0c0;
   border-radius: 6px;
   font-size: 0.9em;

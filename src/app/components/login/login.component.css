@@ -1,7 +1,7 @@
 .login-container {
   width: 100%;
   max-width: 480px;
-  margin: 2rem auto;
+  margin: 1rem auto;
   padding: 2rem 1.5rem;
   background: #454545;
   border-radius: 32px;
@@ -158,24 +158,24 @@
 /* ===================== */
 @media (min-width: 1025px) {
   .login-container {
-    padding: 3rem 2.5rem;
+    padding: 3rem 4rem;
     border-radius: 48px;
   }
 
   .title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .label {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .input {
-    font-size: 1.15rem;
+    font-size: 1rem;
   }
 
   .error {
-    font-size: 1.12rem;
+    font-size: 0.8rem;
   }
 
   .button {

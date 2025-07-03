@@ -33,10 +33,10 @@ export const routes: Routes = [
     component: CalendarTutorComponent,
   },
   { path: 'class', component: ClassComponent },
-  {path: 'header',component: NavbarComponentComponent},
-  {path: 'footer',component:FooterComponentComponent},
-  { path: 'user/menu-creation', component: MenuCreationComponent }
-]
+  { path: 'header', component: NavbarComponentComponent },
+  { path: 'footer', component: FooterComponentComponent },
+  { path: 'admin/dishes', component: MenuCreationComponent },
+];
 
 //Ejemplo de paths usando la verificacion de las guards:
 //  {
