@@ -1,4 +1,4 @@
-import { DishService } from './../../services/dish/dish.service';
+import { DishService } from './../../../../services/dish/dish.service';
 import { Component, inject, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -9,8 +9,8 @@ import {
   FormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { capitalizeWords } from '../../utils/string-utils';
-import { Dish } from '../../interfaces/dish.interface';
+import { capitalizeWords } from '../../../../utils/string-utils';
+import { Dish } from '../../../../interfaces/dish.interface';
 
 @Component({
   selector: 'app-menu-creation',

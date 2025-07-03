@@ -1,16 +1,16 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './../../services/auth/auth.service';
-import { IUser } from './../../interfaces/user.d';
-import { IClass } from '../../interfaces/class';
-import { ClassService } from '../../services/class/class.service';
+import { AuthService } from './../../../../services/auth/auth.service';
+import { IUser } from './../../../../interfaces/user.d';
+import { IClass } from '../../../../interfaces/class';
+import { ClassService } from '../../../../services/class/class.service';
 import {
   FormControl,
   FormGroup,
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { capitalizeWords } from '../../utils/string-utils';
+import { capitalizeWords } from '../../../../utils/string-utils';
 
 @Component({
   selector: 'app-admin-dashboard',

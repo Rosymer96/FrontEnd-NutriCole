@@ -1,9 +1,9 @@
-import { AuthService } from './../../services/auth/auth.service';
+import { AuthService } from './../../../../services/auth/auth.service';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IStudent } from '../../interfaces/student';
+import { IStudent } from '../../../../interfaces/student';
 import { Router, RouterOutlet } from '@angular/router';
-import { StudentService } from '../../services/students/students.service';
-import { IUser } from '../../interfaces/user';
+import { StudentService } from '../../../../services/students/students.service';
+import { IUser } from '../../../../interfaces/user';
 import { CommonModule } from '@angular/common';
 
 @Component({

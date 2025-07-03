@@ -1,9 +1,9 @@
 import { Component, computed, input, output, signal } from '@angular/core';
 
-import { IDish } from '../../interfaces/dish';
+import { IDish } from '../../../interfaces/dish';
 import { CommonModule } from '@angular/common';
-import { SelectedDayMenu } from '../../interfaces/menu';
-import { NoteComponent } from '../note/note.component';
+import { SelectedDayMenu } from '../../../interfaces/menu';
+import { NoteComponent } from '../../dashboard/tutor/note/note.component';
 
 @Component({
   selector: 'app-description-menu',

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { UsersService } from '../../services/users/users.service';
+import { UsersService } from '../../../services/users/users.service';
 import { Router } from '@angular/router';
 import {
   FormControl,
@@ -7,7 +7,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { capitalizeWords } from '../../utils/string-utils';
+import { capitalizeWords } from '../../../utils/string-utils';
 
 @Component({
   selector: 'app-register',

@@ -1,6 +1,6 @@
-import { IStudent } from './../../interfaces/student.d';
+import { IStudent } from './../../../../interfaces/student.d';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { StudentService } from '../../services/students/students.service';
+import { StudentService } from '../../../../services/students/students.service';
 import { CommonModule } from '@angular/common';
 import { CrearEstudianteComponent } from '../crear-estudiante/crear-estudiante.component';
 import { Router } from '@angular/router';

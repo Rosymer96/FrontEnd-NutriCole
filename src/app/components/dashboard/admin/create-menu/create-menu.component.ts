@@ -1,4 +1,4 @@
-import { DishService } from './../../services/dish/dish.service';
+import { DishService } from './../../../../services/dish/dish.service';
 import {
   Component,
   computed,
@@ -15,10 +15,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { IDish } from '../../interfaces/dish';
-import { MenuService } from '../../services/menu/menu.service';
-import { DescriptionMenuComponent } from '../description-menu/description-menu.component';
-import { MenuByDay, MenuResponse } from '../../interfaces/menu';
+import { IDish } from '../../../../interfaces/dish';
+import { MenuService } from '../../../../services/menu/menu.service';
+import { MenuByDay, MenuResponse } from '../../../../interfaces/menu';
+import { DescriptionMenuComponent } from '../../../shared/description-menu/description-menu.component';
 
 @Component({
   selector: 'app-create-menu',

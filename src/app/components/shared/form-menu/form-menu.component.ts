@@ -7,7 +7,7 @@ import {
   FormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Month } from '../../interfaces/month';
+import { Month } from '../../../interfaces/month';
 
 @Component({
   selector: 'app-form-menu',

@@ -1,5 +1,5 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
-import { NoteService } from '../../services/note.service';
+import { NoteService } from '../../../../services/note.service';
 
 @Component({
   selector: 'app-note',

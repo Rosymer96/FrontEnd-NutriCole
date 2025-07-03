@@ -1,5 +1,5 @@
-import { ClassService } from './../../services/class/class.service';
-import { StudentService } from './../../services/students/students.service';
+import { ClassService } from './../../../../services/class/class.service';
+import { StudentService } from './../../../../services/students/students.service';
 import {
   Component,
   inject,
@@ -18,9 +18,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { capitalizeWords } from '../../utils/string-utils';
-import { IClass } from '../../interfaces/class';
-import { IStudent } from '../../interfaces/student';
+import { capitalizeWords } from '../../../../utils/string-utils';
+import { IClass } from '../../../../interfaces/class';
+import { IStudent } from '../../../../interfaces/student';
 @Component({
   selector: 'app-crear-estudiante',
   imports: [ReactiveFormsModule, FormsModule],

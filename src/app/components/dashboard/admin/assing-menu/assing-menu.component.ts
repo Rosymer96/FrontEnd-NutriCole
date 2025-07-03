@@ -1,12 +1,12 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
-import { MenuService } from '../../services/menu/menu.service';
-import { MenuResponse } from '../../interfaces/menu';
+import { MenuService } from '../../../../services/menu/menu.service';
+import { MenuResponse } from '../../../../interfaces/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, formatDate } from '@angular/common';
-import { FormMenuComponent } from '../form-menu/form-menu.component';
-import { Month } from '../../interfaces/month';
+import { Month } from '../../../../interfaces/month';
 import { CreateMenuComponent } from '../create-menu/create-menu.component';
 import { Router } from '@angular/router';
+import { FormMenuComponent } from '../../../shared/form-menu/form-menu.component';
 
 @Component({
   selector: 'app-assing-menu',

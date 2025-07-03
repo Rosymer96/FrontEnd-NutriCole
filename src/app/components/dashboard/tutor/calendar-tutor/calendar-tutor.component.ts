@@ -1,11 +1,11 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { MenuResponse, SelectedDayMenu } from '../../interfaces/menu';
-import { Month } from '../../interfaces/month';
-import { MenuService } from '../../services/menu/menu.service';
+import { MenuResponse, SelectedDayMenu } from '../../../../interfaces/menu';
+import { Month } from '../../../../interfaces/month';
+import { MenuService } from '../../../../services/menu/menu.service';
 import { formatDate } from '@angular/common';
-import { FormMenuComponent } from '../form-menu/form-menu.component';
-import { DescriptionMenuComponent } from '../description-menu/description-menu.component';
 import { Router } from '@angular/router';
+import { FormMenuComponent } from '../../../shared/form-menu/form-menu.component';
+import { DescriptionMenuComponent } from '../../../shared/description-menu/description-menu.component';
 
 @Component({
   selector: 'app-calendar-tutor',
